@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-
 import java.util.Date;
 import java.util.List;
 
@@ -13,8 +12,11 @@ import java.util.List;
 public class Parent {
 
     @Id
+    private int ID;
+
     @Pattern(regexp = "^[0-9]{11}$")
-    @Column(length = 11)
+    @Column(length = 11, unique = true)
+    @NotNull
     private String OIB;
 
     @NotNull
@@ -40,28 +42,30 @@ public class Parent {
     @Email
     private String emailParent;
 
+
     @NotNull
     private Integer postalCode;
+
 
     @NotNull
     private String placeOfResidence;
 
-    @ManyToOne
-    @JoinColumn(name = "employerId")
-    private Employer employer;
+
+    @NotNull
+    private String employerEmail;
+
 
     @ManyToOne
     @JoinColumn(name = "doctorId")
     private Doctor doctor;
 
+
     @OneToMany(mappedBy = "parent")
     private List<Child> children;
 
-
-    public Parent() {
-    }
-
-    public Parent(String OIB, String nameParent, String lastNameParent, Date dateOfBirthParent, String userNameParent, String passwordParent, String phoneNumberParent, String emailParent, Integer postalCode, String placeOfResidence) {
+    public Parent() {}
+    public Parent(int ID, String OIB, String nameParent, String lastNameParent, Date dateOfBirthParent, String userNameParent, String passwordParent, String phoneNumberParent, String emailParent, Integer postalCode, String placeOfResidence, String employerEmail, Doctor doctor, List<Child> children) {
+        this.ID = ID;
         this.OIB = OIB;
         this.nameParent = nameParent;
         this.lastNameParent = lastNameParent;
@@ -72,106 +76,109 @@ public class Parent {
         this.emailParent = emailParent;
         this.postalCode = postalCode;
         this.placeOfResidence = placeOfResidence;
+        this.employerEmail = employerEmail;
+        this.doctor = doctor;
+        this.children = children;
     }
 
     public String getOIB() {
         return OIB;
     }
 
-    public void setOIB(String OIB) {
-        this.OIB = OIB;
-    }
-
     public String getNameParent() {
         return nameParent;
-    }
-
-    public void setNameParent(String nameParent) {
-        this.nameParent = nameParent;
     }
 
     public String getLastNameParent() {
         return lastNameParent;
     }
 
-    public void setLastNameParent(String lastNameParent) {
-        this.lastNameParent = lastNameParent;
-    }
-
     public Date getDateOfBirthParent() {
         return dateOfBirthParent;
-    }
-
-    public void setDateOfBirthParent(Date dateOfBirthParent) {
-        this.dateOfBirthParent = dateOfBirthParent;
     }
 
     public String getUserNameParent() {
         return userNameParent;
     }
 
-    public void setUserNameParent(String userNameParent) {
-        this.userNameParent = userNameParent;
-    }
-
     public String getPasswordParent() {
         return passwordParent;
-    }
-
-    public void setPasswordParent(String passwordParent) {
-        this.passwordParent = passwordParent;
     }
 
     public String getPhoneNumberParent() {
         return phoneNumberParent;
     }
 
-    public void setPhoneNumberParent(String phoneNumberParent) {
-        this.phoneNumberParent = phoneNumberParent;
-    }
-
     public String getEmailParent() {
         return emailParent;
-    }
-
-    public void setEmailParent(String emailParent) {
-        this.emailParent = emailParent;
     }
 
     public Integer getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(Integer postalCode) {
-        this.postalCode = postalCode;
-    }
-
     public String getPlaceOfResidence() {
         return placeOfResidence;
     }
 
-    public void setPlaceOfResidence(String placeOfResidence) {
-        this.placeOfResidence = placeOfResidence;
-    }
-
-    public Employer getEmployer() {
-        return employer;
-    }
-
-    public void setEmployer(Employer employer) {
-        this.employer = employer;
+    public String getEmployerEmail() {
+        return employerEmail;
     }
 
     public Doctor getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
     public List<Child> getChildren() {
         return children;
+    }
+
+    public void setOIB(String OIB) {
+        this.OIB = OIB;
+    }
+
+    public void setNameParent(String nameParent) {
+        this.nameParent = nameParent;
+    }
+
+    public void setLastNameParent(String lastNameParent) {
+        this.lastNameParent = lastNameParent;
+    }
+
+    public void setDateOfBirthParent(Date dateOfBirthParent) {
+        this.dateOfBirthParent = dateOfBirthParent;
+    }
+
+    public void setUserNameParent(String userNameParent) {
+        this.userNameParent = userNameParent;
+    }
+
+    public void setPasswordParent(String passwordParent) {
+        this.passwordParent = passwordParent;
+    }
+
+    public void setPhoneNumberParent(String phoneNumberParent) {
+        this.phoneNumberParent = phoneNumberParent;
+    }
+
+    public void setEmailParent(String emailParent) {
+        this.emailParent = emailParent;
+    }
+
+    public void setPostalCode(Integer postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public void setPlaceOfResidence(String placeOfResidence) {
+        this.placeOfResidence = placeOfResidence;
+    }
+
+    public void setEmployerEmail(String employerEmail) {
+        this.employerEmail = employerEmail;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     public void setChildren(List<Child> children) {
@@ -191,7 +198,7 @@ public class Parent {
                 ", emailParent='" + emailParent + '\'' +
                 ", postalCode=" + postalCode +
                 ", placeOfResidence='" + placeOfResidence + '\'' +
-                ", employer=" + employer +
+                ", employerEmail=" + employerEmail +
                 ", doctor=" + doctor +
                 ", children=" + children +
                 '}';
