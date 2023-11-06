@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webpage</title>
+    <style>
+        .input-button-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    Hello World!
+    <button onclick="sendRequest()">Home</button>
+
+    <script>
+        function sendRequest() {
+        fetch('http://localhost:8080/')
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = 'http://localhost:8080/';
+                } else {
+                    console.error('Error:', response.status);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }   
+    </script>
+</body>
+</html>

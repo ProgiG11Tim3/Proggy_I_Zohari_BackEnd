@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webpage</title>
+    <style>
+        .input-button-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-button-group">
+        <input class="name_input" type="text" placeholder="name">
+        <button onclick="sendRequest()">Button 1</button>
+    </div>
+    <div class="input-button-group">
+        <input class="surname_input" type="text" placeholder="surname">
+        <button onclick="sendRequest()">Button 2</button>
+    </div>
+    <button onclick="sendRequest()">Button 3</button><br>
+    <button onclick="sendRequest()">Button 4</button><br>
+    <button onclick="sendRequest()">Button 5</button>
+
+    <script>
+        function sendRequest() {
+        fetch('http://localhost:8080/hello')
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = 'http://localhost:8080/hello';
+                } else {
+                    console.error('Error:', response.status);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
