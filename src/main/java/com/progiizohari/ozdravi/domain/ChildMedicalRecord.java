@@ -1,5 +1,7 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -8,8 +10,8 @@ import java.util.List;
 public class ChildMedicalRecord {
 
     @Id
-    @Column(length = 5)
-    private String recordId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int recordId;
 
     private String currentDiagnosis;
 
@@ -19,26 +21,29 @@ public class ChildMedicalRecord {
     @JoinColumn(name = "child_OIB", referencedColumnName = "OIB")
     private Child child;
 
-    @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "medicalRecord")
     private List<MedicalReport> medicalReports;
 
-    @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "medicalRecord")
     private List<Examination> examinations;
 
     public ChildMedicalRecord() {
     }
 
-    public ChildMedicalRecord(String recordId, String currentDiagnosis, String allergyList) {
+    public ChildMedicalRecord(int recordId, String currentDiagnosis, String allergyList, Child child, List<MedicalReport> medicalReports, List<Examination> examinations) {
         this.recordId = recordId;
         this.currentDiagnosis = currentDiagnosis;
         this.allergyList = allergyList;
+        this.child = child;
+        this.medicalReports = medicalReports;
+        this.examinations = examinations;
     }
 
-    public String getRecordId() {
+    public int getRecordId() {
         return recordId;
     }
 
-    public void setRecordId(String recordId) {
+    public void setRecordId(int recordId) {
         this.recordId = recordId;
     }
 

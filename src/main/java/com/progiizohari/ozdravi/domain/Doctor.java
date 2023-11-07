@@ -1,5 +1,7 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -11,8 +13,8 @@ import java.util.List;
 public class Doctor {
 
     @Id
-    @Column(length = 5)
-    private String doctorId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int doctorId;
 
     @NotNull
     private String nameDoctor;
@@ -43,7 +45,7 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(String doctorId, String nameDoctor, String lastNameDoctor, Date dateOfBirthDoctor, String userNameDoctor, String passwordDoctor, String phoneNumberDoctor, String emailDoctor) {
+    public Doctor(int doctorId, String nameDoctor, String lastNameDoctor, Date dateOfBirthDoctor, String userNameDoctor, String passwordDoctor, String phoneNumberDoctor, String emailDoctor) {
         this.doctorId = doctorId;
         this.nameDoctor = nameDoctor;
         this.lastNameDoctor = lastNameDoctor;
@@ -54,11 +56,11 @@ public class Doctor {
         this.emailDoctor = emailDoctor;
     }
 
-    public String getDoctorId() {
+    public int getDoctorId() {
         return doctorId;
     }
 
-    public void setDoctorId(String doctorId) {
+    public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
 

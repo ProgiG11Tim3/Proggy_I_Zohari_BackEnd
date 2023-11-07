@@ -1,5 +1,6 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -11,8 +12,8 @@ import java.util.List;
 public class Pediatrician {
 
     @Id
-    @Column(length = 5)
-    private String pediatricianId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int pediatricianId;
 
     @NotNull
     private String namePediatrician;
@@ -43,11 +44,23 @@ public class Pediatrician {
     public Pediatrician() {
     }
 
-    public String getPediatricianId() {
+    public Pediatrician(int pediatricianId, String namePediatrician, String lastNamePediatrician, Date dateOfBirthPediatrician, String userNamePediatrician, String passwordPediatrician, String phoneNumberPediatrician, String emailPediatrician, List<Child> children) {
+        this.pediatricianId = pediatricianId;
+        this.namePediatrician = namePediatrician;
+        this.lastNamePediatrician = lastNamePediatrician;
+        this.dateOfBirthPediatrician = dateOfBirthPediatrician;
+        this.userNamePediatrician = userNamePediatrician;
+        this.passwordPediatrician = passwordPediatrician;
+        this.phoneNumberPediatrician = phoneNumberPediatrician;
+        this.emailPediatrician = emailPediatrician;
+        this.children = children;
+    }
+
+    public int getPediatricianId() {
         return pediatricianId;
     }
 
-    public void setPediatricianId(String pediatricianId) {
+    public void setPediatricianId(int pediatricianId) {
         this.pediatricianId = pediatricianId;
     }
 

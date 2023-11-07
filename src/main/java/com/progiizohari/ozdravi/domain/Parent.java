@@ -1,5 +1,7 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +14,8 @@ import java.util.List;
 public class Parent {
 
     @Id
-    private int ID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int parentId;
 
     @Pattern(regexp = "^[0-9]{11}$")
     @Column(length = 11, unique = true)
@@ -54,8 +57,7 @@ public class Parent {
     @NotNull
     private String employerEmail;
 
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "doctorId")
     private Doctor doctor;
 
@@ -64,8 +66,9 @@ public class Parent {
     private List<Child> children;
 
     public Parent() {}
-    public Parent(int ID, String OIB, String nameParent, String lastNameParent, Date dateOfBirthParent, String userNameParent, String passwordParent, String phoneNumberParent, String emailParent, Integer postalCode, String placeOfResidence, String employerEmail, Doctor doctor, List<Child> children) {
-        this.ID = ID;
+
+    public Parent(int parentId, String OIB, String nameParent, String lastNameParent, Date dateOfBirthParent, String userNameParent, String passwordParent, String phoneNumberParent, String emailParent, Integer postalCode, String placeOfResidence, String employerEmail, Doctor doctor, List<Child> children) {
+        this.parentId = parentId;
         this.OIB = OIB;
         this.nameParent = nameParent;
         this.lastNameParent = lastNameParent;
@@ -79,6 +82,14 @@ public class Parent {
         this.employerEmail = employerEmail;
         this.doctor = doctor;
         this.children = children;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
     }
 
     public String getOIB() {
@@ -188,7 +199,8 @@ public class Parent {
     @Override
     public String toString() {
         return "Parent{" +
-                "OIB='" + OIB + '\'' +
+                ", parentId " + parentId + '\'' +
+                ", OIB='" + OIB + '\'' +
                 ", nameParent='" + nameParent + '\'' +
                 ", lastNameParent='" + lastNameParent + '\'' +
                 ", dateOfBirthParent=" + dateOfBirthParent +

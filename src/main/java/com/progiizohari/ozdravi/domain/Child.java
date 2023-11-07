@@ -1,5 +1,7 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -11,8 +13,12 @@ import java.util.Date;
 public class Child {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int childId;
+
     @Pattern(regexp = "^[0-9]{11}$")
-    @Column(length = 11)
+    @Column(length = 11, unique = true)
+    @NotNull
     private String OIB;
 
     @NotNull
@@ -28,31 +34,43 @@ public class Child {
     @NotNull
     private String educationalInstitution;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     @Email
     private String emailEducationalInstitution;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "parent_OIB")
     private Parent parent;
 
-    @ManyToOne
-    @JoinColumn(name = "pediatricanId")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pediatricianId")
     private Pediatrician pediatrician;
 
-    @OneToOne(mappedBy = "child", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "child")
     private ChildMedicalRecord medicalRecord;
 
     public Child() {
     }
 
-    public Child(String OIB, String nameChild, String lastNameChild, Date dateOfBirthChild, String educationalInstitution, String emailEducationalInstitution) {
+    public Child(int childId, String OIB, String nameChild, String lastNameChild, Date dateOfBirthChild, String educationalInstitution, String emailEducationalInstitution, Parent parent, Pediatrician pediatrician, ChildMedicalRecord medicalRecord) {
+        this.childId = childId;
         this.OIB = OIB;
         this.nameChild = nameChild;
         this.lastNameChild = lastNameChild;
         this.dateOfBirthChild = dateOfBirthChild;
         this.educationalInstitution = educationalInstitution;
         this.emailEducationalInstitution = emailEducationalInstitution;
+        this.parent = parent;
+        this.pediatrician = pediatrician;
+        this.medicalRecord = medicalRecord;
+    }
+
+    public int getChildId() {
+        return childId;
+    }
+
+    public void setChildId(int childId) {
+        this.childId = childId;
     }
 
     public String getOIB() {
