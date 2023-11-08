@@ -2,6 +2,7 @@ package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.Doctor;
 import com.progiizohari.ozdravi.repositories.DoctorRepository;
+import com.progiizohari.ozdravi.services.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,18 +13,17 @@ import java.util.Optional;
 public class DoctorController {
 
     @Autowired
-    private DoctorRepository repository;
+    private DoctorService service;
     @PostMapping("/addDoctor")
     public String add(@RequestBody Doctor doctor) {
-        repository.save(doctor);
-        return "Doctor " + doctor.getNameDoctor() + " " + doctor.getLastNameDoctor() + " successfully added!";
+        return service.add(doctor);
     }
     @GetMapping("/getAllDoctors")
     public List<Doctor> getAll() {
-        return repository.findAll();
+        return service.getAll();
     }
     @GetMapping("/getDoctor/{Id}")
     public Optional<Doctor> getById(@PathVariable int Id) {
-        return repository.findById(Id);
+        return service.getById(Id);
     }
 }

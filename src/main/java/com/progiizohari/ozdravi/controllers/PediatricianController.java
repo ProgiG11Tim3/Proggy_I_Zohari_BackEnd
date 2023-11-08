@@ -3,6 +3,7 @@ package com.progiizohari.ozdravi.controllers;
 import com.progiizohari.ozdravi.domain.Doctor;
 import com.progiizohari.ozdravi.domain.Pediatrician;
 import com.progiizohari.ozdravi.repositories.PediatricianRepository;
+import com.progiizohari.ozdravi.services.PediatricianService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,19 +14,18 @@ import java.util.Optional;
 public class PediatricianController {
 
     @Autowired
-    private PediatricianRepository repository;
+    private PediatricianService service;
 
     @PostMapping("/addPediatrician")
     public String add(@RequestBody Pediatrician pediatrician) {
-        repository.save(pediatrician);
-        return "Pediatrician " + pediatrician.getNamePediatrician() + " " + pediatrician.getLastNamePediatrician() + " successfully added!";
+        return service.add(pediatrician);
     }
     @GetMapping("/getAllPediatricians")
     public List<Pediatrician> getAll() {
-        return repository.findAll();
+        return service.getAll();
     }
     @GetMapping("/getPediatrician/{Id}")
     public Optional<Pediatrician> getById(@PathVariable int Id) {
-        return repository.findById(Id);
+        return service.getById(Id);
     }
 }
