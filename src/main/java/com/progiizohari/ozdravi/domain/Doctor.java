@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -24,7 +24,7 @@ public class Doctor {
 
     @Temporal(TemporalType.DATE)
     @NotNull
-    private Date dateOfBirthDoctor;
+    private LocalDate dateOfBirthDoctor;
 
     @Column(unique = true, nullable = false)
     private String userNameDoctor;
@@ -45,7 +45,7 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(int doctorId, String nameDoctor, String lastNameDoctor, Date dateOfBirthDoctor, String userNameDoctor, String passwordDoctor, String phoneNumberDoctor, String emailDoctor) {
+    public Doctor(int doctorId, String nameDoctor, String lastNameDoctor, LocalDate dateOfBirthDoctor, String userNameDoctor, String passwordDoctor, String phoneNumberDoctor, String emailDoctor) {
         this.doctorId = doctorId;
         this.nameDoctor = nameDoctor;
         this.lastNameDoctor = lastNameDoctor;
@@ -80,11 +80,11 @@ public class Doctor {
         this.lastNameDoctor = lastNameDoctor;
     }
 
-    public Date getDateOfBirthDoctor() {
+    public LocalDate getDateOfBirthDoctor() {
         return dateOfBirthDoctor;
     }
 
-    public void setDateOfBirthDoctor(Date dateOfBirthDoctor) {
+    public void setDateOfBirthDoctor(LocalDate dateOfBirthDoctor) {
         this.dateOfBirthDoctor = dateOfBirthDoctor;
     }
 

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -23,7 +23,7 @@ public class Pediatrician {
 
     @Temporal(TemporalType.DATE)
     @NotNull
-    private Date dateOfBirthPediatrician;
+    private LocalDate dateOfBirthPediatrician;
 
     @Column(unique = true, nullable = false)
     private String userNamePediatrician;
@@ -44,7 +44,7 @@ public class Pediatrician {
     public Pediatrician() {
     }
 
-    public Pediatrician(int pediatricianId, String namePediatrician, String lastNamePediatrician, Date dateOfBirthPediatrician, String userNamePediatrician, String passwordPediatrician, String phoneNumberPediatrician, String emailPediatrician, List<Child> children) {
+    public Pediatrician(int pediatricianId, String namePediatrician, String lastNamePediatrician, LocalDate dateOfBirthPediatrician, String userNamePediatrician, String passwordPediatrician, String phoneNumberPediatrician, String emailPediatrician, List<Child> children) {
         this.pediatricianId = pediatricianId;
         this.namePediatrician = namePediatrician;
         this.lastNamePediatrician = lastNamePediatrician;
@@ -80,11 +80,11 @@ public class Pediatrician {
         this.lastNamePediatrician = lastNamePediatrician;
     }
 
-    public Date getDateOfBirthPediatrician() {
+    public LocalDate getDateOfBirthPediatrician() {
         return dateOfBirthPediatrician;
     }
 
-    public void setDateOfBirthPediatrician(Date dateOfBirthPediatrician) {
+    public void setDateOfBirthPediatrician(LocalDate dateOfBirthPediatrician) {
         this.dateOfBirthPediatrician = dateOfBirthPediatrician;
     }
 

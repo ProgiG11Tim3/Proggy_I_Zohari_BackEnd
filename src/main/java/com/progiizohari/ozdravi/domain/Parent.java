@@ -1,13 +1,11 @@
 package com.progiizohari.ozdravi.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -29,8 +27,7 @@ public class Parent {
     private String lastNameParent;
 
     @Temporal(TemporalType.DATE)
-    @NotNull
-    private Date dateOfBirthParent;
+    private LocalDate dateOfBirthParent;
 
     @Column(unique = true, nullable = false)
     private String userNameParent;
@@ -67,7 +64,7 @@ public class Parent {
 
     public Parent() {}
 
-    public Parent(int parentId, String OIB, String nameParent, String lastNameParent, Date dateOfBirthParent, String userNameParent, String passwordParent, String phoneNumberParent, String emailParent, Integer postalCode, String placeOfResidence, String employerEmail, Doctor doctor, List<Child> children) {
+    public Parent(int parentId, String OIB, String nameParent, String lastNameParent, LocalDate dateOfBirthParent, String userNameParent, String passwordParent, String phoneNumberParent, String emailParent, Integer postalCode, String placeOfResidence, String employerEmail, Doctor doctor, List<Child> children) {
         this.parentId = parentId;
         this.OIB = OIB;
         this.nameParent = nameParent;
@@ -104,7 +101,7 @@ public class Parent {
         return lastNameParent;
     }
 
-    public Date getDateOfBirthParent() {
+    public LocalDate getDateOfBirthParent() {
         return dateOfBirthParent;
     }
 
@@ -156,7 +153,7 @@ public class Parent {
         this.lastNameParent = lastNameParent;
     }
 
-    public void setDateOfBirthParent(Date dateOfBirthParent) {
+    public void setDateOfBirthParent(LocalDate dateOfBirthParent) {
         this.dateOfBirthParent = dateOfBirthParent;
     }
 

@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Child {
@@ -29,7 +29,7 @@ public class Child {
 
     @Temporal(TemporalType.DATE)
     @NotNull
-    private Date dateOfBirthChild;
+    private LocalDate dateOfBirthChild;
 
     @NotNull
     private String educationalInstitution;
@@ -52,7 +52,7 @@ public class Child {
     public Child() {
     }
 
-    public Child(int childId, String OIB, String nameChild, String lastNameChild, Date dateOfBirthChild, String educationalInstitution, String emailEducationalInstitution, Parent parent, Pediatrician pediatrician, ChildMedicalRecord medicalRecord) {
+    public Child(int childId, String OIB, String nameChild, String lastNameChild, LocalDate dateOfBirthChild, String educationalInstitution, String emailEducationalInstitution, Parent parent, Pediatrician pediatrician, ChildMedicalRecord medicalRecord) {
         this.childId = childId;
         this.OIB = OIB;
         this.nameChild = nameChild;
@@ -97,11 +97,11 @@ public class Child {
         this.lastNameChild = lastNameChild;
     }
 
-    public Date getDateOfBirthChild() {
+    public LocalDate getDateOfBirthChild() {
         return dateOfBirthChild;
     }
 
-    public void setDateOfBirthChild(Date dateOfBirthChild) {
+    public void setDateOfBirthChild(LocalDate dateOfBirthChild) {
         this.dateOfBirthChild = dateOfBirthChild;
     }
 
