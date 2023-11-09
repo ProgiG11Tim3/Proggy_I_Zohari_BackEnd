@@ -9,18 +9,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class ParentServiceImpl implements ParentService{
+public class ParentServiceImpl implements ParentService {
 
     @Autowired
     private ParentRepository repository;
-
-
-    //primjer Parenta u repozitoriju za testiranje
-    Parent testParent = new Parent(1, "oib12345678", "imeRoditelja",
-            "prezimeRoditelja", LocalDate.of(2023, 11, 7),
-            "userNameRoditelja", "passwordRoditelja", "brojMobitelaRoditelja",
-            "emailRoditelja@gmail.com", 10000, "Zagreb", "emailPoslodavca@gmail.com",
-            null, null);
 
     @Override
     public String add(Parent parent) {
