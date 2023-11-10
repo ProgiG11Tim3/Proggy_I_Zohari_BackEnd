@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @SpringBootApplication
 @RestController
 public class OzdraviApplication {
-    private static final Logger log = LoggerFactory.getLogger(OzdraviApplication.class);
+    //private static final Logger log = LoggerFactory.getLogger(OzdraviApplication.class);
 
     @Autowired
     private ParentRepository repository;
@@ -26,7 +26,7 @@ public class OzdraviApplication {
         SpringApplication.run(OzdraviApplication.class, args);
     }
 
-    @Bean
+    /*@Bean
     public CommandLineRunner demo() {
         return (args) -> {
             Parent testParent = new Parent(1, "12345678910", "imeRoditelja",
@@ -43,10 +43,10 @@ public class OzdraviApplication {
             });
             log.info("");
         };
-    }
+    }*/
 
     @GetMapping("/")
-    public String home() {
-        return ("This is Ozdravi web app");
+    public String MainPage() {
+        return "MainPage";
     }
 }

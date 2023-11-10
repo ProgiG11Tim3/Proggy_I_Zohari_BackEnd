@@ -16,7 +16,7 @@ public class ParentController {
 
     @Autowired
     private ParentService service;
- 
+
     @PostMapping("/addParent")
     public String add(@RequestBody Parent parent) {
         return service.add(parent);
