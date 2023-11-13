@@ -21,7 +21,7 @@ public class MedicalReport {
 
     @ManyToOne
     @JoinColumn(name = "recordId")
-    private ChildMedicalRecord medicalRecord;
+    private MedicalRecord medicalRecord;
 
     public MedicalReport() {
     }
@@ -56,11 +56,11 @@ public class MedicalReport {
         this.reportInformation = reportInformation;
     }
 
-    public ChildMedicalRecord getMedicalRecord() {
+    public MedicalRecord getMedicalRecord() {
         return medicalRecord;
     }
 
-    public void setMedicalRecord(ChildMedicalRecord medicalRecord) {
+    public void setMedicalRecord(MedicalRecord medicalRecord) {
         this.medicalRecord = medicalRecord;
     }
 

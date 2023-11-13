@@ -47,12 +47,12 @@ public class Child {
     private Pediatrician pediatrician;
 
     @OneToOne(mappedBy = "child")
-    private ChildMedicalRecord medicalRecord;
+    private MedicalRecord medicalRecord;
 
     public Child() {
     }
 
-    public Child(int childId, String OIB, String nameChild, String lastNameChild, LocalDate dateOfBirthChild, String educationalInstitution, String emailEducationalInstitution, Parent parent, Pediatrician pediatrician, ChildMedicalRecord medicalRecord) {
+    public Child(int childId, String OIB, String nameChild, String lastNameChild, LocalDate dateOfBirthChild, String educationalInstitution, String emailEducationalInstitution, Parent parent, Pediatrician pediatrician, MedicalRecord medicalRecord) {
         this.childId = childId;
         this.OIB = OIB;
         this.nameChild = nameChild;
@@ -137,11 +137,11 @@ public class Child {
         this.pediatrician = pediatrician;
     }
 
-    public ChildMedicalRecord getMedicalRecord() {
+    public MedicalRecord getMedicalRecord() {
         return medicalRecord;
     }
 
-    public void setMedicalRecord(ChildMedicalRecord medicalRecord) {
+    public void setMedicalRecord(MedicalRecord medicalRecord) {
         this.medicalRecord = medicalRecord;
     }
 

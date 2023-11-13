@@ -32,12 +32,12 @@ public class Examination {
 
     @ManyToOne
     @JoinColumn(name = "recordId")
-    private ChildMedicalRecord medicalRecord;
+    private MedicalRecord medicalRecord;
 
     public Examination() {
     }
 
-    public Examination(String examinationId, String diagnosis, Timestamp dateOfExamination, Character medicalCertificate, Character parentMedicalLeave, ChildMedicalRecord medicalRecord) {
+    public Examination(String examinationId, String diagnosis, Timestamp dateOfExamination, Character medicalCertificate, Character parentMedicalLeave, MedicalRecord medicalRecord) {
         this.examinationId = examinationId;
         this.diagnosis = diagnosis;
         this.dateOfExamination = dateOfExamination;
@@ -86,11 +86,11 @@ public class Examination {
         this.parentMedicalLeave = parentMedicalLeave;
     }
 
-    public ChildMedicalRecord getMedicalRecord() {
+    public MedicalRecord getMedicalRecord() {
         return medicalRecord;
     }
 
-    public void setMedicalRecord(ChildMedicalRecord medicalRecord) {
+    public void setMedicalRecord(MedicalRecord medicalRecord) {
         this.medicalRecord = medicalRecord;
     }
 

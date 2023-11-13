@@ -1,13 +1,11 @@
 package com.progiizohari.ozdravi.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-public class ChildMedicalRecord {
+public class MedicalRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +25,10 @@ public class ChildMedicalRecord {
     @OneToMany(mappedBy = "medicalRecord")
     private List<Examination> examinations;
 
-    public ChildMedicalRecord() {
+    public MedicalRecord() {
     }
 
-    public ChildMedicalRecord(int recordId, String currentDiagnosis, String allergyList, Child child, List<MedicalReport> medicalReports, List<Examination> examinations) {
+    public MedicalRecord(int recordId, String currentDiagnosis, String allergyList, Child child, List<MedicalReport> medicalReports, List<Examination> examinations) {
         this.recordId = recordId;
         this.currentDiagnosis = currentDiagnosis;
         this.allergyList = allergyList;
@@ -89,7 +87,7 @@ public class ChildMedicalRecord {
 
     @Override
     public String toString() {
-        return "ChildMedicalRecord{" +
+        return "MedicalRecord{" +
                 "recordId='" + recordId + '\'' +
                 ", currentDiagnosis='" + currentDiagnosis + '\'' +
                 ", allergyList='" + allergyList + '\'' +
