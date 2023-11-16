@@ -8,9 +8,7 @@ import com.progiizohari.ozdravi.repositories.DoctorRepository;
 import com.progiizohari.ozdravi.repositories.PediatricianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.progiizohari.ozdravi.domain.LoginRequest;
 import com.progiizohari.ozdravi.domain.Parent;
 import com.progiizohari.ozdravi.repositories.ParentRepository;
@@ -24,12 +22,13 @@ public class LoginController {
     @Autowired
     private PediatricianRepository pediatrician_repo;
 
-    @PostMapping(value = "/login")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<String> login(@RequestBody LoginRequest loginJson) {
 
         List<Parent> parents = parent_repo.findAll();
         for (Parent parent : parents) {
             if (parent.getUserNameParent().equals(loginJson.getUsername()) && parent.getPasswordParent().equals(loginJson.getPassword())) {
+                System.out.println("loggiran parent");
                 return ResponseEntity.ok("PARENT");
             }
         }
@@ -37,6 +36,7 @@ public class LoginController {
         List<Doctor> doctors = doctor_repo.findAll();
         for (Doctor doctor : doctors) {
             if (doctor.getUserNameDoctor().equals(loginJson.getUsername()) && doctor.getPasswordDoctor().equals(loginJson.getPassword())) {
+                System.out.println("loggiran doktor");
                 return ResponseEntity.ok("DOCTOR");
             }
         }
@@ -44,10 +44,12 @@ public class LoginController {
         List<Pediatrician> pediatricians = pediatrician_repo.findAll();
         for (Pediatrician pediatrician : pediatricians) {
             if (pediatrician.getUserNamePediatrician().equals(loginJson.getUsername()) && pediatrician.getPasswordPediatrician().equals(loginJson.getPassword())) {
+                System.out.println("loggiran pediatar");
                 return ResponseEntity.ok("PEDIATRICIAN");
             }
         }
 
+        System.out.println("losi cridentials");
         return ResponseEntity.badRequest().body("NOT FOUND");
     }
 }
