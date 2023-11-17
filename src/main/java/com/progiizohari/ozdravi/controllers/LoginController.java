@@ -28,7 +28,7 @@ public class LoginController {
         List<Parent> parents = parent_repo.findAll();
         for (Parent parent : parents) {
             if (parent.getUserNameParent().equals(loginJson.getUsername()) && parent.getPasswordParent().equals(loginJson.getPassword())) {
-                System.out.println("loggiran parent");
+                System.out.println("Parent logged in");
                 return ResponseEntity.ok("PARENT");
             }
         }
@@ -36,7 +36,7 @@ public class LoginController {
         List<Doctor> doctors = doctor_repo.findAll();
         for (Doctor doctor : doctors) {
             if (doctor.getUserNameDoctor().equals(loginJson.getUsername()) && doctor.getPasswordDoctor().equals(loginJson.getPassword())) {
-                System.out.println("loggiran doktor");
+                System.out.println("Doctor logged in");
                 return ResponseEntity.ok("DOCTOR");
             }
         }
@@ -44,12 +44,12 @@ public class LoginController {
         List<Pediatrician> pediatricians = pediatrician_repo.findAll();
         for (Pediatrician pediatrician : pediatricians) {
             if (pediatrician.getUserNamePediatrician().equals(loginJson.getUsername()) && pediatrician.getPasswordPediatrician().equals(loginJson.getPassword())) {
-                System.out.println("loggiran pediatar");
+                System.out.println("Pediatrician logged in");
                 return ResponseEntity.ok("PEDIATRICIAN");
             }
         }
 
-        System.out.println("losi cridentials");
+        System.out.println("lnvalid credentials");
         return ResponseEntity.badRequest().body("NOT FOUND");
     }
 }
