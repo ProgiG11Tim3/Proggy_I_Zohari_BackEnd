@@ -49,7 +49,7 @@ public class LoginController {
             }
         }
 
-        System.out.println("lnvalid credentials");
+        System.out.println("invalid credentials");
         return ResponseEntity.badRequest().body("NOT FOUND");
     }
 }
