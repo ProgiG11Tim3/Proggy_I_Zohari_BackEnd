@@ -30,7 +30,7 @@ public class LoginController {
         List<Parent> parents = parent_repo.findAll();
         for (Parent parent : parents) {
             if (parent.getUserNameParent().equals(loginJson.getUsername()) && argon2.VerifyPassword(parent.getPasswordParent(), loginJson.getPassword())) {
-                System.out.println("loggiran parent");
+                System.out.println("Parent logged in");
                 return ResponseEntity.ok("PARENT");
             }
         }
@@ -38,7 +38,7 @@ public class LoginController {
         List<Doctor> doctors = doctor_repo.findAll();
         for (Doctor doctor : doctors) {
             if (doctor.getUserNameDoctor().equals(loginJson.getUsername()) && argon2.VerifyPassword(doctor.getPasswordDoctor(), loginJson.getPassword())) {
-                System.out.println("loggiran doktor");
+                System.out.println("Doctor logged in");
                 return ResponseEntity.ok("DOCTOR");
             }
         }
@@ -46,12 +46,12 @@ public class LoginController {
         List<Pediatrician> pediatricians = pediatrician_repo.findAll();
         for (Pediatrician pediatrician : pediatricians) {
             if (pediatrician.getUserNamePediatrician().equals(loginJson.getUsername()) && argon2.VerifyPassword(pediatrician.getPasswordPediatrician(), loginJson.getPassword())) {
-                System.out.println("loggiran pediatar");
+                System.out.println("Pediatrician logged in");
                 return ResponseEntity.ok("PEDIATRICIAN");
             }
         }
 
-        System.out.println("losi cridentials");
+        System.out.println("invalid credentials");
         return ResponseEntity.badRequest().body("NOT FOUND");
     }
 }
