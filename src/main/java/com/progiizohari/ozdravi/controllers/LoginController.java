@@ -6,6 +6,7 @@ import com.progiizohari.ozdravi.domain.Doctor;
 import com.progiizohari.ozdravi.domain.Pediatrician;
 import com.progiizohari.ozdravi.repositories.DoctorRepository;
 import com.progiizohari.ozdravi.repositories.PediatricianRepository;
+import com.progiizohari.ozdravi.util.Argon2Crypting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ import com.progiizohari.ozdravi.repositories.ParentRepository;
 @RestController
 public class LoginController {
     @Autowired
+    Argon2Crypting argon2;
+    @Autowired
     private ParentRepository parent_repo;
     @Autowired
     private DoctorRepository doctor_repo;
@@ -24,10 +27,9 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<String> login(@RequestBody LoginRequest loginJson) {
-
         List<Parent> parents = parent_repo.findAll();
         for (Parent parent : parents) {
-            if (parent.getUserNameParent().equals(loginJson.getUsername()) && parent.getPasswordParent().equals(loginJson.getPassword())) {
+            if (parent.getUserNameParent().equals(loginJson.getUsername()) && argon2.VerifyPassword(parent.getPasswordParent(), loginJson.getPassword())) {
                 System.out.println("loggiran parent");
                 return ResponseEntity.ok("PARENT");
             }
@@ -35,7 +37,7 @@ public class LoginController {
 
         List<Doctor> doctors = doctor_repo.findAll();
         for (Doctor doctor : doctors) {
-            if (doctor.getUserNameDoctor().equals(loginJson.getUsername()) && doctor.getPasswordDoctor().equals(loginJson.getPassword())) {
+            if (doctor.getUserNameDoctor().equals(loginJson.getUsername()) && argon2.VerifyPassword(doctor.getPasswordDoctor(), loginJson.getPassword())) {
                 System.out.println("loggiran doktor");
                 return ResponseEntity.ok("DOCTOR");
             }
@@ -43,7 +45,7 @@ public class LoginController {
 
         List<Pediatrician> pediatricians = pediatrician_repo.findAll();
         for (Pediatrician pediatrician : pediatricians) {
-            if (pediatrician.getUserNamePediatrician().equals(loginJson.getUsername()) && pediatrician.getPasswordPediatrician().equals(loginJson.getPassword())) {
+            if (pediatrician.getUserNamePediatrician().equals(loginJson.getUsername()) && argon2.VerifyPassword(pediatrician.getPasswordPediatrician(), loginJson.getPassword())) {
                 System.out.println("loggiran pediatar");
                 return ResponseEntity.ok("PEDIATRICIAN");
             }
