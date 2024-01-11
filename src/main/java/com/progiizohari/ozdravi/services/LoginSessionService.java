@@ -8,10 +8,10 @@ public interface LoginSessionService {
     public String add(String username, String password, String role, String session);
     public String add(LoginSession loginSession);
     public List<LoginSession> getAll();
-    // TODO: if we decide to only have singular login, contact Dino to refactor this and login session service
-    public List<LoginSession> getAllUsersOfSession(String sessionID);
-    // TODO: if we decide to only have singular login, contact Dino to refactor this and login session service
+    public LoginSession getUserOfSession(String sessionID);
     public List<String> getAllSessionsOfUser(String username, String password, String role);
     public boolean checkSession(String username, String password, String role, String session);
     public boolean checkSession(LoginSession loginSession);
+    public void remove(LoginSession loginSession);
+    public void remove(String username, String password, String role, String session);
 }

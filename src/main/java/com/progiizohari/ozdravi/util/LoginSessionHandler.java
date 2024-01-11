@@ -30,7 +30,7 @@ public class LoginSessionHandler {
 
     // TODO: if we decide to only have singular login per browser client, contact Dino to refactor this and login session service
     public String loginGuard(String sessionID) {
-        if (login_session_service.getAllUsersOfSession(sessionID).size() > 0) {
+        if (login_session_service.getUserOfSession(sessionID) != null) {
             System.out.println("LoginSessionHandler: loginGuild: user already logged in, proceeding without redirect.");
             return "OK";
         } else {
@@ -41,7 +41,7 @@ public class LoginSessionHandler {
 
     // TODO: if we decide to only have singular login per browser client, contact Dino to refactor this and login session service
     public boolean isUserLoggedIn(String sessionID) {
-        if (login_session_service.getAllUsersOfSession(sessionID).size() > 0) {
+        if (login_session_service.getUserOfSession(sessionID) != null) {
             return true;
         } else {
             return false;
@@ -50,11 +50,11 @@ public class LoginSessionHandler {
 
     // TODO: returns a list instead of just 1st OIB if there are multiple users logged in, if we decide to only have singular login per browser client, contact Dino to refactor this and login session service
     public String getUserOIB(String sessionID) {
-        List<LoginSession> userSessions = login_session_service.getAllUsersOfSession(sessionID);
-        if (userSessions.size() == 0) {
+        LoginSession userSession = login_session_service.getUserOfSession(sessionID);
+        if (userSession == null) {
             return null;
         }
-        LoginSession userSession = userSessions.get(0);
+
         String returnOIB = null;
 
         if (userSession.getRole().equals("PARENT")) {
@@ -88,11 +88,11 @@ public class LoginSessionHandler {
 
     public Parent getParent(String sessionID)
     {
-        List<LoginSession> userSessions = login_session_service.getAllUsersOfSession(sessionID);
-        if (userSessions.size() == 0) {
+        LoginSession userSession = login_session_service.getUserOfSession(sessionID);
+        if (userSession == null) {
             return null;
         }
-        LoginSession userSession = userSessions.get(0);
+
         Parent returnParent = null;
 
         if (userSession.getRole().equals("PARENT")) {
@@ -107,11 +107,11 @@ public class LoginSessionHandler {
 
     public Doctor getDoctor(String sessionID)
     {
-        List<LoginSession> userSessions = login_session_service.getAllUsersOfSession(sessionID);
-        if (userSessions.size() == 0) {
+        LoginSession userSession = login_session_service.getUserOfSession(sessionID);
+        if (userSession == null) {
             return null;
         }
-        LoginSession userSession = userSessions.get(0);
+
         Doctor returnDoctor = null;
 
         if (userSession.getRole().equals("DOCTOR")) {
@@ -126,11 +126,11 @@ public class LoginSessionHandler {
 
     public Pediatrician getPediatrician(String sessionID)
     {
-        List<LoginSession> userSessions = login_session_service.getAllUsersOfSession(sessionID);
-        if (userSessions.size() == 0) {
+        LoginSession userSession = login_session_service.getUserOfSession(sessionID);
+        if (userSession == null) {
             return null;
         }
-        LoginSession userSession = userSessions.get(0);
+
         Pediatrician returnPediatrician = null;
 
         if (userSession.getRole().equals("PEDIATRICIAN")) {

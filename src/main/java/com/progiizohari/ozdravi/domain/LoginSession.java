@@ -104,4 +104,14 @@ public class LoginSession {
                 ", active=" + active +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (!(obj instanceof LoginSession))
+            return false;
+
+        LoginSession object = (LoginSession) obj;
+        return this.session.equals(object.session) && this.username.equals(object.username) && this.password.equals(object.password) && this.role.equals(object.role);
+    }
 }

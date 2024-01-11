@@ -31,16 +31,18 @@ public class LoginSessionServiceImpl implements LoginSessionService {
         return repository.findAll();
     }
 
+
+    // TODO: ODMAH NAKON moram napraviti da ako se netko relogina ili reregistera da brise zadnji session record iz database
     @Override
-    public List<LoginSession> getAllUsersOfSession(String sessionID) {
+    public LoginSession getUserOfSession(String sessionID) {
         List<LoginSession> returnList = new ArrayList<>();
         List<LoginSession> loginSessions = repository.findAll();
         for (LoginSession entry : loginSessions) {
             if (entry.getSession().equals(sessionID)) {
-                returnList.add(entry);
+                return entry;
             }
         }
-        return returnList;
+        return null;
     }
 
     @Override
@@ -74,5 +76,15 @@ public class LoginSessionServiceImpl implements LoginSessionService {
             }
         }
         return false;
+    }
+
+    @Override
+    public void remove(LoginSession loginSession) {
+        repository.delete(loginSession);
+    }
+
+    @Override
+    public void remove(String username, String password, String role, String session) {
+        repository.delete(new LoginSession(username, password, role, session));
     }
 }
