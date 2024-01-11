@@ -38,7 +38,7 @@ public class RegistrationController {
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         login_session_service.add(new LoginSession(parentJson.getUserNameParent(), parentJson.getPasswordParent(), "PARENT", sessionID, true));
 
-        System.out.println("registriran novi parent");
+        System.out.println("registriran novi parent " + sessionID);
         return ResponseEntity.ok("OK");
     }
 }

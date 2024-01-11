@@ -19,6 +19,10 @@ public class LoginSession {
     @NotNull
     private boolean active;
 
+    public LoginSession(){
+
+    }
+
     public LoginSession(String username, String password, String role, String session, boolean active) {
         this.username = username;
         this.password = password;

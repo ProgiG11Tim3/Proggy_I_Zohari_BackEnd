@@ -35,10 +35,13 @@ public class LoginController {
             if (parent.getUserNameParent().equals(loginJson.getUsername()) && argon2.VerifyPassword(parent.getPasswordParent(), loginJson.getPassword())) {
 
                 String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-                login_session_service.add(new LoginSession(parent.getUserNameParent(), parent.getPasswordParent(), "PARENT", sessionID, true));
+                boolean already_logged_in = login_session_service.checkSession(parent.getUserNameParent(), parent.getPasswordParent(), "PARENT", sessionID);
+                if (!already_logged_in) {
+                    login_session_service.add(new LoginSession(parent.getUserNameParent(), parent.getPasswordParent(), "PARENT", sessionID, true));
+                }
 
                 System.out.println("Parent logged in");
-                System.out.println("Login session registered");
+                System.out.println("Login session registered " + sessionID);
                 return ResponseEntity.ok("PARENT");
             }
         }
@@ -48,7 +51,10 @@ public class LoginController {
             if (doctor.getUserNameDoctor().equals(loginJson.getUsername()) && argon2.VerifyPassword(doctor.getPasswordDoctor(), loginJson.getPassword())) {
 
                 String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-                login_session_service.add(new LoginSession(doctor.getUserNameDoctor(), doctor.getPasswordDoctor(), "DOCTOR", sessionID, true));
+                boolean already_logged_in = login_session_service.checkSession(doctor.getUserNameDoctor(), doctor.getPasswordDoctor(), "DOCTOR", sessionID);
+                if (!already_logged_in) {
+                    login_session_service.add(new LoginSession(doctor.getUserNameDoctor(), doctor.getPasswordDoctor(), "DOCTOR", sessionID, true));
+                }
 
                 System.out.println("Doctor logged in");
                 return ResponseEntity.ok("DOCTOR");
@@ -60,7 +66,10 @@ public class LoginController {
             if (pediatrician.getUserNamePediatrician().equals(loginJson.getUsername()) && argon2.VerifyPassword(pediatrician.getPasswordPediatrician(), loginJson.getPassword())) {
 
                 String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-                login_session_service.add(new LoginSession(pediatrician.getUserNamePediatrician(), pediatrician.getPasswordPediatrician(), "PEDIATRICIAN", sessionID, true));
+                boolean already_logged_in = login_session_service.checkSession(pediatrician.getUserNamePediatrician(), pediatrician.getPasswordPediatrician(), "PEDIATRICIAN", sessionID);
+                if (!already_logged_in) {
+                    login_session_service.add(new LoginSession(pediatrician.getUserNamePediatrician(), pediatrician.getPasswordPediatrician(), "PEDIATRICIAN", sessionID, true));
+                }
 
                 System.out.println("Pediatrician logged in");
                 return ResponseEntity.ok("PEDIATRICIAN");
