@@ -36,13 +36,12 @@ public class LoginController {
 
                 String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
                 boolean already_logged_in = login_session_service.checkSession(parent.getUserNameParent(), parent.getPasswordParent(), "PARENT", sessionID);
-                if (!already_logged_in) {
+                if (already_logged_in) {
                     login_session_service.remove(login_session_service.getUserOfSession(sessionID));
                 }
                 login_session_service.add(new LoginSession(parent.getUserNameParent(), parent.getPasswordParent(), "PARENT", sessionID, true));
 
                 System.out.println("Parent logged in");
-                System.out.println("Login session registered " + sessionID);
                 return ResponseEntity.ok("PARENT");
             }
         }
@@ -53,7 +52,7 @@ public class LoginController {
 
                 String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
                 boolean already_logged_in = login_session_service.checkSession(doctor.getUserNameDoctor(), doctor.getPasswordDoctor(), "DOCTOR", sessionID);
-                if (!already_logged_in) {
+                if (already_logged_in) {
                     login_session_service.remove(login_session_service.getUserOfSession(sessionID));
                 }
                 login_session_service.add(new LoginSession(doctor.getUserNameDoctor(), doctor.getPasswordDoctor(), "DOCTOR", sessionID, true));
@@ -69,7 +68,7 @@ public class LoginController {
 
                 String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
                 boolean already_logged_in = login_session_service.checkSession(pediatrician.getUserNamePediatrician(), pediatrician.getPasswordPediatrician(), "PEDIATRICIAN", sessionID);
-                if (!already_logged_in) {
+                if (already_logged_in) {
                     login_session_service.remove(login_session_service.getUserOfSession(sessionID));
                 }
                 login_session_service.add(new LoginSession(pediatrician.getUserNamePediatrician(), pediatrician.getPasswordPediatrician(), "PEDIATRICIAN", sessionID, true));

@@ -2,6 +2,8 @@ package com.progiizohari.ozdravi.services;
 
 import com.progiizohari.ozdravi.domain.LoginSession;
 import com.progiizohari.ozdravi.repositories.LoginSesssionRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import java.util.List;
 @Service
 public class LoginSessionServiceImpl implements LoginSessionService {
 
+    @PersistenceContext
+    private EntityManager entityManager;
     @Autowired
     private LoginSesssionRepository repository;
 
@@ -81,10 +85,12 @@ public class LoginSessionServiceImpl implements LoginSessionService {
     @Override
     public void remove(LoginSession loginSession) {
         repository.delete(loginSession);
+        entityManager.detach(loginSession);
     }
 
     @Override
     public void remove(String username, String password, String role, String session) {
         repository.delete(new LoginSession(username, password, role, session));
+        entityManager.detach(new LoginSession(username, password, role, session));
     }
 }

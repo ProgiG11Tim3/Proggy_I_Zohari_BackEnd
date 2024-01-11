@@ -37,12 +37,12 @@ public class RegistrationController {
 
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         boolean already_logged_in = login_session_service.checkSession(parentJson.getUserNameParent(), parentJson.getPasswordParent(), "PARENT", sessionID);
-        if (!already_logged_in) {
+        if (already_logged_in) {
             login_session_service.remove(login_session_service.getUserOfSession(sessionID));
         }
         login_session_service.add(new LoginSession(parentJson.getUserNameParent(), parentJson.getPasswordParent(), "PARENT", sessionID, true));
 
-        System.out.println("registriran novi parent " + sessionID);
+        System.out.println("registriran novi parent");
         return ResponseEntity.ok("OK");
     }
 }
