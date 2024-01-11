@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.print.Doc;
+import java.util.List;
 
 @Component
 public class LoginSessionHandler {
@@ -34,8 +35,7 @@ public class LoginSessionHandler {
             return "OK";
         } else {
             System.out.println("LoginSessionHandler: loginGuild: user not logged in, redirecting to /login.");
-            String externalSiteUrl = "/login";
-            return "redirect:" + externalSiteUrl;
+            return "redirect:/login";
         }
     }
 
@@ -49,10 +49,12 @@ public class LoginSessionHandler {
     }
 
     // TODO: returns a list instead of just 1st OIB if there are multiple users logged in, if we decide to only have singular login per browser client, contact Dino to refactor this and login session service
-    public String getUserOIB() {
-        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-        LoginSession userSession = login_session_service.getAllUsersOfSession(sessionID).get(0);
-
+    public String getUserOIB(String sessionID) {
+        List<LoginSession> userSessions = login_session_service.getAllUsersOfSession(sessionID);
+        if (userSessions.size() == 0) {
+            return null;
+        }
+        LoginSession userSession = userSessions.get(0);
         String returnOIB = null;
 
         if (userSession.getRole().equals("PARENT")) {
@@ -82,5 +84,62 @@ public class LoginSessionHandler {
         } */
 
         return returnOIB;
+    }
+
+    public Parent getParent(String sessionID)
+    {
+        List<LoginSession> userSessions = login_session_service.getAllUsersOfSession(sessionID);
+        if (userSessions.size() == 0) {
+            return null;
+        }
+        LoginSession userSession = userSessions.get(0);
+        Parent returnParent = null;
+
+        if (userSession.getRole().equals("PARENT")) {
+            for (Parent parent : parent_service.getAll()) {
+                if (parent.getUserNameParent().equals(userSession.getUsername()) && parent.getPasswordParent().equals(userSession.getPassword())) {
+                    returnParent = parent;
+                }
+            }
+        }
+        return returnParent;
+    }
+
+    public Doctor getDoctor(String sessionID)
+    {
+        List<LoginSession> userSessions = login_session_service.getAllUsersOfSession(sessionID);
+        if (userSessions.size() == 0) {
+            return null;
+        }
+        LoginSession userSession = userSessions.get(0);
+        Doctor returnDoctor = null;
+
+        if (userSession.getRole().equals("DOCTOR")) {
+            for (Doctor doctor : doctor_service.getAll()) {
+                if (doctor.getUserNameDoctor().equals(userSession.getUsername()) && doctor.getPasswordDoctor().equals(userSession.getPassword())) {
+                    returnDoctor = doctor;
+                }
+            }
+        }
+        return returnDoctor;
+    }
+
+    public Pediatrician getPediatrician(String sessionID)
+    {
+        List<LoginSession> userSessions = login_session_service.getAllUsersOfSession(sessionID);
+        if (userSessions.size() == 0) {
+            return null;
+        }
+        LoginSession userSession = userSessions.get(0);
+        Pediatrician returnPediatrician = null;
+
+        if (userSession.getRole().equals("PEDIATRICIAN")) {
+            for (Pediatrician pediatrician : pediatrician_service.getAll()) {
+                if (pediatrician.getUserNamePediatrician().equals(userSession.getUsername()) && pediatrician.getPasswordPediatrician().equals(userSession.getPassword())) {
+                    returnPediatrician = pediatrician;
+                }
+            }
+        }
+        return returnPediatrician;
     }
 }

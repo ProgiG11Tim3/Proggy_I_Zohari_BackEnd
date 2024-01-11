@@ -14,13 +14,10 @@ public class LoginSession {
     private String password;
     @NotNull
     private String role;
-    // TODO IMPORTANT: on logout delete the session from the database
     @NotNull
     private String session;
     @NotNull
     private boolean active;
-    // TODO: add expiration date if we decide to implement it, contact Dino to refactor this and login session service (i will do it if i have time, pinky promise)
-    // TODO NOTE: on expiration date, do remember to nuke the session from the database
 
     public LoginSession(String username, String password, String role, String session, boolean active) {
         this.username = username;
