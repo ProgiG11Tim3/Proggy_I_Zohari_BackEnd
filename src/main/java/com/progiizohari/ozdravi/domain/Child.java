@@ -1,6 +1,7 @@
 package com.progiizohari.ozdravi.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -38,12 +39,14 @@ public class Child {
     @Email
     private String emailEducationalInstitution;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "parent_OIB")
+    @JsonIgnore
     private Parent parent;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "pediatricianId")
+    @JsonIgnore
     private Pediatrician pediatrician;
 
     @OneToOne(mappedBy = "child")
@@ -52,8 +55,7 @@ public class Child {
     public Child() {
     }
 
-    public Child(int childId, String OIB, String nameChild, String lastNameChild, LocalDate dateOfBirthChild, String educationalInstitution, String emailEducationalInstitution, Parent parent, Pediatrician pediatrician, MedicalRecord medicalRecord) {
-        this.childId = childId;
+    public Child(String OIB, String nameChild, String lastNameChild, LocalDate dateOfBirthChild, String educationalInstitution, String emailEducationalInstitution, Parent parent, Pediatrician pediatrician, MedicalRecord medicalRecord) {
         this.OIB = OIB;
         this.nameChild = nameChild;
         this.lastNameChild = lastNameChild;

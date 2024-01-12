@@ -131,7 +131,7 @@ public class RegistrationRequest {
 
         Doctor doctor = new Doctor();
         List<Child> children = new ArrayList<>();
-        Parent parent = new Parent(ID, OIB, name, surname, LocalDate.parse(dateOfBirth, formatter),
+        Parent parent = new Parent(OIB, name, surname, LocalDate.parse(dateOfBirth, formatter),
                 username, password, phoneNumber, emailAddress, Integer.parseInt(postalCode),
                 placeOfResidence, employerEmailAddress, doctor, children);
         return parent;

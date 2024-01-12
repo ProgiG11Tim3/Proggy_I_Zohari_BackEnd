@@ -26,7 +26,7 @@ public class RegistrationController {
     @Autowired
     private LoginSessionService login_session_service;
 
-     @Autowired
+    @Autowired
     LoginSessionHandler sessionHandler;
 
     // hakuna matata

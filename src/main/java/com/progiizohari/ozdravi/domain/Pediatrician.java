@@ -38,14 +38,13 @@ public class Pediatrician {
     @Email
     private String emailPediatrician;
 
-    @OneToMany(mappedBy = "pediatrician")
+    @OneToMany(mappedBy = "pediatrician", cascade = CascadeType.ALL)
     private List<Child> children;
 
     public Pediatrician() {
     }
 
-    public Pediatrician(int pediatricianId, String namePediatrician, String lastNamePediatrician, LocalDate dateOfBirthPediatrician, String userNamePediatrician, String passwordPediatrician, String phoneNumberPediatrician, String emailPediatrician, List<Child> children) {
-        this.pediatricianId = pediatricianId;
+    public Pediatrician(String namePediatrician, String lastNamePediatrician, LocalDate dateOfBirthPediatrician, String userNamePediatrician, String passwordPediatrician, String phoneNumberPediatrician, String emailPediatrician, List<Child> children) {
         this.namePediatrician = namePediatrician;
         this.lastNamePediatrician = lastNamePediatrician;
         this.dateOfBirthPediatrician = dateOfBirthPediatrician;

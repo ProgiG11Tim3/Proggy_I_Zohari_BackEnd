@@ -1,5 +1,6 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -22,8 +23,7 @@ public class Notification {
     @NotNull
     private String notificationInformation;
 
-    public Notification(int notificationId, Parent parent, Child child, String notificationTitle, String notificationInformation) {
-        this.notificationId = notificationId;
+    public Notification(Parent parent, Child child, String notificationTitle, String notificationInformation) {
         this.parent = parent;
         this.child = child;
         this.notificationTitle = notificationTitle;

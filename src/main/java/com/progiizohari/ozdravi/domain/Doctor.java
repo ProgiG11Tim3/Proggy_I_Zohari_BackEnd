@@ -39,14 +39,13 @@ public class Doctor {
     @Email
     private String emailDoctor;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Parent> parents;
 
     public Doctor() {
     }
 
-    public Doctor(int doctorId, String nameDoctor, String lastNameDoctor, LocalDate dateOfBirthDoctor, String userNameDoctor, String passwordDoctor, String phoneNumberDoctor, String emailDoctor) {
-        this.doctorId = doctorId;
+    public Doctor(String nameDoctor, String lastNameDoctor, LocalDate dateOfBirthDoctor, String userNameDoctor, String passwordDoctor, String phoneNumberDoctor, String emailDoctor, List<Parent> parents) {
         this.nameDoctor = nameDoctor;
         this.lastNameDoctor = lastNameDoctor;
         this.dateOfBirthDoctor = dateOfBirthDoctor;
@@ -54,6 +53,7 @@ public class Doctor {
         this.passwordDoctor = passwordDoctor;
         this.phoneNumberDoctor = phoneNumberDoctor;
         this.emailDoctor = emailDoctor;
+        this.parents = parents;
     }
 
     public int getDoctorId() {

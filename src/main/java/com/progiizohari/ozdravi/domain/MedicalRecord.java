@@ -1,5 +1,6 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,19 +18,19 @@ public class MedicalRecord {
 
     @OneToOne
     @JoinColumn(name = "child_OIB", referencedColumnName = "OIB")
+    @JsonIgnore
     private Child child;
 
-    @OneToMany(mappedBy = "medicalRecord")
+    @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL)
     private List<MedicalReport> medicalReports;
 
-    @OneToMany(mappedBy = "medicalRecord")
+    @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL)
     private List<Examination> examinations;
 
     public MedicalRecord() {
     }
 
-    public MedicalRecord(int recordId, String currentDiagnosis, String allergyList, Child child, List<MedicalReport> medicalReports, List<Examination> examinations) {
-        this.recordId = recordId;
+    public MedicalRecord(String currentDiagnosis, String allergyList, Child child, List<MedicalReport> medicalReports, List<Examination> examinations) {
         this.currentDiagnosis = currentDiagnosis;
         this.allergyList = allergyList;
         this.child = child;

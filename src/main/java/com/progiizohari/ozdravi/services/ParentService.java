@@ -1,5 +1,6 @@
 package com.progiizohari.ozdravi.services;
 
+import com.progiizohari.ozdravi.domain.Notification;
 import com.progiizohari.ozdravi.domain.Parent;
 
 import java.util.List;

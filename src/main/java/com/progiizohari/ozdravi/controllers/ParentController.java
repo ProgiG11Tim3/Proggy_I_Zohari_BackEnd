@@ -1,5 +1,6 @@
 package com.progiizohari.ozdravi.controllers;
 
+import com.progiizohari.ozdravi.domain.Notification;
 import com.progiizohari.ozdravi.domain.Parent;
 import com.progiizohari.ozdravi.repositories.ParentRepository;
 import com.progiizohari.ozdravi.services.ParentService;

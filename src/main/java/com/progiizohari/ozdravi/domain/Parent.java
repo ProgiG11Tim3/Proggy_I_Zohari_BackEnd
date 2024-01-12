@@ -1,5 +1,6 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -54,18 +55,18 @@ public class Parent {
     @NotNull
     private String employerEmail;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "doctorId")
+    @JsonIgnore
     private Doctor doctor;
 
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     private List<Child> children;
 
     public Parent() {}
 
-    public Parent(int parentId, String OIB, String nameParent, String lastNameParent, LocalDate dateOfBirthParent, String userNameParent, String passwordParent, String phoneNumberParent, String emailParent, Integer postalCode, String placeOfResidence, String employerEmail, Doctor doctor, List<Child> children) {
-        this.parentId = parentId;
+    public Parent(String OIB, String nameParent, String lastNameParent, LocalDate dateOfBirthParent, String userNameParent, String passwordParent, String phoneNumberParent, String emailParent, Integer postalCode, String placeOfResidence, String employerEmail, Doctor doctor, List<Child> children) {
         this.OIB = OIB;
         this.nameParent = nameParent;
         this.lastNameParent = lastNameParent;

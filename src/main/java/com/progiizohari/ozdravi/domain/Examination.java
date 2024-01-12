@@ -1,5 +1,6 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -11,7 +12,8 @@ public class Examination {
 
     @Id
     @Column(length = 5)
-    private String examinationId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int examinationId;
 
     @NotNull
     private String diagnosis;
@@ -23,22 +25,22 @@ public class Examination {
     @NotNull
     @Pattern(regexp = "[DN]")
     @Column(length = 1)
-    private Character medicalCertificate;
+    private String medicalCertificate;
 
     @NotNull
     @Pattern(regexp = "[DN]")
     @Column(length = 1)
-    private Character parentMedicalLeave;
+    private String parentMedicalLeave;
 
     @ManyToOne
     @JoinColumn(name = "recordId")
+    @JsonIgnore
     private MedicalRecord medicalRecord;
 
     public Examination() {
     }
 
-    public Examination(String examinationId, String diagnosis, Timestamp dateOfExamination, Character medicalCertificate, Character parentMedicalLeave, MedicalRecord medicalRecord) {
-        this.examinationId = examinationId;
+    public Examination(String diagnosis, Timestamp dateOfExamination, String medicalCertificate, String parentMedicalLeave, MedicalRecord medicalRecord) {
         this.diagnosis = diagnosis;
         this.dateOfExamination = dateOfExamination;
         this.medicalCertificate = medicalCertificate;
@@ -46,11 +48,11 @@ public class Examination {
         this.medicalRecord = medicalRecord;
     }
 
-    public String getExaminationId() {
+    public int getExaminationId() {
         return examinationId;
     }
 
-    public void setExaminationId(String examinationId) {
+    public void setExaminationId(int examinationId) {
         this.examinationId = examinationId;
     }
 
@@ -70,19 +72,19 @@ public class Examination {
         this.dateOfExamination = dateOfExamination;
     }
 
-    public Character getMedicalCertificate() {
+    public String getMedicalCertificate() {
         return medicalCertificate;
     }
 
-    public void setMedicalCertificate(Character medicalCertificate) {
+    public void setMedicalCertificate(String medicalCertificate) {
         this.medicalCertificate = medicalCertificate;
     }
 
-    public Character getParentMedicalLeave() {
+    public String getParentMedicalLeave() {
         return parentMedicalLeave;
     }
 
-    public void setParentMedicalLeave(Character parentMedicalLeave) {
+    public void setParentMedicalLeave(String parentMedicalLeave) {
         this.parentMedicalLeave = parentMedicalLeave;
     }
 

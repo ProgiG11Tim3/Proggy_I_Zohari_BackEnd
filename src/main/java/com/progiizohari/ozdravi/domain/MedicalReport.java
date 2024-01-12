@@ -1,5 +1,6 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -10,7 +11,8 @@ public class MedicalReport {
 
     @Id
     @Column(length = 5)
-    private String reportId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int reportId;
 
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull
@@ -21,22 +23,23 @@ public class MedicalReport {
 
     @ManyToOne
     @JoinColumn(name = "recordId")
+    @JsonIgnore
     private MedicalRecord medicalRecord;
 
     public MedicalReport() {
     }
 
-    public MedicalReport(String reportId, Timestamp dateOfReport, String reportInformation) {
-        this.reportId = reportId;
+    public MedicalReport(Timestamp dateOfReport, String reportInformation, MedicalRecord medicalRecord) {
         this.dateOfReport = dateOfReport;
         this.reportInformation = reportInformation;
+        this.medicalRecord = medicalRecord;
     }
 
-    public String getReportId() {
+    public int getReportId() {
         return reportId;
     }
 
-    public void setReportId(String reportId) {
+    public void setReportId(int reportId) {
         this.reportId = reportId;
     }
 
