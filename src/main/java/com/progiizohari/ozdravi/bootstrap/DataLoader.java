@@ -22,9 +22,10 @@ public class DataLoader implements CommandLineRunner {
     private final MedicalRecordRepository medicalRecordRepository;
     private final MedicalReportRepository medicalReportRepository;
     private final ExaminationRepository examinationRepository;
+    private final FileRepository fileRepository;
 
     public DataLoader(Argon2Crypting argon2, DoctorRepository doctorRepository, PediatricianRepository pediatricianRepository, ParentRepository parentRepository, ChildRepository childRepository, NotificationRepository notificationRepository
-    , MedicalRecordRepository medicalRecordRepository, MedicalReportRepository medicalReportRepository, ExaminationRepository examinationRepository) {
+    , MedicalRecordRepository medicalRecordRepository, MedicalReportRepository medicalReportRepository, ExaminationRepository examinationRepository, FileRepository fileRepository) {
         this.argon2 = argon2;
         this.doctorRepository = doctorRepository;
         this.pediatricianRepository = pediatricianRepository;
@@ -34,6 +35,7 @@ public class DataLoader implements CommandLineRunner {
         this.medicalRecordRepository = medicalRecordRepository;
         this.medicalReportRepository = medicalReportRepository;
         this.examinationRepository = examinationRepository;
+        this.fileRepository = fileRepository;
     }
 
     @Override
