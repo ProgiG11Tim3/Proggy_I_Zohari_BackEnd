@@ -3,6 +3,8 @@ package com.progiizohari.ozdravi.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.sql.Date;
+
 @Entity
 public class SickLeaveRecommendation {
     @Id
@@ -16,6 +18,9 @@ public class SickLeaveRecommendation {
     @NotNull
     private String recData;
 
+    @NotNull
+    private Date sickLeaveStartDate;
+
     public SickLeaveRecommendation() {
     }
 
@@ -23,10 +28,19 @@ public class SickLeaveRecommendation {
         this.recommendationId = recommendationId;
         this.doctor = doctor;
         this.recData = recData;
+        this.sickLeaveStartDate = new Date(System.currentTimeMillis());
     }
 
     public int getRecommendationId() {
         return recommendationId;
+    }
+
+    public Date getSickLeaveStartDate() {
+        return sickLeaveStartDate;
+    }
+
+    public int daysSinceSickLeaveStartDate() {
+        return (int) ((System.currentTimeMillis() - sickLeaveStartDate.getTime()) / (1000 * 60 * 60 * 24));
     }
 
     public void setRecommendationId(int recommendationId) {
