@@ -20,6 +20,10 @@ public class MedicalRecord {
     @JoinColumn(name = "child_OIB", referencedColumnName = "OIB")
     private Child child;
 
+    @OneToOne
+    @JoinColumn(name = "parent_OIB", referencedColumnName = "OIB")
+    private Parent parent;
+
     @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<MedicalReport> medicalReports;
@@ -97,6 +101,14 @@ public class MedicalRecord {
 
     public void setSpecialistExaminations(List<SpecialistExamination> specialistExaminations) {
         this.specialistExaminations = specialistExaminations;
+    }
+
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 
     @Override
