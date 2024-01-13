@@ -55,15 +55,22 @@ public class Parent {
     @NotNull
     private String employerEmail;
 
+    @OneToOne(mappedBy = "parent")
+    @JsonIgnore
+    private MedicalRecord medicalRecord;
+
     @ManyToOne
     @JoinColumn(name = "doctorId")
-    @JsonIgnore
     private Doctor doctor;
 
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Child> children;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Notification> notifications;
 
     public Parent() {}
 
@@ -193,6 +200,22 @@ public class Parent {
 
     public void setChildren(List<Child> children) {
         this.children = children;
+    }
+
+    public MedicalRecord getMedicalRecord() {
+        return medicalRecord;
+    }
+
+    public void setMedicalRecord(MedicalRecord medicalRecord) {
+        this.medicalRecord = medicalRecord;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 
     public boolean equalVariables(Parent parent)

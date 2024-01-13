@@ -40,7 +40,7 @@ public class FileController {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
                     .path("/files/")
-                    .path(dbFile.getId())
+                    .path(dbFile.getFileId())
                     .toUriString();
 
             return new ResponseFile(
