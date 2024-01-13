@@ -35,7 +35,7 @@ public class LoginController {
             if (parent.getUserNameParent().equals(loginJson.getUsername()) && argon2.VerifyPassword(parent.getPasswordParent(), loginJson.getPassword())) {
 
                 String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-                boolean already_logged_in = login_session_service.checkSession(parent.getUserNameParent(), parent.getPasswordParent(), "PARENT", sessionID);
+                boolean already_logged_in = login_session_service.getUserOfSession(sessionID) != null;
                 if (already_logged_in) {
                     login_session_service.remove(login_session_service.getUserOfSession(sessionID));
                 }
@@ -51,7 +51,7 @@ public class LoginController {
             if (doctor.getUserNameDoctor().equals(loginJson.getUsername()) && argon2.VerifyPassword(doctor.getPasswordDoctor(), loginJson.getPassword())) {
 
                 String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-                boolean already_logged_in = login_session_service.checkSession(doctor.getUserNameDoctor(), doctor.getPasswordDoctor(), "DOCTOR", sessionID);
+                boolean already_logged_in = login_session_service.getUserOfSession(sessionID) != null;
                 if (already_logged_in) {
                     login_session_service.remove(login_session_service.getUserOfSession(sessionID));
                 }
@@ -67,7 +67,7 @@ public class LoginController {
             if (pediatrician.getUserNamePediatrician().equals(loginJson.getUsername()) && argon2.VerifyPassword(pediatrician.getPasswordPediatrician(), loginJson.getPassword())) {
 
                 String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-                boolean already_logged_in = login_session_service.checkSession(pediatrician.getUserNamePediatrician(), pediatrician.getPasswordPediatrician(), "PEDIATRICIAN", sessionID);
+                boolean already_logged_in = login_session_service.getUserOfSession(sessionID) != null;
                 if (already_logged_in) {
                     login_session_service.remove(login_session_service.getUserOfSession(sessionID));
                 }
