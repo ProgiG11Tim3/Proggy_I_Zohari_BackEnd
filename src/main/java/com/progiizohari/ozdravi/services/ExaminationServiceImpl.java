@@ -1,6 +1,7 @@
 package com.progiizohari.ozdravi.services;
 
 import com.progiizohari.ozdravi.domain.Examination;
+import com.progiizohari.ozdravi.domain.Parent;
 import com.progiizohari.ozdravi.repositories.ExaminationRepository;
 import com.progiizohari.ozdravi.util.LoginSessionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,12 @@ public class ExaminationServiceImpl implements ExaminationService {
 
     @Autowired
     private LoginSessionHandler loginSessionHandler;
+
+    @Override
+    public String add(Examination examination) {
+        repository.save(examination);
+        return examination.toString() + " successfully added!";
+    }
 
     @Override
     public List<Examination> getAllExaminations() {
