@@ -18,14 +18,19 @@ public class MedicalRecord {
 
     @OneToOne
     @JoinColumn(name = "child_OIB", referencedColumnName = "OIB")
-    @JsonIgnore
     private Child child;
 
     @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<MedicalReport> medicalReports;
 
     @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Examination> examinations;
+
+    @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<SpecialistExamination> specialistExaminations;
 
     public MedicalRecord() {
     }
@@ -84,6 +89,14 @@ public class MedicalRecord {
 
     public void setExaminations(List<Examination> examinations) {
         this.examinations = examinations;
+    }
+
+    public List<SpecialistExamination> getSpecialistExaminations() {
+        return specialistExaminations;
+    }
+
+    public void setSpecialistExaminations(List<SpecialistExamination> specialistExaminations) {
+        this.specialistExaminations = specialistExaminations;
     }
 
     @Override

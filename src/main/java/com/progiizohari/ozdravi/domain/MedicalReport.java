@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.io.File;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 public class MedicalReport {
@@ -23,8 +25,11 @@ public class MedicalReport {
 
     @ManyToOne
     @JoinColumn(name = "recordId")
-    @JsonIgnore
     private MedicalRecord medicalRecord;
+
+    @OneToMany(mappedBy = "medicalReport", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<FileDB> fileDBS;
 
     public MedicalReport() {
     }
@@ -65,6 +70,14 @@ public class MedicalReport {
 
     public void setMedicalRecord(MedicalRecord medicalRecord) {
         this.medicalRecord = medicalRecord;
+    }
+
+    public List<FileDB> getFileDBS() {
+        return fileDBS;
+    }
+
+    public void setFileDBS(List<FileDB> fileDBS) {
+        this.fileDBS = fileDBS;
     }
 
     @Override

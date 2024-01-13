@@ -1,6 +1,7 @@
 package com.progiizohari.ozdravi.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -40,7 +41,12 @@ public class Doctor {
     private String emailDoctor;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Parent> parents;
+
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<SickLeaveRecommendation> sickLeaveRecommendations;
 
     public Doctor() {
     }
@@ -126,6 +132,14 @@ public class Doctor {
 
     public void setParents(List<Parent> parents) {
         this.parents = parents;
+    }
+
+    public List<SickLeaveRecommendation> getSickLeaveRecommendations() {
+        return sickLeaveRecommendations;
+    }
+
+    public void setSickLeaveRecommendations(List<SickLeaveRecommendation> sickLeaveRecommendations) {
+        this.sickLeaveRecommendations = sickLeaveRecommendations;
     }
 
     public boolean equalVariables(Object o) {

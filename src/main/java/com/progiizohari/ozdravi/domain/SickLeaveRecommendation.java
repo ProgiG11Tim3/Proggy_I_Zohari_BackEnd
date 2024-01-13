@@ -21,6 +21,7 @@ public class SickLeaveRecommendation {
     @NotNull
     private Date sickLeaveStartDate;
 
+
     public SickLeaveRecommendation() {
     }
 
@@ -43,9 +44,6 @@ public class SickLeaveRecommendation {
         return (int) ((System.currentTimeMillis() - sickLeaveStartDate.getTime()) / (1000 * 60 * 60 * 24));
     }
 
-    public void setRecommendationId(int recommendationId) {
-        this.recommendationId = recommendationId;
-    }
 
     public Doctor getDoctor() {
         return doctor;

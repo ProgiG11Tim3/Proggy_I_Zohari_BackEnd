@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Child {
@@ -41,16 +42,23 @@ public class Child {
 
     @ManyToOne
     @JoinColumn(name = "parent_OIB")
-    @JsonIgnore
     private Parent parent;
 
     @ManyToOne
     @JoinColumn(name = "pediatricianId")
-    @JsonIgnore
     private Pediatrician pediatrician;
 
     @OneToOne(mappedBy = "child")
+    @JsonIgnore
     private MedicalRecord medicalRecord;
+
+    @OneToMany(mappedBy = "child", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Notification> notifications;
+
+    @OneToMany(mappedBy = "child", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<SickNote> sickNotes;
 
     public Child() {
     }
@@ -145,6 +153,22 @@ public class Child {
 
     public void setMedicalRecord(MedicalRecord medicalRecord) {
         this.medicalRecord = medicalRecord;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public List<SickNote> getSickNotes() {
+        return sickNotes;
+    }
+
+    public void setSickNotes(List<SickNote> sickNotes) {
+        this.sickNotes = sickNotes;
     }
 
     @Override
