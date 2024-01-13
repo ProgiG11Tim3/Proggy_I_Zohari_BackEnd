@@ -1,9 +1,11 @@
 package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.Doctor;
+import com.progiizohari.ozdravi.domain.Parent;
 import com.progiizohari.ozdravi.repositories.DoctorRepository;
 import com.progiizohari.ozdravi.services.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,5 +27,10 @@ public class DoctorController {
     @GetMapping("/getDoctor/{Id}")
     public Optional<Doctor> getById(@PathVariable int Id) {
         return service.getById(Id);
+    }
+
+    @GetMapping("/doctor/getAllPatients")
+    public ResponseEntity<List<Parent>> getAllPatients() {
+        return service.getAllPatients();
     }
 }

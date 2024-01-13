@@ -1,11 +1,15 @@
 package com.progiizohari.ozdravi.services;
 
 import com.progiizohari.ozdravi.domain.Doctor;
+import com.progiizohari.ozdravi.domain.Parent;
 import com.progiizohari.ozdravi.repositories.DoctorRepository;
+import com.progiizohari.ozdravi.util.LoginSessionHandler;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +21,9 @@ public class DoctorServiceImpl implements DoctorService{
     private EntityManager entityManager;
     @Autowired
     private DoctorRepository repository;
+
+    @Autowired
+    private LoginSessionHandler loginSessionHandler;
 
     @Override
     public String add(Doctor doctor) {
@@ -90,5 +97,18 @@ public class DoctorServiceImpl implements DoctorService{
             }
         }
         return false;
+    }
+
+    @Override
+    public ResponseEntity<List<Parent>> getAllPatients() {
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        Doctor doctor = loginSessionHandler.getDoctor(sessionID);
+
+        if(doctor == null) {
+            System.out.println("Nemas pristup!");
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        return ResponseEntity.ok(doctor.getParents());
     }
 }

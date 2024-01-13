@@ -62,6 +62,7 @@ public class Parent {
 
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Child> children;
 
     public Parent() {}

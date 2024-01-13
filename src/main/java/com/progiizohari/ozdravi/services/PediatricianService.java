@@ -1,6 +1,8 @@
 package com.progiizohari.ozdravi.services;
 
+import com.progiizohari.ozdravi.domain.Child;
 import com.progiizohari.ozdravi.domain.Pediatrician;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,4 +15,5 @@ public interface PediatricianService {
     public boolean remove(Pediatrician pediatrician);
     public boolean remove(int id);
     public boolean edit(int id, Pediatrician newPediatricianData);
+    public ResponseEntity<List<Child>> getAllPatients();
 }

@@ -3,6 +3,7 @@ package com.progiizohari.ozdravi.controllers;
 import com.progiizohari.ozdravi.domain.Notification;
 import com.progiizohari.ozdravi.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,5 +17,5 @@ public class NotificationController {
 
     //UC4
     @GetMapping("/getAllNotifications")
-    public List<Notification> getAllNotifications() {return service.getAllNotifications();}
+    public ResponseEntity<List<Notification>> getAllNotifications() {return service.getAllNotifications();}
 }

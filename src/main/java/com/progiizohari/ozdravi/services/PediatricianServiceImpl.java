@@ -1,11 +1,16 @@
 package com.progiizohari.ozdravi.services;
 
+import com.progiizohari.ozdravi.domain.Child;
+import com.progiizohari.ozdravi.domain.Doctor;
 import com.progiizohari.ozdravi.domain.Pediatrician;
 import com.progiizohari.ozdravi.repositories.PediatricianRepository;
+import com.progiizohari.ozdravi.util.LoginSessionHandler;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +22,9 @@ public class PediatricianServiceImpl implements PediatricianService {
     private EntityManager entityManager;
     @Autowired
     private PediatricianRepository repository;
+    @Autowired
+    private LoginSessionHandler loginSessionHandler;
+
     @Override
     public String add(Pediatrician pediatrician) {
         // check if pediatrician already exists
@@ -89,5 +97,18 @@ public class PediatricianServiceImpl implements PediatricianService {
             }
         }
         return false;
+    }
+
+    @Override
+    public ResponseEntity<List<Child>> getAllPatients() {
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        Pediatrician pediatrician = loginSessionHandler.getPediatrician(sessionID);
+
+        if(pediatrician == null) {
+            System.out.println("Nemas pristup!");
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        return ResponseEntity.ok(pediatrician.getChildren());
     }
 }
