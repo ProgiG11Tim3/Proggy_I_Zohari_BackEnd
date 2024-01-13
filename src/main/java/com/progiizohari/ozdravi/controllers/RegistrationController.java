@@ -33,7 +33,13 @@ public class RegistrationController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<String> register(@RequestBody Parent parentJson) {
         parentJson.setPasswordParent(argon2.HashPassword(parentJson.getPasswordParent()));
-        parent_service.add(parentJson);
+        String result = parent_service.add(parentJson);
+
+        if (result == "Trying to add Parent that already exists!")
+        {
+            System.out.println("Parent already exists");
+            return ResponseEntity.ok("Parent already exists!");
+        }
 
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         boolean already_logged_in = login_session_service.checkSession(parentJson.getUserNameParent(), parentJson.getPasswordParent(), "PARENT", sessionID);

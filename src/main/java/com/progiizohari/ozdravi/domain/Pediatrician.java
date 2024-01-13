@@ -127,17 +127,28 @@ public class Pediatrician {
         this.children = children;
     }
 
+    public boolean equalVariables(Pediatrician pediatrician)
+    {
+        return this.namePediatrician.equals(pediatrician.getNamePediatrician()) &&
+                this.lastNamePediatrician.equals(pediatrician.getLastNamePediatrician()) &&
+                this.dateOfBirthPediatrician.equals(pediatrician.getDateOfBirthPediatrician()) &&
+                this.userNamePediatrician.equals(pediatrician.getUserNamePediatrician()) &&
+                this.passwordPediatrician.equals(pediatrician.getPasswordPediatrician()) &&
+                this.phoneNumberPediatrician.equals(pediatrician.getPhoneNumberPediatrician()) &&
+                this.emailPediatrician.equals(pediatrician.getEmailPediatrician());
+    }
+
     @Override
     public String toString() {
         return "Pediatrician{" +
-                "pediatricianId='" + pediatricianId + '\'' +
-                ", namePediatrician='" + namePediatrician + '\'' +
-                ", lastNamePediatrician='" + lastNamePediatrician + '\'' +
-                ", dateOfBirthPediatrician=" + dateOfBirthPediatrician +
-                ", userNamePediatrician='" + userNamePediatrician + '\'' +
-                ", passwordPediatrician='" + passwordPediatrician + '\'' +
-                ", phoneNumberPediatrician='" + phoneNumberPediatrician + '\'' +
-                ", emailPediatrician='" + emailPediatrician + '\'' +
+                "Id='" + pediatricianId + '\'' +
+                ", name='" + namePediatrician + '\'' +
+                ", lastName='" + lastNamePediatrician + '\'' +
+                ", dateOfBirth=" + dateOfBirthPediatrician +
+                ", userName='" + userNamePediatrician + '\'' +
+                ", password='" + passwordPediatrician + '\'' +
+                ", phoneNumber='" + phoneNumberPediatrician + '\'' +
+                ", email='" + emailPediatrician + '\'' +
                 ", children=" + children +
                 '}';
     }

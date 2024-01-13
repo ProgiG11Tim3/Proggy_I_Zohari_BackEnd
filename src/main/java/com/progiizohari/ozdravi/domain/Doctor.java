@@ -128,17 +128,30 @@ public class Doctor {
         this.parents = parents;
     }
 
+    public boolean equalVariables(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Doctor)) return false;
+        Doctor doctor = (Doctor) o;
+        return nameDoctor.equals(doctor.getNameDoctor()) &&
+                lastNameDoctor.equals(doctor.getLastNameDoctor()) &&
+                dateOfBirthDoctor.equals(doctor.getDateOfBirthDoctor()) &&
+                userNameDoctor.equals(doctor.getUserNameDoctor()) &&
+                passwordDoctor.equals(doctor.getPasswordDoctor()) &&
+                phoneNumberDoctor.equals(doctor.getPhoneNumberDoctor()) &&
+                emailDoctor.equals(doctor.getEmailDoctor());
+    }
+
     @Override
     public String toString() {
         return "Doctor{" +
-                "doctorId='" + doctorId + '\'' +
-                ", nameDoctor='" + nameDoctor + '\'' +
-                ", lastNameDoctor='" + lastNameDoctor + '\'' +
-                ", dateOfBirthDoctor=" + dateOfBirthDoctor +
-                ", userNameDoctor='" + userNameDoctor + '\'' +
-                ", passwordDoctor='" + passwordDoctor + '\'' +
-                ", phoneNumberDoctor='" + phoneNumberDoctor + '\'' +
-                ", emailDoctor='" + emailDoctor + '\'' +
+                "Id='" + doctorId + '\'' +
+                ", name='" + nameDoctor + '\'' +
+                ", lastName='" + lastNameDoctor + '\'' +
+                ", dateOfBirth=" + dateOfBirthDoctor +
+                ", userName='" + userNameDoctor + '\'' +
+                ", password='" + passwordDoctor + '\'' +
+                ", phoneNumber='" + phoneNumberDoctor + '\'' +
+                ", email='" + emailDoctor + '\'' +
                 ", parents=" + parents +
                 '}';
     }

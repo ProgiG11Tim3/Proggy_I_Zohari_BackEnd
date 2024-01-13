@@ -194,18 +194,39 @@ public class Parent {
         this.children = children;
     }
 
+    public boolean equalVariables(Parent parent)
+    {
+        if (this.OIB.equals(parent.getOIB()) &&
+                this.nameParent.equals(parent.getNameParent()) &&
+                this.lastNameParent.equals(parent.getLastNameParent()) &&
+                this.dateOfBirthParent.equals(parent.getDateOfBirthParent()) &&
+                this.userNameParent.equals(parent.getUserNameParent()) &&
+                this.passwordParent.equals(parent.getPasswordParent()) &&
+                this.phoneNumberParent.equals(parent.getPhoneNumberParent()) &&
+                this.emailParent.equals(parent.getEmailParent()) &&
+                this.postalCode.equals(parent.getPostalCode()) &&
+                this.placeOfResidence.equals(parent.getPlaceOfResidence()) &&
+                this.employerEmail.equals(parent.getEmployerEmail()) &&
+                this.doctor.equals(parent.getDoctor()) &&
+                this.children.equals(parent.getChildren()))
+        {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Parent{" +
-                ", parentId " + parentId + '\'' +
+                ", Id " + parentId + '\'' +
                 ", OIB='" + OIB + '\'' +
-                ", nameParent='" + nameParent + '\'' +
-                ", lastNameParent='" + lastNameParent + '\'' +
-                ", dateOfBirthParent=" + dateOfBirthParent +
-                ", userNameParent='" + userNameParent + '\'' +
-                ", passwordParent='" + passwordParent + '\'' +
-                ", phoneNumberParent='" + phoneNumberParent + '\'' +
-                ", emailParent='" + emailParent + '\'' +
+                ", name='" + nameParent + '\'' +
+                ", lastName='" + lastNameParent + '\'' +
+                ", dateOfBirth=" + dateOfBirthParent +
+                ", userName='" + userNameParent + '\'' +
+                ", password='" + passwordParent + '\'' +
+                ", phoneNumber='" + phoneNumberParent + '\'' +
+                ", email='" + emailParent + '\'' +
                 ", postalCode=" + postalCode +
                 ", placeOfResidence='" + placeOfResidence + '\'' +
                 ", employerEmail=" + employerEmail +
