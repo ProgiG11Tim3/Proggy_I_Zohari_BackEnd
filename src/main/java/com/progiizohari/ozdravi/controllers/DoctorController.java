@@ -29,8 +29,25 @@ public class DoctorController {
         return service.getById(Id);
     }
 
+    //UC12
     @GetMapping("/doctor/getAllPatients")
     public ResponseEntity<List<Parent>> getAllPatients() {
-        return service.getAllPatients();
+        List<Parent> parents = service.getAllPatients();
+
+        if(parents == null){
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(parents);
+    }
+
+    //UC13
+    @GetMapping("/doctor/getPatient/{OIB}")
+    public ResponseEntity<Parent> getPatientByOIB(@PathVariable String OIB) {
+        Parent parent = service.getPatientByOIB(OIB);
+
+        if(parent == null){
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(parent);
     }
 }

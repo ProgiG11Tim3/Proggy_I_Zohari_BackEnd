@@ -6,5 +6,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface NotificationService {
-    public ResponseEntity<List<Notification>> getAllNotifications();
+    //UC4
+    public List<Notification> getAllParentNotifications();
 }

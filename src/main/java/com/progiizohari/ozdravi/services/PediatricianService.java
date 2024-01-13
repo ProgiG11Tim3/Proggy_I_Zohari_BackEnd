@@ -15,5 +15,8 @@ public interface PediatricianService {
     public boolean remove(Pediatrician pediatrician);
     public boolean remove(int id);
     public boolean edit(int id, Pediatrician newPediatricianData);
-    public ResponseEntity<List<Child>> getAllPatients();
+    //UC12
+    public List<Child> getAllPatients();
+    //UC13
+    public Child getPatientByOIB(String OIB);
 }

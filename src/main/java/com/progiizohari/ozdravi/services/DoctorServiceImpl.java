@@ -3,6 +3,7 @@ package com.progiizohari.ozdravi.services;
 import com.progiizohari.ozdravi.domain.Doctor;
 import com.progiizohari.ozdravi.domain.Parent;
 import com.progiizohari.ozdravi.repositories.DoctorRepository;
+import com.progiizohari.ozdravi.repositories.ParentRepository;
 import com.progiizohari.ozdravi.util.LoginSessionHandler;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -18,7 +19,9 @@ import java.util.Optional;
 public class DoctorServiceImpl implements DoctorService{
 
     @Autowired
-    private DoctorRepository repository;
+    private DoctorRepository doctorRepository;
+    @Autowired
+    private ParentRepository parentRepository;
 
     @Autowired
     private LoginSessionHandler loginSessionHandler;
@@ -26,7 +29,7 @@ public class DoctorServiceImpl implements DoctorService{
     @Override
     public String add(Doctor doctor) {
         // check if doctor already exists
-        for (Doctor entry : repository.findAll())
+        for (Doctor entry : doctorRepository.findAll())
         {
             if (entry.equalVariables(doctor))
             {
@@ -34,27 +37,27 @@ public class DoctorServiceImpl implements DoctorService{
             }
         }
 
-        repository.save(doctor);
+        doctorRepository.save(doctor);
         return "Doctor " + doctor.getNameDoctor() + " " + doctor.getLastNameDoctor() + " successfully added!";
     }
 
     @Override
     public List<Doctor> getAll() {
-        return repository.findAll();
+        return doctorRepository.findAll();
     }
 
     @Override
     public Optional<Doctor> getById(int Id) {
-        return repository.findById(Id);
+        return doctorRepository.findById(Id);
     }
 
     @Override
     public boolean remove(Doctor doctor) {
-        for (Doctor entry : repository.findAll())
+        for (Doctor entry : doctorRepository.findAll())
         {
             if (entry.equalVariables(doctor))
             {
-                repository.delete(doctor);
+                doctorRepository.delete(doctor);
                 return true;
             }
         }
@@ -63,11 +66,11 @@ public class DoctorServiceImpl implements DoctorService{
 
     @Override
     public boolean remove(int id) {
-        for (Doctor entry : repository.findAll())
+        for (Doctor entry : doctorRepository.findAll())
         {
             if (entry.getDoctorId() == id)
             {
-                repository.delete(entry);
+                doctorRepository.delete(entry);
                 return true;
             }
         }
@@ -76,7 +79,7 @@ public class DoctorServiceImpl implements DoctorService{
 
     @Override
     public boolean edit(int id, Doctor newDoctorData) {
-        for (Doctor entry : repository.findAll())
+        for (Doctor entry : doctorRepository.findAll())
         {
             if (entry.getDoctorId() == id)
             {
@@ -88,7 +91,7 @@ public class DoctorServiceImpl implements DoctorService{
                 entry.setPhoneNumberDoctor(newDoctorData.getPhoneNumberDoctor());
                 entry.setUserNameDoctor(newDoctorData.getUserNameDoctor());
                 entry.setPasswordDoctor(newDoctorData.getPasswordDoctor());
-                repository.save(entry);
+                doctorRepository.save(entry);
                 return true;
             }
         }
@@ -96,15 +99,34 @@ public class DoctorServiceImpl implements DoctorService{
     }
 
     @Override
-    public ResponseEntity<List<Parent>> getAllPatients() {
+    public List<Parent> getAllPatients() {
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         Doctor doctor = loginSessionHandler.getDoctor(sessionID);
 
         if(doctor == null) {
             System.out.println("Nemas pristup!");
-            return ResponseEntity.badRequest().body(null);
+            return null;
         }
 
-        return ResponseEntity.ok(doctor.getParents());
+        return doctor.getParents();
+    }
+
+    @Override
+    public Parent getPatientByOIB(String OIB) {
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        Doctor doctor = loginSessionHandler.getDoctor(sessionID);
+
+        if(doctor == null) {
+            System.out.println("Nemas pristup!");
+            return null;
+        }
+
+        Parent parent = parentRepository.findByOIB(OIB);
+
+        if(!doctor.getParents().contains(parent)){
+            System.out.println("Nije tvoj pacijent!");
+            return null;
+        }
+        return parent;
     }
 }

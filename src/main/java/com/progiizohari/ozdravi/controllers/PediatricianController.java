@@ -32,8 +32,25 @@ public class PediatricianController {
         return service.getById(Id);
     }
 
+    //UC12
     @GetMapping("/pediatrician/getAllPatients")
     public ResponseEntity<List<Child>> getAllPatients() {
-        return service.getAllPatients();
+        List<Child> children = service.getAllPatients();
+
+        if(children == null){
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(children);
+    }
+
+    //UC13
+    @GetMapping("/pediatrician/getPatient/{OIB}")
+    public ResponseEntity<Child> getPatientByOIB(@PathVariable String OIB) {
+        Child child = service.getPatientByOIB(OIB);
+
+        if(child == null){
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(child);
     }
 }

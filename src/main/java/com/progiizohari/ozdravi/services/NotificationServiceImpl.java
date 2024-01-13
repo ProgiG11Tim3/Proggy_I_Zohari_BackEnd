@@ -21,14 +21,15 @@ public class NotificationServiceImpl implements NotificationService{
     private LoginSessionHandler loginSessionHandler;
 
     @Override
-    public ResponseEntity<List<Notification>> getAllNotifications() {
+    public List<Notification> getAllParentNotifications() {
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         Parent parent = loginSessionHandler.getParent(sessionID);
 
         if(parent == null) {
-            return ResponseEntity.badRequest().body(null);
+            System.out.println("Nemas pristup!");
+            return null;
         }
 
-        return ResponseEntity.ok(repository.findAllByParent_OIB(parent.getOIB()));
+        return repository.findAllByParent_OIB(parent.getOIB());
     }
 }

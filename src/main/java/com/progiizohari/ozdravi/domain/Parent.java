@@ -61,6 +61,7 @@ public class Parent {
 
     @ManyToOne
     @JoinColumn(name = "doctorId")
+    @JsonIgnore
     private Doctor doctor;
 
 

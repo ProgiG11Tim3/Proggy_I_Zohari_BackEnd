@@ -16,6 +16,14 @@ public class NotificationController {
     private NotificationService service;
 
     //UC4
-    @GetMapping("/getAllNotifications")
-    public ResponseEntity<List<Notification>> getAllNotifications() {return service.getAllNotifications();}
+    @GetMapping("/getAllParentNotifications")
+    public ResponseEntity<List<Notification>> getAllNotifications() {
+        List<Notification> notifications = service.getAllParentNotifications();
+
+        if(notifications == null){
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(notifications);
+    }
+
 }

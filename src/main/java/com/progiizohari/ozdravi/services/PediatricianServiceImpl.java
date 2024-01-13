@@ -2,7 +2,9 @@ package com.progiizohari.ozdravi.services;
 
 import com.progiizohari.ozdravi.domain.Child;
 import com.progiizohari.ozdravi.domain.Doctor;
+import com.progiizohari.ozdravi.domain.Parent;
 import com.progiizohari.ozdravi.domain.Pediatrician;
+import com.progiizohari.ozdravi.repositories.ChildRepository;
 import com.progiizohari.ozdravi.repositories.PediatricianRepository;
 import com.progiizohari.ozdravi.util.LoginSessionHandler;
 import jakarta.persistence.EntityManager;
@@ -19,14 +21,16 @@ import java.util.Optional;
 public class PediatricianServiceImpl implements PediatricianService {
 
     @Autowired
-    private PediatricianRepository repository;
+    private PediatricianRepository pediatricianRepository;
+    @Autowired
+    private ChildRepository childRepository;
     @Autowired
     private LoginSessionHandler loginSessionHandler;
 
     @Override
     public String add(Pediatrician pediatrician) {
         // check if pediatrician already exists
-        for (Pediatrician entry : repository.findAll())
+        for (Pediatrician entry : pediatricianRepository.findAll())
         {
             if (entry.equalVariables(pediatrician))
             {
@@ -34,27 +38,27 @@ public class PediatricianServiceImpl implements PediatricianService {
             }
         }
 
-        repository.save(pediatrician);
+        pediatricianRepository.save(pediatrician);
         return "Pediatrician " + pediatrician.getNamePediatrician() + " " + pediatrician.getLastNamePediatrician() + " successfully added!";
     }
 
     @Override
     public List<Pediatrician> getAll() {
-        return repository.findAll();
+        return pediatricianRepository.findAll();
     }
 
     @Override
     public Optional<Pediatrician> getById(int Id) {
-        return repository.findById(Id);
+        return pediatricianRepository.findById(Id);
     }
 
     @Override
     public boolean remove(Pediatrician pediatrician) {
-        for (Pediatrician entry : repository.findAll())
+        for (Pediatrician entry : pediatricianRepository.findAll())
         {
             if (entry.equalVariables(pediatrician))
             {
-                repository.delete(pediatrician);
+                pediatricianRepository.delete(pediatrician);
                 return true;
             }
         }
@@ -63,11 +67,11 @@ public class PediatricianServiceImpl implements PediatricianService {
 
     @Override
     public boolean remove(int id) {
-        for (Pediatrician entry : repository.findAll())
+        for (Pediatrician entry : pediatricianRepository.findAll())
         {
             if (entry.getPediatricianId() == id)
             {
-                repository.delete(entry);
+                pediatricianRepository.delete(entry);
                 return true;
             }
         }
@@ -76,7 +80,7 @@ public class PediatricianServiceImpl implements PediatricianService {
 
     @Override
     public boolean edit(int id, Pediatrician newPediatricianData) {
-        for (Pediatrician entry : repository.findAll())
+        for (Pediatrician entry : pediatricianRepository.findAll())
         {
             if (entry.getPediatricianId() == id)
             {
@@ -88,7 +92,7 @@ public class PediatricianServiceImpl implements PediatricianService {
                 entry.setEmailPediatrician(newPediatricianData.getEmailPediatrician());
                 entry.setPhoneNumberPediatrician(newPediatricianData.getPhoneNumberPediatrician());
                 entry.setDateOfBirthPediatrician(newPediatricianData.getDateOfBirthPediatrician());
-                repository.save(entry);
+                pediatricianRepository.save(entry);
                 return true;
             }
         }
@@ -96,15 +100,34 @@ public class PediatricianServiceImpl implements PediatricianService {
     }
 
     @Override
-    public ResponseEntity<List<Child>> getAllPatients() {
+    public List<Child> getAllPatients() {
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         Pediatrician pediatrician = loginSessionHandler.getPediatrician(sessionID);
 
         if(pediatrician == null) {
             System.out.println("Nemas pristup!");
-            return ResponseEntity.badRequest().body(null);
+            return null;
         }
 
-        return ResponseEntity.ok(pediatrician.getChildren());
+        return pediatrician.getChildren();
+    }
+
+    @Override
+    public Child getPatientByOIB(String OIB) {
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        Pediatrician pediatrician = loginSessionHandler.getPediatrician(sessionID);
+
+        if(pediatrician == null) {
+            System.out.println("Nemas pristup!");
+            return null;
+        }
+
+        Child child = childRepository.findByOIB(OIB);
+
+        if(!pediatrician.getChildren().contains(child)){
+            System.out.println("Nije tvoj pacijent!");
+            return null;
+        }
+        return child;
     }
 }

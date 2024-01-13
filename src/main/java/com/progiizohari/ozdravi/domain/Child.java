@@ -42,10 +42,12 @@ public class Child {
 
     @ManyToOne
     @JoinColumn(name = "parent_OIB")
+    @JsonIgnore
     private Parent parent;
 
     @ManyToOne
     @JoinColumn(name = "pediatricianId")
+    @JsonIgnore
     private Pediatrician pediatrician;
 
     @OneToOne(mappedBy = "child")
