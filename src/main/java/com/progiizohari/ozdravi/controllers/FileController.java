@@ -2,16 +2,13 @@ package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.FileDB;
 import com.progiizohari.ozdravi.domain.ResponseFile;
-import com.progiizohari.ozdravi.domain.ResponseMessage;
 import com.progiizohari.ozdravi.services.FileService;
-import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -25,16 +22,15 @@ public class FileController {
     private FileService storageService;
 
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         try {
             storageService.storeFile(file);
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+            return ResponseEntity.status(HttpStatus.OK).body(message);
         } catch (Exception e) {
-            message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-            message += " " + e.getMessage();
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+            message = "Could not upload the file: " + file.getOriginalFilename() + " | " + e.getMessage();
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
         }
     }
 
@@ -44,7 +40,7 @@ public class FileController {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
                     .path("/files/")
-                    .path(dbFile.getId())
+                    .path(dbFile.getFileId())
                     .toUriString();
 
             return new ResponseFile(

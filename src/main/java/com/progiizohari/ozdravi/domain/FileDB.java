@@ -1,5 +1,6 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
@@ -10,7 +11,7 @@ public class FileDB {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    private String fileId;
 
     private String name;
 
@@ -18,6 +19,10 @@ public class FileDB {
 
     @Lob
     private byte[] data;
+
+    @ManyToOne
+    @JoinColumn(name = "reportId")
+    private MedicalReport medicalReport;
 
     public FileDB() {
     }
@@ -28,8 +33,8 @@ public class FileDB {
         this.data = data;
     }
 
-    public String getId() {
-        return id;
+    public String getFileId() {
+        return fileId;
     }
 
     public String getName() {
@@ -56,4 +61,11 @@ public class FileDB {
         this.data = data;
     }
 
+    public MedicalReport getMedicalReport() {
+        return medicalReport;
+    }
+
+    public void setMedicalReport(MedicalReport medicalReport) {
+        this.medicalReport = medicalReport;
+    }
 }

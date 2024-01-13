@@ -19,6 +19,10 @@ public class SpecialistExamination {
     @NotNull
     private String examLocations;
 
+    @ManyToOne
+    @JoinColumn(name = "recordId")
+    private MedicalRecord medicalRecord;
+
     public SpecialistExamination() {
     }
 
@@ -59,6 +63,14 @@ public class SpecialistExamination {
 
     public void setExamLocations(String examLocations) {
         this.examLocations = examLocations;
+    }
+
+    public MedicalRecord getMedicalRecord() {
+        return medicalRecord;
+    }
+
+    public void setMedicalRecord(MedicalRecord medicalRecord) {
+        this.medicalRecord = medicalRecord;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -39,6 +40,7 @@ public class Pediatrician {
     private String emailPediatrician;
 
     @OneToMany(mappedBy = "pediatrician", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Child> children;
 
     public Pediatrician() {
