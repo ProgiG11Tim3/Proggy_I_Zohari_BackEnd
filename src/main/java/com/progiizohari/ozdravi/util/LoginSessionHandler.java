@@ -28,7 +28,6 @@ public class LoginSessionHandler {
     @Autowired
     private LoginSessionService login_session_service;
 
-    // TODO: if we decide to only have singular login per browser client, contact Dino to refactor this and login session service
     public String loginGuard(String sessionID) {
         if (login_session_service.getUserOfSession(sessionID) != null) {
             System.out.println("LoginSessionHandler: loginGuild: user already logged in, proceeding without redirect.");
@@ -39,7 +38,6 @@ public class LoginSessionHandler {
         }
     }
 
-    // TODO: if we decide to only have singular login per browser client, contact Dino to refactor this and login session service
     public boolean isUserLoggedIn(String sessionID) {
         if (login_session_service.getUserOfSession(sessionID) != null) {
             return true;
