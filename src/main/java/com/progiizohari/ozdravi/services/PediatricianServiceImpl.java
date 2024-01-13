@@ -18,8 +18,6 @@ import java.util.Optional;
 @Service
 public class PediatricianServiceImpl implements PediatricianService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
     @Autowired
     private PediatricianRepository repository;
     @Autowired
@@ -57,7 +55,6 @@ public class PediatricianServiceImpl implements PediatricianService {
             if (entry.equalVariables(pediatrician))
             {
                 repository.delete(pediatrician);
-                entityManager.detach(pediatrician);
                 return true;
             }
         }
@@ -71,7 +68,6 @@ public class PediatricianServiceImpl implements PediatricianService {
             if (entry.getPediatricianId() == id)
             {
                 repository.delete(entry);
-                entityManager.detach(entry);
                 return true;
             }
         }

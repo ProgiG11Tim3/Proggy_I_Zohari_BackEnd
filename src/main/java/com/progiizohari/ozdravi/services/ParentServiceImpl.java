@@ -13,8 +13,6 @@ import java.util.List;
 @Service
 public class ParentServiceImpl implements ParentService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
     @Autowired
     private ParentRepository repository;
 
@@ -47,7 +45,6 @@ public class ParentServiceImpl implements ParentService {
             if (entry.equalVariables(parent))
             {
                 repository.delete(parent);
-                entityManager.detach(parent);
                 return true;
             }
         }
@@ -61,7 +58,6 @@ public class ParentServiceImpl implements ParentService {
             if (entry.getParentId() == id)
             {
                 repository.delete(entry);
-                entityManager.detach(entry);
                 return true;
             }
         }

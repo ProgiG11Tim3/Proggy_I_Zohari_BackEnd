@@ -17,8 +17,6 @@ import java.util.Optional;
 @Service
 public class DoctorServiceImpl implements DoctorService{
 
-    @PersistenceContext
-    private EntityManager entityManager;
     @Autowired
     private DoctorRepository repository;
 
@@ -57,7 +55,6 @@ public class DoctorServiceImpl implements DoctorService{
             if (entry.equalVariables(doctor))
             {
                 repository.delete(doctor);
-                entityManager.detach(doctor);
                 return true;
             }
         }
@@ -71,7 +68,6 @@ public class DoctorServiceImpl implements DoctorService{
             if (entry.getDoctorId() == id)
             {
                 repository.delete(entry);
-                entityManager.detach(entry);
                 return true;
             }
         }
