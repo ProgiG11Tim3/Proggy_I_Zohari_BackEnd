@@ -173,6 +173,15 @@ public class Child {
         this.sickNotes = sickNotes;
     }
 
+    public void setFromChildRegistrationEntry(ChildRegistrationEntry childRegistrationEntry) {
+        this.OIB = childRegistrationEntry.getOIB();
+        this.nameChild = childRegistrationEntry.getNameChild();
+        this.lastNameChild = childRegistrationEntry.getLastNameChild();
+        this.dateOfBirthChild = childRegistrationEntry.getDateOfBirthChild();
+        this.educationalInstitution = childRegistrationEntry.getEducationalInstitution();
+        this.emailEducationalInstitution = childRegistrationEntry.getEmailEducationalInstitution();
+    }
+
     @Override
     public String toString() {
         return "Child{" +

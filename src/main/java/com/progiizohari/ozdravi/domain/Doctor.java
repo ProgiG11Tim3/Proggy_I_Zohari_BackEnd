@@ -130,6 +130,10 @@ public class Doctor {
         return parents;
     }
 
+    public boolean addParent(Parent parent) {
+        return parents.add(parent);
+    }
+
     public void setParents(List<Parent> parents) {
         this.parents = parents;
     }
