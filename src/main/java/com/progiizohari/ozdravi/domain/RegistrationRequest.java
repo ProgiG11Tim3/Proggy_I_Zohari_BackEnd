@@ -131,9 +131,10 @@ public class RegistrationRequest {
 
         Doctor doctor = new Doctor();
         List<Child> children = new ArrayList<>();
+        MedicalRecord medicalRecord = new MedicalRecord();
         Parent parent = new Parent(OIB, name, surname, LocalDate.parse(dateOfBirth, formatter),
                 username, password, phoneNumber, emailAddress, Integer.parseInt(postalCode),
-                placeOfResidence, employerEmailAddress, doctor, children);
+                placeOfResidence, employerEmailAddress,medicalRecord ,doctor, children);
         return parent;
     }
 }

@@ -34,6 +34,7 @@ public class Parent {
     private String userNameParent;
 
     @NotNull
+    @JsonIgnore
     private String passwordParent;
 
     @Column(unique = true)
@@ -75,7 +76,7 @@ public class Parent {
 
     public Parent() {}
 
-    public Parent(String OIB, String nameParent, String lastNameParent, LocalDate dateOfBirthParent, String userNameParent, String passwordParent, String phoneNumberParent, String emailParent, Integer postalCode, String placeOfResidence, String employerEmail, Doctor doctor, List<Child> children) {
+    public Parent(String OIB, String nameParent, String lastNameParent, LocalDate dateOfBirthParent, String userNameParent, String passwordParent, String phoneNumberParent, String emailParent, Integer postalCode, String placeOfResidence, String employerEmail, MedicalRecord medicalRecord, Doctor doctor, List<Child> children) {
         this.OIB = OIB;
         this.nameParent = nameParent;
         this.lastNameParent = lastNameParent;
@@ -87,6 +88,7 @@ public class Parent {
         this.postalCode = postalCode;
         this.placeOfResidence = placeOfResidence;
         this.employerEmail = employerEmail;
+        this.medicalRecord = medicalRecord;
         this.doctor = doctor;
         this.children = children;
     }

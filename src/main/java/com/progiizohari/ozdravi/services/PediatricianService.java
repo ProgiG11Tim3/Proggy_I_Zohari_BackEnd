@@ -1,6 +1,8 @@
 package com.progiizohari.ozdravi.services;
 
 import com.progiizohari.ozdravi.domain.Child;
+import com.progiizohari.ozdravi.domain.MedicalRecord;
+import com.progiizohari.ozdravi.domain.MedicalReport;
 import com.progiizohari.ozdravi.domain.Pediatrician;
 import org.springframework.http.ResponseEntity;
 
@@ -19,4 +21,8 @@ public interface PediatricianService {
     public List<Child> getAllPatients();
     //UC13
     public Child getPatientByOIB(String OIB);
+    //UC14
+    public MedicalRecord getPatientRecord(String OIB);
+    //UC20
+    public List<MedicalReport> getPatientReports(String OIB);
 }

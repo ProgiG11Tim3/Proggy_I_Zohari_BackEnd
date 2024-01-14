@@ -25,6 +25,7 @@ public class MedicalReport {
 
     @ManyToOne
     @JoinColumn(name = "recordId")
+    @JsonIgnore
     private MedicalRecord medicalRecord;
 
     @OneToMany(mappedBy = "medicalReport", cascade = CascadeType.ALL)
@@ -34,10 +35,11 @@ public class MedicalReport {
     public MedicalReport() {
     }
 
-    public MedicalReport(Timestamp dateOfReport, String reportInformation, MedicalRecord medicalRecord) {
+    public MedicalReport(Timestamp dateOfReport, String reportInformation, MedicalRecord medicalRecord, List<FileDB> fileDBS) {
         this.dateOfReport = dateOfReport;
         this.reportInformation = reportInformation;
         this.medicalRecord = medicalRecord;
+        this.fileDBS = fileDBS;
     }
 
     public int getReportId() {

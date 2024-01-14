@@ -1,6 +1,8 @@
 package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.Doctor;
+import com.progiizohari.ozdravi.domain.MedicalRecord;
+import com.progiizohari.ozdravi.domain.MedicalReport;
 import com.progiizohari.ozdravi.domain.Parent;
 import com.progiizohari.ozdravi.repositories.DoctorRepository;
 import com.progiizohari.ozdravi.services.DoctorService;
@@ -49,5 +51,27 @@ public class DoctorController {
             return ResponseEntity.badRequest().body(null);
         }
         return ResponseEntity.ok(parent);
+    }
+
+    //UC14
+    @GetMapping("/doctor/getPatientRecord/{OIB}")
+    public ResponseEntity<MedicalRecord> getPatientRecord(@PathVariable String OIB) {
+        MedicalRecord medicalRecord = service.getPatientRecord(OIB);
+
+        if(medicalRecord == null){
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(medicalRecord);
+    }
+
+    //UC20
+    @GetMapping("/doctor/getPatientReports/{OIB}")
+    public ResponseEntity<List<MedicalReport>> getPatientReports(@PathVariable String OIB){
+        List<MedicalReport> medicalReports = service.getPatientReports(OIB);
+
+        if(medicalReports == null){
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(medicalReports);
     }
 }

@@ -1,8 +1,11 @@
 package com.progiizohari.ozdravi.services;
 
 import com.progiizohari.ozdravi.domain.Doctor;
+import com.progiizohari.ozdravi.domain.MedicalRecord;
+import com.progiizohari.ozdravi.domain.MedicalReport;
 import com.progiizohari.ozdravi.domain.Parent;
 import com.progiizohari.ozdravi.repositories.DoctorRepository;
+import com.progiizohari.ozdravi.repositories.MedicalRecordRepository;
 import com.progiizohari.ozdravi.repositories.ParentRepository;
 import com.progiizohari.ozdravi.util.LoginSessionHandler;
 import jakarta.persistence.EntityManager;
@@ -12,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import javax.print.Doc;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +27,8 @@ public class DoctorServiceImpl implements DoctorService{
     private DoctorRepository doctorRepository;
     @Autowired
     private ParentRepository parentRepository;
-
+    @Autowired
+    private MedicalRecordRepository medicalRecordRepository;
     @Autowired
     private LoginSessionHandler loginSessionHandler;
 
@@ -128,5 +134,55 @@ public class DoctorServiceImpl implements DoctorService{
             return null;
         }
         return parent;
+    }
+
+    @Override
+    public MedicalRecord getPatientRecord(String OIB) {
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        Doctor doctor = loginSessionHandler.getDoctor(sessionID);
+
+        if(doctor == null) {
+            System.out.println("Nemas pristup!");
+            return null;
+        }
+
+        Parent parent = parentRepository.findByOIB(OIB);
+
+        if(!doctor.getParents().contains(parent)){
+            System.out.println("Nije tvoj pacijent!");
+            return null;
+        }
+
+        MedicalRecord medicalRecord = medicalRecordRepository.findByParent_OIB(OIB);
+
+        if(medicalRecord == null){
+            return new MedicalRecord(parent);
+        }
+        return medicalRecord;
+    }
+
+    @Override
+    public List<MedicalReport> getPatientReports(String OIB) {
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        Doctor doctor = loginSessionHandler.getDoctor(sessionID);
+
+        if(doctor == null) {
+            System.out.println("Nemas pristup!");
+            return null;
+        }
+
+        Parent parent = parentRepository.findByOIB(OIB);
+
+        if(!doctor.getParents().contains(parent)){
+            System.out.println("Nije tvoj pacijent!");
+            return null;
+        }
+
+        MedicalRecord medicalRecord = medicalRecordRepository.findByParent_OIB(OIB);
+
+        if(medicalRecord.getMedicalReports() == null){
+            return new ArrayList<>();
+        }
+        return medicalRecord.getMedicalReports();
     }
 }
