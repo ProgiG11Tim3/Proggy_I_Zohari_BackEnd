@@ -34,6 +34,12 @@ public class Notification {
     public Notification() {
     }
 
+    public Notification(Parent parent, String notificationTitle, String notificationInformation) {
+        this.parent = parent;
+        this.notificationTitle = notificationTitle;
+        this.notificationInformation = notificationInformation;
+    }
+
     public int getNotificationId() {
         return notificationId;
     }

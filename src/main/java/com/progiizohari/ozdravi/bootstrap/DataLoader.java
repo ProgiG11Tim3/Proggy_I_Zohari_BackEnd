@@ -46,6 +46,7 @@ public class DataLoader implements CommandLineRunner {
         Pediatrician pediatrician1 = new Pediatrician("Pedijatar", "Pedijatric", LocalDate.of(1980, 4, 12), "pedijatar", argon2.HashPassword("pedijatar123"), "0981239832", "pedijatar@gmail.com", null);
         Child child1 = new Child("34567887654", "Dijete", "Malo", LocalDate.of(2020, 6, 3), "OS ZaMaluDijecu", "zamale@gmail.com", parent1, pediatrician1, null);
         Notification notification1 = new Notification(parent1, child1, "Bolest lijevog kuka", "Postovani, vase dijete ima bolest lijevog kuka i zbog toga je osudjeno na crip walk, east coast mothafucka. Srdacan pozdrav, Pedijatar");
+        Notification notification2 = new Notification(parent1, "Bolest najboljeg roditelja", "Postovani, u velikoj ste opasnosti jer vam iz bradavice raste kost, javite mi se sto prije, vas doktor Doktor Doktoric najdoktoriji");
         MedicalRecord medicalRecord1 = new MedicalRecord("Upala crijevnog otvora", "Nema alergije", child1,null, null, null);
         MedicalReport medicalReport1 = new MedicalReport(Timestamp.valueOf(LocalDateTime.of(2024, 1,3,16,32)), "Ima iskrivljena stopala poput bavlana na cesti 91. godine", medicalRecord1, null);
         Examination examination1 = new Examination("Stopala smrde uzasno", Timestamp.valueOf(LocalDateTime.of(2024, 1,12,16,32)), "D", "D", medicalRecord1);
@@ -57,6 +58,7 @@ public class DataLoader implements CommandLineRunner {
         pediatricianRepository.save(pediatrician1);
         childRepository.save(child1);
         notificationRepository.save(notification1);
+        notificationRepository.save(notification2);
         medicalRecordRepository.save(medicalRecord1);
         medicalReportRepository.save(medicalReport1);
         examinationRepository.save(examination1);

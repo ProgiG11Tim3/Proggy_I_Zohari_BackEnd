@@ -11,4 +11,8 @@ import java.util.List;
 
 public interface NotificationRepository extends JpaRepository<Notification, Integer> {
     List<Notification> findAllByParent_OIB(String parent_OIB);
+
+    List<Notification> findNotificationsByChildIsNullAndParent_OIB(String parent_OIB);
+
+    List<Notification> findNotificationsByChild_OIB(String child_OIB);
 }
