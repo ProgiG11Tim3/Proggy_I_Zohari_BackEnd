@@ -42,13 +42,15 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Doctor doctor1 = new Doctor("Doktor", "Doktoric", LocalDate.of(1977, 12, 3), "doktorDoktoric", argon2.HashPassword("doktorka"), "0992280353", "doktor@gmail.com", null);
-        Parent parent1 = new Parent("12345678901", "Roditelj", "Rodic", LocalDate.of(1980, 12, 4), "najroditelj", argon2.HashPassword("roditelj123"), "0992233344", "roditelj@gmail.com", 10000, "Zagreb", "tvrtka@gmail.com", doctor1, null);
+        Parent parent1 = new Parent("12345678901", "Roditelj", "Rodic", LocalDate.of(1980, 12, 4), "najroditelj", argon2.HashPassword("roditelj123"), "0992233344", "roditelj@gmail.com", 10000, "Zagreb", "tvrtka@gmail.com", null ,doctor1, null);
         Pediatrician pediatrician1 = new Pediatrician("Pedijatar", "Pedijatric", LocalDate.of(1980, 4, 12), "pedijatar", argon2.HashPassword("pedijatar123"), "0981239832", "pedijatar@gmail.com", null);
         Child child1 = new Child("34567887654", "Dijete", "Malo", LocalDate.of(2020, 6, 3), "OS ZaMaluDijecu", "zamale@gmail.com", parent1, pediatrician1, null);
         Notification notification1 = new Notification(parent1, child1, "Bolest lijevog kuka", "Postovani, vase dijete ima bolest lijevog kuka i zbog toga je osudjeno na crip walk, east coast mothafucka. Srdacan pozdrav, Pedijatar");
-        MedicalRecord medicalRecord1 = new MedicalRecord("Upala crijevnog otvora", "Nema alergije", child1, null, null);
-        MedicalReport medicalReport1 = new MedicalReport(Timestamp.valueOf(LocalDateTime.of(2024, 1,3,16,32)), "Ima iskrivljena stopala poput bavlana na cesti 91. godine", medicalRecord1);
+        MedicalRecord medicalRecord1 = new MedicalRecord("Upala crijevnog otvora", "Nema alergije", child1,null, null, null);
+        MedicalReport medicalReport1 = new MedicalReport(Timestamp.valueOf(LocalDateTime.of(2024, 1,3,16,32)), "Ima iskrivljena stopala poput bavlana na cesti 91. godine", medicalRecord1, null);
         Examination examination1 = new Examination("Stopala smrde uzasno", Timestamp.valueOf(LocalDateTime.of(2024, 1,12,16,32)), "D", "D", medicalRecord1);
+        MedicalRecord medicalRecord_parent = new MedicalRecord("Nema dijagnozu!", "Alergija na grinje", null, parent1, null, null);
+        MedicalReport medicalReport_parent = new MedicalReport(Timestamp.valueOf(LocalDateTime.of(2023,7,12,15,23)), "Mnogo spolnih bolesti", medicalRecord_parent, null);
 
         doctorRepository.save(doctor1);
         parentRepository.save(parent1);
@@ -58,6 +60,8 @@ public class DataLoader implements CommandLineRunner {
         medicalRecordRepository.save(medicalRecord1);
         medicalReportRepository.save(medicalReport1);
         examinationRepository.save(examination1);
+        medicalRecordRepository.save(medicalRecord_parent);
+        medicalReportRepository.save(medicalReport_parent);
         System.out.println("Data loaded into the database.");
     }
 }

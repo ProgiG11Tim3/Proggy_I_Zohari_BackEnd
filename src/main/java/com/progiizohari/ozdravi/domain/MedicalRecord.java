@@ -17,11 +17,11 @@ public class MedicalRecord {
     private String allergyList;
 
     @OneToOne
-    @JoinColumn(name = "child_OIB", referencedColumnName = "OIB")
+    @JoinColumn(name = "child_OIB")
     private Child child;
 
     @OneToOne
-    @JoinColumn(name = "parent_OIB", referencedColumnName = "OIB")
+    @JoinColumn(name = "parent_OIB")
     private Parent parent;
 
     @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL)
@@ -39,10 +39,19 @@ public class MedicalRecord {
     public MedicalRecord() {
     }
 
-    public MedicalRecord(String currentDiagnosis, String allergyList, Child child, List<MedicalReport> medicalReports, List<Examination> examinations) {
+    public MedicalRecord(Parent parent){
+        this.parent = parent;
+    }
+
+    public MedicalRecord(Child child){
+        this.child = child;
+    }
+
+    public MedicalRecord(String currentDiagnosis, String allergyList, Child child, Parent parent, List<MedicalReport> medicalReports, List<Examination> examinations) {
         this.currentDiagnosis = currentDiagnosis;
         this.allergyList = allergyList;
         this.child = child;
+        this.parent = parent;
         this.medicalReports = medicalReports;
         this.examinations = examinations;
     }

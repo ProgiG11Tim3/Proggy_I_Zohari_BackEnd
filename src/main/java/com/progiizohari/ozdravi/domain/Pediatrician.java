@@ -30,6 +30,7 @@ public class Pediatrician {
     private String userNamePediatrician;
 
     @NotNull
+    @JsonIgnore
     private String passwordPediatrician;
 
     @Column(unique = true)

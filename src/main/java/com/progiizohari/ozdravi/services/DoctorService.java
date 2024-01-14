@@ -1,8 +1,6 @@
 package com.progiizohari.ozdravi.services;
 
-import com.progiizohari.ozdravi.domain.Doctor;
-import com.progiizohari.ozdravi.domain.LoginSession;
-import com.progiizohari.ozdravi.domain.Parent;
+import com.progiizohari.ozdravi.domain.*;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -19,4 +17,8 @@ public interface DoctorService {
     public List<Parent> getAllPatients();
     //UC13
     public Parent getPatientByOIB(String OIB);
+    //UC14
+    public MedicalRecord getPatientRecord(String OIB);
+    //UC20
+    public List<MedicalReport> getPatientReports(String OIB);
 }

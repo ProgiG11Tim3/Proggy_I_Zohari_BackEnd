@@ -31,6 +31,7 @@ public class Doctor {
     private String userNameDoctor;
 
     @NotNull
+    @JsonIgnore
     private String passwordDoctor;
 
     @Column(unique = true)
