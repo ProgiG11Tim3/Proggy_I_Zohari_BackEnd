@@ -8,4 +8,8 @@ import java.util.List;
 public interface ExaminationService {
     public String add(Examination examination);
     List<Examination> getAllExaminations();
+
+    List<Examination> getOnlyParentExaminations();
+
+    List<Examination> getOnlyChildExaminations(int index);
 }
