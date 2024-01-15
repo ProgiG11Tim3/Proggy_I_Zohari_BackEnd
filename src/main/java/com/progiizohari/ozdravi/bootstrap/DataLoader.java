@@ -23,11 +23,11 @@ public class DataLoader implements CommandLineRunner {
     private final MedicalReportRepository medicalReportRepository;
     private final ExaminationRepository examinationRepository;
     private final FileRepository fileRepository;
-
     private final SickNoteRepository sickNoteRepository;
+    private final SpecialistExaminationRepository specialistExaminationRepository;
 
     public DataLoader(Argon2Crypting argon2, DoctorRepository doctorRepository, PediatricianRepository pediatricianRepository, ParentRepository parentRepository, ChildRepository childRepository, NotificationRepository notificationRepository
-    , MedicalRecordRepository medicalRecordRepository, MedicalReportRepository medicalReportRepository, ExaminationRepository examinationRepository, FileRepository fileRepository, SickNoteRepository sickNoteRepository) {
+    , MedicalRecordRepository medicalRecordRepository, MedicalReportRepository medicalReportRepository, ExaminationRepository examinationRepository, FileRepository fileRepository, SickNoteRepository sickNoteRepository, SpecialistExaminationRepository specialistExaminationRepository) {
         this.argon2 = argon2;
         this.doctorRepository = doctorRepository;
         this.pediatricianRepository = pediatricianRepository;
@@ -39,6 +39,7 @@ public class DataLoader implements CommandLineRunner {
         this.examinationRepository = examinationRepository;
         this.fileRepository = fileRepository;
         this.sickNoteRepository = sickNoteRepository;
+        this.specialistExaminationRepository = specialistExaminationRepository;
     }
 
     @Override
@@ -60,6 +61,11 @@ public class DataLoader implements CommandLineRunner {
         Examination examination4 = new Examination("Opet na aparatima", Timestamp.valueOf(LocalDateTime.of(2024, 1,12,16,32)), "D", "N", medicalRecord_parent);
         SickNote sickNote1 = new SickNote(child1, "Draga ravnateljice tikvica molim vas dopustite da se moj sin odmori deset dana od nekontrolirajuce i eksplozivne i mokre stolice, Hvala lijepa");
         SickNote sickNote2 = new SickNote(child1, "Draga ravnateljice tikvica molim vas da ispricate moga sina debila sljedecih tjedan dana zbog pozara koji se dogodio na wcu poslje njegove nekontrolirajuce proljevcine, Hvala na razumijevanju!");
+        SpecialistExamination specialistExamination1 = new SpecialistExamination("Pregled smrada stopala uzasnog", "KBC Rebro, KBC Dubrava", medicalRecord1);
+        SpecialistExamination specialistExamination2 = new SpecialistExamination("Pregleda smrada pzuha uzasnog", "KBC Volim piti, KBC i ljubiti", medicalRecord1);
+        SpecialistExamination specialistExamination3 = new SpecialistExamination("Pregled alergijske reakcije koju je izazvao sin debil", "KBC prodajem sina debila za metar drva", medicalRecord_parent);
+        SpecialistExamination specialistExamination4 = new SpecialistExamination("Pregled opet na aparatima", "KBC Kad mi padne sesir na celo", medicalRecord_parent);
+        Parent parent2 = new Parent("65656565656", "Marko", "Perkovic Thompson", LocalDate.of(1969, 12, 3), "geniGeniKameni", argon2.HashPassword("vatraGoriUMeni"), "0992233340", "mpThompsonKoljiSveAjmo@gmail.com", 3, "Čikola", "tvrtka@gmail.com", null ,doctor1, null);
 
         doctorRepository.save(doctor1);
         parentRepository.save(parent1);
@@ -77,6 +83,11 @@ public class DataLoader implements CommandLineRunner {
         examinationRepository.save(examination4);
         sickNoteRepository.save(sickNote1);
         sickNoteRepository.save(sickNote2);
+        specialistExaminationRepository.save(specialistExamination1);
+        specialistExaminationRepository.save(specialistExamination2);
+        specialistExaminationRepository.save(specialistExamination3);
+        specialistExaminationRepository.save(specialistExamination4);
+        parentRepository.save(parent2);
         System.out.println("Data loaded into the database.");
     }
 }

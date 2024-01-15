@@ -63,6 +63,7 @@ public class NotificationServiceImpl implements NotificationService{
 
         Child child = parent.getChildren().get(index);
 
+
         return repository.findNotificationsByChild_OIB(child.getOIB());
     }
 

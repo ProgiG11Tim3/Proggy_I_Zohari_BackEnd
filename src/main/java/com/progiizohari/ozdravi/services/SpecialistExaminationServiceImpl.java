@@ -1,10 +1,10 @@
 package com.progiizohari.ozdravi.services;
 
 import com.progiizohari.ozdravi.domain.Child;
-import com.progiizohari.ozdravi.domain.Examination;
 import com.progiizohari.ozdravi.domain.MedicalRecord;
 import com.progiizohari.ozdravi.domain.Parent;
-import com.progiizohari.ozdravi.repositories.ExaminationRepository;
+import com.progiizohari.ozdravi.domain.SpecialistExamination;
+import com.progiizohari.ozdravi.repositories.SpecialistExaminationRepository;
 import com.progiizohari.ozdravi.util.LoginSessionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,31 +13,17 @@ import org.springframework.web.context.request.RequestContextHolder;
 import java.util.List;
 
 @Service
-public class ExaminationServiceImpl implements ExaminationService {
+public class SpecialistExaminationServiceImpl implements SpecialistExaminationService{
 
     @Autowired
-    private ExaminationRepository repository;
+    private SpecialistExaminationRepository repository;
 
     @Autowired
     private LoginSessionHandler loginSessionHandler;
 
-    @Override
-    public String add(Examination examination) {
-        repository.save(examination);
-        return examination.toString() + " successfully added!";
-    }
 
     @Override
-    public List<Examination> getAllExaminations() {
-        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-        if(!loginSessionHandler.isUserLoggedIn(sessionID)){
-            return null;
-        }
-        return repository.findAll();
-    }
-
-    @Override
-    public List<Examination> getOnlyParentExaminations() {
+    public List<SpecialistExamination> getParentSpecialistExaminations() {
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         Parent parent = loginSessionHandler.getParent(sessionID);
 
@@ -48,11 +34,16 @@ public class ExaminationServiceImpl implements ExaminationService {
 
         MedicalRecord medicalRecord = parent.getMedicalRecord();
 
-        return repository.findExaminationByMedicalRecordRecordId(medicalRecord.getRecordId());
+        if (medicalRecord == null) {
+            System.out.println("Roditelj nema medicinski karton!");
+            return null;
+        }
+
+        return repository.findSpecialistExaminationByMedicalRecordRecordId(medicalRecord.getRecordId());
     }
 
     @Override
-    public List<Examination> getOnlyChildExaminations(int index) {
+    public List<SpecialistExamination> getChildSpecialistExaminations(int index) {
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         Parent parent = loginSessionHandler.getParent(sessionID);
 
@@ -77,8 +68,6 @@ public class ExaminationServiceImpl implements ExaminationService {
             return null;
         }
 
-        return repository.findExaminationByMedicalRecordRecordId(medicalRecord.getRecordId());
+        return repository.findSpecialistExaminationByMedicalRecordRecordId(medicalRecord.getRecordId());
     }
-
-
 }

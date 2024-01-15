@@ -11,9 +11,6 @@ public class SpecialistExamination {
     private int examId;
 
     @NotNull
-    private String patientOib;
-
-    @NotNull
     private String examTitle;
 
     @NotNull
@@ -26,11 +23,10 @@ public class SpecialistExamination {
     public SpecialistExamination() {
     }
 
-    public SpecialistExamination(int examId, String patientOib, String examTitle, String examLocations) {
-        this.examId = examId;
-        this.patientOib = patientOib;
+    public SpecialistExamination(String examTitle, String examLocations, MedicalRecord medicalRecord) {
         this.examTitle = examTitle;
         this.examLocations = examLocations;
+        this.medicalRecord = medicalRecord;
     }
 
     public int getExamId() {
@@ -41,13 +37,6 @@ public class SpecialistExamination {
         this.examId = examId;
     }
 
-    public String getPatientOib() {
-        return patientOib;
-    }
-
-    public void setPatientOib(String patientOib) {
-        this.patientOib = patientOib;
-    }
 
     public String getExamTitle() {
         return examTitle;
@@ -77,9 +66,9 @@ public class SpecialistExamination {
     public String toString() {
         return "SpecialistExamination{" +
                 "examId=" + examId +
-                ", patientOib='" + patientOib + '\'' +
                 ", examTitle='" + examTitle + '\'' +
                 ", examLocations='" + examLocations + '\'' +
+                ", medicalRecord=" + medicalRecord +
                 '}';
     }
 }
