@@ -24,8 +24,10 @@ public class DataLoader implements CommandLineRunner {
     private final ExaminationRepository examinationRepository;
     private final FileRepository fileRepository;
 
+    private final SickNoteRepository sickNoteRepository;
+
     public DataLoader(Argon2Crypting argon2, DoctorRepository doctorRepository, PediatricianRepository pediatricianRepository, ParentRepository parentRepository, ChildRepository childRepository, NotificationRepository notificationRepository
-    , MedicalRecordRepository medicalRecordRepository, MedicalReportRepository medicalReportRepository, ExaminationRepository examinationRepository, FileRepository fileRepository) {
+    , MedicalRecordRepository medicalRecordRepository, MedicalReportRepository medicalReportRepository, ExaminationRepository examinationRepository, FileRepository fileRepository, SickNoteRepository sickNoteRepository) {
         this.argon2 = argon2;
         this.doctorRepository = doctorRepository;
         this.pediatricianRepository = pediatricianRepository;
@@ -36,6 +38,7 @@ public class DataLoader implements CommandLineRunner {
         this.medicalReportRepository = medicalReportRepository;
         this.examinationRepository = examinationRepository;
         this.fileRepository = fileRepository;
+        this.sickNoteRepository = sickNoteRepository;
     }
 
     @Override
@@ -55,6 +58,8 @@ public class DataLoader implements CommandLineRunner {
         MedicalReport medicalReport_parent = new MedicalReport(Timestamp.valueOf(LocalDateTime.of(2023,7,12,15,23)), "Mnogo spolnih bolesti", medicalRecord_parent, null);
         Examination examination3 = new Examination("Sin izazvao alergijsku reakciju smrdljivim stopalima", Timestamp.valueOf(LocalDateTime.of(2024, 1,3,16,32)), "D", "D", medicalRecord_parent);
         Examination examination4 = new Examination("Opet na aparatima", Timestamp.valueOf(LocalDateTime.of(2024, 1,12,16,32)), "D", "N", medicalRecord_parent);
+        SickNote sickNote1 = new SickNote(child1, "Draga ravnateljice tikvica molim vas dopustite da se moj sin odmori deset dana od nekontrolirajuce i eksplozivne i mokre stolice, Hvala lijepa");
+        SickNote sickNote2 = new SickNote(child1, "Draga ravnateljice tikvica molim vas da ispricate moga sina debila sljedecih tjedan dana zbog pozara koji se dogodio na wcu poslje njegove nekontrolirajuce proljevcine, Hvala na razumijevanju!");
 
         doctorRepository.save(doctor1);
         parentRepository.save(parent1);
@@ -70,6 +75,8 @@ public class DataLoader implements CommandLineRunner {
         medicalReportRepository.save(medicalReport_parent);
         examinationRepository.save(examination3);
         examinationRepository.save(examination4);
+        sickNoteRepository.save(sickNote1);
+        sickNoteRepository.save(sickNote2);
         System.out.println("Data loaded into the database.");
     }
 }

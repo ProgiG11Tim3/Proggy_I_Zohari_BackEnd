@@ -19,8 +19,7 @@ public class SickNote {
     public SickNote() {
     }
 
-    public SickNote(int excuseNoteId, Child child, String noteData) {
-        this.excuseNoteId = excuseNoteId;
+    public SickNote(Child child, String noteData) {
         this.child = child;
         this.noteData = noteData;
     }
