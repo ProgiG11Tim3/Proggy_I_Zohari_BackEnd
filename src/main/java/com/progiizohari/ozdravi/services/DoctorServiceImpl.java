@@ -156,7 +156,9 @@ public class DoctorServiceImpl implements DoctorService{
         MedicalRecord medicalRecord = medicalRecordRepository.findByParent_OIB(OIB);
 
         if(medicalRecord == null){
-            return new MedicalRecord(parent);
+            MedicalRecord med = new MedicalRecord(parent);
+            medicalRecordRepository.save(med);
+            return med;
         }
         return medicalRecord;
     }
@@ -179,6 +181,12 @@ public class DoctorServiceImpl implements DoctorService{
         }
 
         MedicalRecord medicalRecord = medicalRecordRepository.findByParent_OIB(OIB);
+
+        if(medicalRecord == null){
+            MedicalRecord med = new MedicalRecord(parent);
+            medicalRecordRepository.save(med);
+            medicalRecord = med;
+        }
 
         if(medicalRecord.getMedicalReports() == null){
             return new ArrayList<>();

@@ -47,11 +47,18 @@ public class MedicalRecord {
         this.child = child;
     }
 
-    public MedicalRecord(String currentDiagnosis, String allergyList, Child child, Parent parent, List<MedicalReport> medicalReports, List<Examination> examinations) {
+    public MedicalRecord(String currentDiagnosis, String allergyList, Parent parent, List<MedicalReport> medicalReports, List<Examination> examinations){
+        this.currentDiagnosis = currentDiagnosis;
+        this.allergyList = allergyList;
+        this.parent = parent;
+        this.medicalReports = medicalReports;
+        this.examinations = examinations;
+    }
+
+    public MedicalRecord(String currentDiagnosis, String allergyList, Child child, List<MedicalReport> medicalReports, List<Examination> examinations){
         this.currentDiagnosis = currentDiagnosis;
         this.allergyList = allergyList;
         this.child = child;
-        this.parent = parent;
         this.medicalReports = medicalReports;
         this.examinations = examinations;
     }

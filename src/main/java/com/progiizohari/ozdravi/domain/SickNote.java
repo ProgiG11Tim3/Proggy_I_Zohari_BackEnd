@@ -1,5 +1,6 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -11,6 +12,7 @@ public class SickNote {
 
     @ManyToOne
     @JoinColumn(name = "child_OIB")
+    @JsonIgnore
     private Child child;
 
     @NotNull

@@ -21,14 +21,16 @@ public class SickLeaveRecommendation {
     @NotNull
     private Date sickLeaveStartDate;
 
+    @NotNull
+    private String employerEmail;
 
     public SickLeaveRecommendation() {
     }
 
-    public SickLeaveRecommendation(int recommendationId, Doctor doctor, String recData) {
-        this.recommendationId = recommendationId;
+    public SickLeaveRecommendation(Doctor doctor, String recData, String employerEmail) {
         this.doctor = doctor;
         this.recData = recData;
+        this.employerEmail = employerEmail;
         this.sickLeaveStartDate = new Date(System.currentTimeMillis());
     }
 

@@ -1,5 +1,6 @@
 package com.progiizohari.ozdravi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -18,6 +19,7 @@ public class SpecialistExamination {
 
     @ManyToOne
     @JoinColumn(name = "recordId")
+    @JsonIgnore
     private MedicalRecord medicalRecord;
 
     public SpecialistExamination() {

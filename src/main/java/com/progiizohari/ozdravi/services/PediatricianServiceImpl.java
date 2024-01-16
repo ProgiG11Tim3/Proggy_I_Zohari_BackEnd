@@ -152,7 +152,9 @@ public class PediatricianServiceImpl implements PediatricianService {
         MedicalRecord medicalRecord = medicalRecordRepository.findByChild_OIB(OIB);
 
         if(medicalRecord == null){
-            return new MedicalRecord(child);
+            MedicalRecord med = new MedicalRecord(child);
+            medicalRecordRepository.save(med);
+            return med;
         }
         return medicalRecord;
     }
@@ -176,8 +178,10 @@ public class PediatricianServiceImpl implements PediatricianService {
 
         MedicalRecord medicalRecord = medicalRecordRepository.findByChild_OIB(OIB);
 
-        if(medicalRecord.getMedicalReports() == null){
-            return new ArrayList<>();
+        if(medicalRecord == null){
+            MedicalRecord med = new MedicalRecord(child);
+            medicalRecordRepository.save(med);
+            medicalRecord = med;
         }
         return medicalRecord.getMedicalReports();
     }
