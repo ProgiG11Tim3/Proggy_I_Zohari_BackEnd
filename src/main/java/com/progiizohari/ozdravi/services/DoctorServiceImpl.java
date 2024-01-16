@@ -111,10 +111,10 @@ public class DoctorServiceImpl implements DoctorService{
         Doctor doctor = loginSessionHandler.getDoctor(sessionID);
 
         if(doctor == null) {
-            System.out.println("Nemas pristup!");
+            System.out.println("Nemaš pristup!");
             return null;
         }
-
+        System.out.println("Svi pacijenti poslani na frontend!");
         return doctor.getParents();
     }
 
@@ -124,16 +124,22 @@ public class DoctorServiceImpl implements DoctorService{
         Doctor doctor = loginSessionHandler.getDoctor(sessionID);
 
         if(doctor == null) {
-            System.out.println("Nemas pristup!");
+            System.out.println("Nemaš pristup!");
             return null;
         }
 
         Parent parent = parentRepository.findByOIB(OIB);
 
+        if(parent == null){
+            System.out.println("Nepostojeći OIB!");
+            return null;
+        }
+
         if(!doctor.getParents().contains(parent)){
             System.out.println("Nije tvoj pacijent!");
             return null;
         }
+        System.out.println("Pacijent poslan na frontend!");
         return parent;
     }
 
@@ -143,11 +149,16 @@ public class DoctorServiceImpl implements DoctorService{
         Doctor doctor = loginSessionHandler.getDoctor(sessionID);
 
         if(doctor == null) {
-            System.out.println("Nemas pristup!");
+            System.out.println("Nemaš pristup!");
             return null;
         }
 
         Parent parent = parentRepository.findByOIB(OIB);
+
+        if(parent == null){
+            System.out.println("Nepostojeći OIB!");
+            return null;
+        }
 
         if(!doctor.getParents().contains(parent)){
             System.out.println("Nije tvoj pacijent!");
@@ -159,8 +170,10 @@ public class DoctorServiceImpl implements DoctorService{
         if(medicalRecord == null){
             MedicalRecord med = new MedicalRecord(parent);
             medicalRecordRepository.save(med);
+            System.out.println("Pacijent još nema karton. Stvoren prazan karton pacijenta i poslan na frontend!");
             return med;
         }
+        System.out.println("Karton pacijenta poslan na frontend!");
         return medicalRecord;
     }
 
@@ -170,11 +183,16 @@ public class DoctorServiceImpl implements DoctorService{
         Doctor doctor = loginSessionHandler.getDoctor(sessionID);
 
         if(doctor == null) {
-            System.out.println("Nemas pristup!");
+            System.out.println("Nemaš pristup!");
             return null;
         }
 
         Parent parent = parentRepository.findByOIB(OIB);
+
+        if(parent == null){
+            System.out.println("Nepostojeći OIB!");
+            return null;
+        }
 
         if(!doctor.getParents().contains(parent)){
             System.out.println("Nije tvoj pacijent!");
@@ -187,11 +205,14 @@ public class DoctorServiceImpl implements DoctorService{
             MedicalRecord med = new MedicalRecord(parent);
             medicalRecordRepository.save(med);
             medicalRecord = med;
+            System.out.println("Pacijent još nema karton. Stvoren prazan karton pacijenta.");
         }
 
         if(medicalRecord.getMedicalReports() == null){
+            System.out.println("Prazna lista nalaza poslana na frontend!");
             return new ArrayList<>();
         }
+        System.out.println("Lista nalaza poslana na frontend!");
         return medicalRecord.getMedicalReports();
     }
 }

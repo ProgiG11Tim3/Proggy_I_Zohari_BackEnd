@@ -4,7 +4,6 @@ import com.progiizohari.ozdravi.domain.*;
 import com.progiizohari.ozdravi.repositories.*;
 import com.progiizohari.ozdravi.util.Argon2Crypting;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -68,7 +67,8 @@ public class DataLoader implements CommandLineRunner {
                 new Parent("34567890123", "Ivona", "Novak", LocalDate.of(1978, 8, 23), "ivonaNovak", argon2.HashPassword("ivonaNovak"), "0973456789", "ivona.novak@gmail.com", 8000, "Osijek", "inet@inet.hr", null, doctors.get(1), null),
                 new Parent("45678901234", "Nikola", "Babić", LocalDate.of(1982, 3, 7), "nikolaBabic", argon2.HashPassword("nikolaBabic"), "0974567890", "nikola.babic@gmail.com", 15000, "Rijeka", "optika@optinet.hr", null, doctors.get(1), null),
                 new Parent("56789012345", "Mia", "Radić", LocalDate.of(1990, 6, 15), "miaRadic", argon2.HashPassword("miaRadic"), "0975678901", "mia.radic@gmail.com", 11000, "Zadar", "nttdata@nttdata.hr", null, doctors.get(2), null),
-                new Parent("11111111111", "Dino", "Saurić", LocalDate.of(1990, 6, 15), "dinoSauric", argon2.HashPassword("dinoSauric"), "0911111111", "dino.sauric@gmail.com", 11000, "Zadar", "nttdata@nttdata.hr", null, null, null)
+                //ostavi dino saurica bez kartona jer treba za jedan test case
+                new Parent("48249825043", "Dino", "Saurić", LocalDate.of(1990, 6, 15), "dinoSauric", argon2.HashPassword("dinoSauric"), "0978901424", "dino.sauric@gmail.com", 11000, "Zadar", "ntt@nttdata.hr", null, doctors.get(2), null)
         ));
         List<Child> children = new ArrayList<>(Arrays.asList(
                 new Child("29081734199", "Dorian", "Gray", LocalDate.of(2013, 6, 3), "OŠ Dobriše Cesarić", "os.cesaric@gmail.com", parents.get(0), pediatricians.get(0), null),
