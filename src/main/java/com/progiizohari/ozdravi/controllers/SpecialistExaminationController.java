@@ -5,9 +5,7 @@ import com.progiizohari.ozdravi.services.SpecialistExaminationService;
 import com.progiizohari.ozdravi.services.SpecialistExaminationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +15,11 @@ public class SpecialistExaminationController {
 
     @Autowired
     private SpecialistExaminationService service;
+
+    @PostMapping("/addSpecialistExamination")
+    public String addSpecialistExamination(@RequestBody SpecialistExamination specialistExamination) {
+        return service.add(specialistExamination);
+    }
 
     //UC10
     @GetMapping(value = "/{text}/getAllSelectedSpecialistExaminations")

@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface SpecialistExaminationService {
 
+    public String add(SpecialistExamination specialistExamination);
     List<SpecialistExamination> getParentSpecialistExaminations();
     List<SpecialistExamination> getChildSpecialistExaminations(int index);
 }

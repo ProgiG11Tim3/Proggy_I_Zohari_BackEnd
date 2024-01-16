@@ -23,6 +23,12 @@ public class SpecialistExaminationServiceImpl implements SpecialistExaminationSe
 
 
     @Override
+    public String add(SpecialistExamination specialistExamination) {
+        repository.save(specialistExamination);
+        return specialistExamination.toString() + " successfully added!";
+    }
+
+    @Override
     public List<SpecialistExamination> getParentSpecialistExaminations() {
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         Parent parent = loginSessionHandler.getParent(sessionID);
