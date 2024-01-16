@@ -51,33 +51,6 @@ public class AdminTools {
         return pediatrician_service.remove(id);
     }
 
-    public String getAllParents() {
-        String return_string = "";
-        for (Parent parent : parent_service.getAll())
-        {
-            return_string = return_string + (parent.toString() + "\n");
-        }
-        return return_string;
-    }
-
-    public String getAllDoctors() {
-        String return_string = "";
-        for (Doctor doctor : doctor_service.getAll())
-        {
-            return_string = return_string + (doctor.toString() + "\n");
-        }
-        return return_string;
-    }
-
-    public String getAllPediatricians() {
-        String return_string = "";
-        for (Pediatrician pediatrician : pediatrician_service.getAll())
-        {
-            return_string = return_string + (pediatrician.toString() + "\n");
-        }
-        return return_string;
-    }
-
     public boolean editParent(int id, Parent newParentData) {
         return parent_service.edit(id, newParentData);
     }

@@ -174,4 +174,18 @@ public class Doctor {
                 ", parents=" + parents +
                 '}';
     }
+
+    public String toJson() {
+        return "{" +
+                "\"doctorId\":" + doctorId +
+                ", \"nameDoctor\":\"" + nameDoctor + '\"' +
+                ", \"lastNameDoctor\":\"" + lastNameDoctor + '\"' +
+                ", \"dateOfBirthDoctor\":\"" + dateOfBirthDoctor + '\"' +
+                ", \"userNameDoctor\":\"" + userNameDoctor + '\"' +
+                ", \"passwordDoctor\":\"" + passwordDoctor + '\"' +
+                ", \"phoneNumberDoctor\":\"" + phoneNumberDoctor + '\"' +
+                ", \"emailDoctor\":\"" + emailDoctor + '\"' +
+                ", \"parents\":" + parents +
+                '}';
+    }
 }

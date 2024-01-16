@@ -155,4 +155,18 @@ public class Pediatrician {
                 ", children=" + children +
                 '}';
     }
+
+    public String toJson() {
+        return "{" +
+                "\"pediatricianId\":" + pediatricianId +
+                ", \"namePediatrician\":\"" + namePediatrician + '\"' +
+                ", \"lastNamePediatrician\":\"" + lastNamePediatrician + '\"' +
+                ", \"dateOfBirthPediatrician\":\"" + dateOfBirthPediatrician + '\"' +
+                ", \"userNamePediatrician\":\"" + userNamePediatrician + '\"' +
+                ", \"passwordPediatrician\":\"" + passwordPediatrician + '\"' +
+                ", \"phoneNumberPediatrician\":\"" + phoneNumberPediatrician + '\"' +
+                ", \"emailPediatrician\":\"" + emailPediatrician + '\"' +
+                ", \"children\":" + children +
+                '}';
+    }
 }

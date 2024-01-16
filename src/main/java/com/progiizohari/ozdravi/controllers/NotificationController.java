@@ -27,7 +27,7 @@ public class NotificationController {
         return ResponseEntity.ok(notifications);
     }
 
-    //UC5
+    //UC6
     @GetMapping(value = "/{text}/getAllNotifications")
     public ResponseEntity<List<Notification>> getAllSelectedPersonNotifications(@PathVariable String text) {
         

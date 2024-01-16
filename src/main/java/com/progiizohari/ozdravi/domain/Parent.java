@@ -261,4 +261,23 @@ public class Parent {
                 ", children=" + children +
                 '}';
     }
+
+    public String toJson() {
+        return "{" +
+                "\"parentId\":" + parentId +
+                ", \"OIB\":\"" + OIB + '\"' +
+                ", \"nameParent\":\"" + nameParent + '\"' +
+                ", \"lastNameParent\":\"" + lastNameParent + '\"' +
+                ", \"dateOfBirthParent\":\"" + dateOfBirthParent + '\"' +
+                ", \"userNameParent\":\"" + userNameParent + '\"' +
+                ", \"passwordParent\":\"" + passwordParent + '\"' +
+                ", \"phoneNumberParent\":\"" + phoneNumberParent + '\"' +
+                ", \"emailParent\":\"" + emailParent + '\"' +
+                ", \"postalCode\":" + postalCode +
+                ", \"placeOfResidence\":\"" + placeOfResidence + '\"' +
+                ", \"employerEmail\":\"" + employerEmail + '\"' +
+                ", \"doctor\":" + doctor +
+                ", \"children\":" + children +
+                '}';
+    }
 }
