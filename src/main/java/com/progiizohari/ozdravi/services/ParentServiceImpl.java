@@ -35,14 +35,7 @@ public class ParentServiceImpl implements ParentService {
 
     @Override
     public Parent getByOIB(String OIB) {
-        for (Parent entry : repository.findAll())
-        {
-            if (entry.getOIB().equals(OIB))
-            {
-                return entry;
-            }
-        }
-        return null;
+        return repository.findByOIB(OIB);
     }
 
     @Override
