@@ -6,10 +6,7 @@ import com.progiizohari.ozdravi.util.LoginSessionHandler;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 
 @RestController
@@ -20,8 +17,8 @@ public class PatientControllet {
     @Autowired
     private LoginSessionHandler login_session_handler;
 
-    @RequestMapping(value = "/unospacijentabyoib", method = RequestMethod.POST)
-    public ResponseEntity<String> UnosPacijentaByOIB(@RequestBody String OIB) {
+    @RequestMapping(value = "/unospacijentabyoib{oib:^[0-9]{11}$}", method = RequestMethod.POST)
+    public ResponseEntity<String> UnosPacijentaByOIB(@PathVariable String OIB) {
         // check if doctor is logged in
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         Doctor doctor = login_session_handler.getDoctor(sessionID);
