@@ -33,6 +33,12 @@ public class PatientControllet {
         if (patient == null) {
             return ResponseEntity.badRequest().body("Patient not found by OIB: " + OIB + "!");
         }
+
+        // check if patient is already added
+        if (doctor.getParents().contains(patient)) {
+            return ResponseEntity.badRequest().body("Patient already added!");
+        }
+
         doctor.addParent(patient);
         return ResponseEntity.ok("OK");
     }
@@ -49,6 +55,13 @@ public class PatientControllet {
         Parent patient = parent_service.getByOIB(childRegistrationEntryJson.getParentOIB());
         if (patient == null) {
             return ResponseEntity.badRequest().body("Patient of child not found by OIB: " + childRegistrationEntryJson.getParentOIB() + "!");
+        }
+
+        // check if child is already added
+        for (Child child : patient.getChildren()) {
+            if (child.getOIB().equals(childRegistrationEntryJson.getOIB())) {
+                return ResponseEntity.badRequest().body("Child already added!");
+            }
         }
 
         Child child = new Child();
