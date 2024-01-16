@@ -89,4 +89,37 @@ public class AdminTools {
     public boolean editPediatrician(int id, Pediatrician newPediatricianData) {
         return pediatrician_service.edit(id, newPediatricianData);
     }
+
+    public Parent getParentById(int id) {
+        for (Parent parent : parent_service.getAll())
+        {
+            if (parent.getParentId() == id)
+            {
+                return parent;
+            }
+        }
+        return null;
+    }
+
+    public Doctor getDoctorById(int id) {
+        for (Doctor doctor : doctor_service.getAll())
+        {
+            if (doctor.getDoctorId() == id)
+            {
+                return doctor;
+            }
+        }
+        return null;
+    }
+
+    public Pediatrician getPediatricianById(int id) {
+        for (Pediatrician pediatrician : pediatrician_service.getAll())
+        {
+            if (pediatrician.getPediatricianId() == id)
+            {
+                return pediatrician;
+            }
+        }
+        return null;
+    }
 }

@@ -1,6 +1,7 @@
 package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.*;
+import com.progiizohari.ozdravi.services.DoctorService;
 import com.progiizohari.ozdravi.services.ParentService;
 import com.progiizohari.ozdravi.util.LoginSessionHandler;
 import org.apache.coyote.Response;
@@ -9,11 +10,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import java.util.List;
+
 @RestController
 public class PatientControllet {
 
     @Autowired
     private ParentService parent_service;
+    @Autowired
+    private DoctorService doctor_service;
+
     @Autowired
     private LoginSessionHandler login_session_handler;
 
@@ -47,7 +53,15 @@ public class PatientControllet {
             return ResponseEntity.badRequest().body("Patient already added!");
         }
 
-        doctor.addParent(patient);
+        // check if patient is already added to another doctor
+        if (patient.getDoctor() != null) {
+            return ResponseEntity.badRequest().body("Patient already added to another doctor!");
+        }
+
+        patient.setDoctor(doctor);
+        parent_service.edit(patient.getParentId(), patient);
+
+        System.out.println("Patient with OIB " + OIB + " added to doctor: " + doctor.getUserNameDoctor() + "!");
         return ResponseEntity.ok("OK");
     }
 

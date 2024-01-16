@@ -52,8 +52,7 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(String nameDoctor, String lastNameDoctor, LocalDate dateOfBirthDoctor, String userNameDoctor, String passwordDoctor, String phoneNumberDoctor, String emailDoctor, List<Parent> parents) {
-        this.nameDoctor = nameDoctor;
+    public Doctor(String nameDoctor, String lastNameDoctor, LocalDate dateOfBirthDoctor, String userNameDoctor, String passwordDoctor, String phoneNumberDoctor, String emailDoctor, List<Parent> parents, List<SickLeaveRecommendation> sickLeaveRecommendations) {        this.nameDoctor = nameDoctor;
         this.lastNameDoctor = lastNameDoctor;
         this.dateOfBirthDoctor = dateOfBirthDoctor;
         this.userNameDoctor = userNameDoctor;
@@ -61,6 +60,7 @@ public class Doctor {
         this.phoneNumberDoctor = phoneNumberDoctor;
         this.emailDoctor = emailDoctor;
         this.parents = parents;
+        this.sickLeaveRecommendations = sickLeaveRecommendations;
     }
 
     public int getDoctorId() {

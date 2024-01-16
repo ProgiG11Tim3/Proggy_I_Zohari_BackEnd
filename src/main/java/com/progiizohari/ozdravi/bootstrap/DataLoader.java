@@ -4,6 +4,7 @@ import com.progiizohari.ozdravi.domain.*;
 import com.progiizohari.ozdravi.repositories.*;
 import com.progiizohari.ozdravi.util.Argon2Crypting;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -52,9 +53,9 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Loading data into database...");
 
         List<Doctor> doctors = new ArrayList<>(Arrays.asList(
-                new Doctor("Ana", "Ivanović", LocalDate.of(1977, 12, 3), "anaIvanovic", argon2.HashPassword("anaIvanovic"), "0992280353", "ana.ivanovic@gmail.com", null),
-                new Doctor("Marko", "Petrović", LocalDate.of(1985, 5, 15), "markoPetrovic", argon2.HashPassword("markoPetrovic"), "0992280354", "marko.petrovic@gmail.com", null),
-                new Doctor("Jelena", "Kovač", LocalDate.of(1990, 8, 27), "jelenaKovac", argon2.HashPassword("jelenaKovac"), "0992280355", "jelena.kovac@gmail.com", null)
+                new Doctor("Ana", "Ivanović", LocalDate.of(1977, 12, 3), "anaIvanovic", argon2.HashPassword("anaIvanovic"), "0992280353", "ana.ivanovic@gmail.com", null, null),
+                new Doctor("Marko", "Petrović", LocalDate.of(1985, 5, 15), "markoPetrovic", argon2.HashPassword("markoPetrovic"), "0992280354", "marko.petrovic@gmail.com", null, null),
+                new Doctor("Jelena", "Kovač", LocalDate.of(1990, 8, 27), "jelenaKovac", argon2.HashPassword("jelenaKovac"), "0992280355", "jelena.kovac@gmail.com", null, null)
         ));
         List<Pediatrician> pediatricians = new ArrayList<>(Arrays.asList(
                 new Pediatrician("Ana", "Pedić", LocalDate.of(1980, 4, 12), "anaPedic", argon2.HashPassword("anaPedic"), "0981239832", "ana.pedic@gmail.com", null),
@@ -66,7 +67,8 @@ public class DataLoader implements CommandLineRunner {
                 new Parent("23456789012", "Luka", "Kovač", LocalDate.of(1985, 5, 18), "lukaKovac", argon2.HashPassword("lukaKovac"), "0972345678", "luka.kovac@gmail.com", 12000, "Split", "vipnet@vip.hr", null, doctors.get(0), null),
                 new Parent("34567890123", "Ivona", "Novak", LocalDate.of(1978, 8, 23), "ivonaNovak", argon2.HashPassword("ivonaNovak"), "0973456789", "ivona.novak@gmail.com", 8000, "Osijek", "inet@inet.hr", null, doctors.get(1), null),
                 new Parent("45678901234", "Nikola", "Babić", LocalDate.of(1982, 3, 7), "nikolaBabic", argon2.HashPassword("nikolaBabic"), "0974567890", "nikola.babic@gmail.com", 15000, "Rijeka", "optika@optinet.hr", null, doctors.get(1), null),
-                new Parent("56789012345", "Mia", "Radić", LocalDate.of(1990, 6, 15), "miaRadic", argon2.HashPassword("miaRadic"), "0975678901", "mia.radic@gmail.com", 11000, "Zadar", "nttdata@nttdata.hr", null, doctors.get(2), null)
+                new Parent("56789012345", "Mia", "Radić", LocalDate.of(1990, 6, 15), "miaRadic", argon2.HashPassword("miaRadic"), "0975678901", "mia.radic@gmail.com", 11000, "Zadar", "nttdata@nttdata.hr", null, doctors.get(2), null),
+                new Parent("11111111111", "Dino", "Saurić", LocalDate.of(1990, 6, 15), "dinoSauric", argon2.HashPassword("dinoSauric"), "0911111111", "dino.sauric@gmail.com", 11000, "Zadar", "nttdata@nttdata.hr", null, null, null)
         ));
         List<Child> children = new ArrayList<>(Arrays.asList(
                 new Child("29081734199", "Dorian", "Gray", LocalDate.of(2013, 6, 3), "OŠ Dobriše Cesarić", "os.cesaric@gmail.com", parents.get(0), pediatricians.get(0), null),

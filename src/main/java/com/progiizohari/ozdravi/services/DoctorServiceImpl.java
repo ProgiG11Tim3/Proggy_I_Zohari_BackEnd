@@ -97,6 +97,7 @@ public class DoctorServiceImpl implements DoctorService{
                 entry.setPhoneNumberDoctor(newDoctorData.getPhoneNumberDoctor());
                 entry.setUserNameDoctor(newDoctorData.getUserNameDoctor());
                 entry.setPasswordDoctor(newDoctorData.getPasswordDoctor());
+                entry.setSickLeaveRecommendations(newDoctorData.getSickLeaveRecommendations());
                 doctorRepository.save(entry);
                 return true;
             }
