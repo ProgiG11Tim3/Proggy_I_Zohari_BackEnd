@@ -17,8 +17,19 @@ public class PatientControllet {
     @Autowired
     private LoginSessionHandler login_session_handler;
 
-    @RequestMapping(value = "/unospacijentabyoib{oib:^[0-9]{11}$}", method = RequestMethod.POST)
+    @RequestMapping(value = "/unospacijentabyoib{OIB}", method = RequestMethod.POST)
     public ResponseEntity<String> UnosPacijentaByOIB(@PathVariable String OIB) {
+        // check if OIB is a valid string format
+        if (OIB.length() != 11) {
+            return ResponseEntity.badRequest().body("OIB is not a valid string format, not of length 11!");
+        }
+        // check if OIB is only numbers
+        try {
+            Long.parseLong(OIB);
+        } catch (NumberFormatException e) {
+            return ResponseEntity.badRequest().body("OIB is not a valid string format, not only numbers!");
+        }
+
         // check if doctor is logged in
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         Doctor doctor = login_session_handler.getDoctor(sessionID);
