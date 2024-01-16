@@ -81,6 +81,7 @@ public class DataLoader implements CommandLineRunner {
                 new Child("10100198761", "Lovro", "Rukavina", LocalDate.of(2014, 3, 1), "OŠ Siniša Vuce", "os.vuco@gmail.com", parents.get(4), pediatricians.get(2), null)
         ));
         List<Notification> notifications = new ArrayList<>(Arrays.asList(
+//              child
                 new Notification(parents.get(0), children.get(0), "Važna obavijest!", "Dijete je danas prošlo pregled i sve je u redu."),
                 new Notification(parents.get(0), children.get(0), "Nove informacije", "Molimo vas da pregledate ažurirane informacije o djetetu."),
                 new Notification(parents.get(0), children.get(0), "Podsjetnik", "Sutra je zakazan pregled djeteta."),
@@ -110,7 +111,13 @@ public class DataLoader implements CommandLineRunner {
                 new Notification(parents.get(4), children.get(8), "Posebna obavijest", "Molim Vas dođite u bolnicu."),
                 new Notification(parents.get(4), children.get(9), "Zakazan razgovor", "Razgovor s pedijatrom je zakazan za idući tjedan."),
                 new Notification(parents.get(4), children.get(9), "Poteškoća u govoru", "Molim Vas zakazati termin s logopedom."),
-                new Notification(parents.get(4), children.get(9), "Kupovina kolica", "Vaše dijete će trebati kolica.")
+                new Notification(parents.get(4), children.get(9), "Kupovina kolica", "Vaše dijete će trebati kolica."),
+//              parent
+                new Notification(parents.get(0), null, "Božićni humanitarni koncert", "Božićni humanitarni koncert za prikupljanje sredstava biti će održan ovu subotu."),
+                new Notification(parents.get(1), null, "Božićni humanitarni koncert", "Božićni humanitarni koncert za prikupljanje sredstava biti će održan ovu subotu."),
+                new Notification(parents.get(2), null, "Božićni humanitarni koncert", "Božićni humanitarni koncert za prikupljanje sredstava biti će održan ovu subotu."),
+                new Notification(parents.get(3), null, "Božićni humanitarni koncert", "Božićni humanitarni koncert za prikupljanje sredstava biti će održan ovu subotu."),
+                new Notification(parents.get(4), null, "Božićni humanitarni koncert", "Božićni humanitarni koncert za prikupljanje sredstava biti će održan ovu subotu.")
         ));
         List<MedicalRecord> medicalRecords = new ArrayList<>(Arrays.asList(
 //              parent
