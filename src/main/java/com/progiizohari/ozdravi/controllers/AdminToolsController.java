@@ -6,7 +6,6 @@ import com.progiizohari.ozdravi.services.ParentService;
 import com.progiizohari.ozdravi.services.PediatricianService;
 import com.progiizohari.ozdravi.util.AdminTools;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,13 +66,16 @@ public class AdminToolsController {
 
     // UC 25
     @GetMapping("/admin/getAllParents")
-    public ResponseEntity<List<StringWithLink>> getAllParents() {
-        List<StringWithLink> return_list = new ArrayList<>();
+    public ResponseEntity<List<AdminToolUserEntity>> getAllParents() {
+        List<AdminToolUserEntity> return_list = new ArrayList<>();
 
         for (Parent parent : parent_service.getAll()) {
-            StringWithLink string_with_link = new StringWithLink();
-            string_with_link.setString(parent.toJson());
-            string_with_link.setLink("/admin/getParent/" + parent.getParentId());
+            AdminToolUserEntity string_with_link = new AdminToolUserEntity();
+            string_with_link.setUserJson(parent.toJson());
+            string_with_link.setData_link("/admin/getParent/" + parent.getParentId());
+            string_with_link.setDelete_link("/admin/deleteParent/" + parent.getParentId());
+            string_with_link.setEdit_link("/admin/editParent/" + parent.getParentId());
+            string_with_link.setUser_id(parent.getParentId());
             return_list.add(string_with_link);
         }
 
@@ -82,13 +84,16 @@ public class AdminToolsController {
 
     // UC 25
     @GetMapping("/admin/getAllDoctors")
-    public ResponseEntity<List<StringWithLink>> getAllDoctors() {
-        List<StringWithLink> return_list = new ArrayList<>();
+    public ResponseEntity<List<AdminToolUserEntity>> getAllDoctors() {
+        List<AdminToolUserEntity> return_list = new ArrayList<>();
 
         for (Doctor doctor : doctor_service.getAll()) {
-            StringWithLink string_with_link = new StringWithLink();
-            string_with_link.setString(doctor.toJson());
-            string_with_link.setLink("/admin/getDoctor/" + doctor.getDoctorId());
+            AdminToolUserEntity string_with_link = new AdminToolUserEntity();
+            string_with_link.setData_link(doctor.toJson());
+            string_with_link.setData_link("/admin/getDoctor/" + doctor.getDoctorId());
+            string_with_link.setDelete_link("/admin/deleteDoctor/" + doctor.getDoctorId());
+            string_with_link.setEdit_link("/admin/editDoctor/" + doctor.getDoctorId());
+            string_with_link.setUser_id(doctor.getDoctorId());
             return_list.add(string_with_link);
         }
 
@@ -97,13 +102,16 @@ public class AdminToolsController {
 
     // UC 25
     @GetMapping("/admin/getAllPediatricians")
-    public ResponseEntity<List<StringWithLink>> getAllPediatricians() {
-        List<StringWithLink> return_list = new ArrayList<>();
+    public ResponseEntity<List<AdminToolUserEntity>> getAllPediatricians() {
+        List<AdminToolUserEntity> return_list = new ArrayList<>();
 
         for (Pediatrician pediatrician : pediatrician_service.getAll()) {
-            StringWithLink string_with_link = new StringWithLink();
-            string_with_link.setString(pediatrician.toJson());
-            string_with_link.setLink("/admin/getPediatrician/" + pediatrician.getPediatricianId());
+            AdminToolUserEntity string_with_link = new AdminToolUserEntity();
+            string_with_link.setData_link(pediatrician.toJson());
+            string_with_link.setData_link("/admin/getPediatrician/" + pediatrician.getPediatricianId());
+            string_with_link.setDelete_link("/admin/deletePediatrician/" + pediatrician.getPediatricianId());
+            string_with_link.setEdit_link("/admin/editPediatrician/" + pediatrician.getPediatricianId());
+            string_with_link.setUser_id(pediatrician.getPediatricianId());
             return_list.add(string_with_link);
         }
 
@@ -112,27 +120,36 @@ public class AdminToolsController {
 
     // UC 25
     @PostMapping("/admin/getAllPeople")
-    public ResponseEntity<List<StringWithLink>> getAllPeople() {
-        List<StringWithLink> return_list = new ArrayList<>();
+    public ResponseEntity<List<AdminToolUserEntity>> getAllPeople() {
+        List<AdminToolUserEntity> return_list = new ArrayList<>();
 
         for (Parent parent : parent_service.getAll()) {
-            StringWithLink string_with_link = new StringWithLink();
-            string_with_link.setString(parent.toJson());
-            string_with_link.setLink("/admin/getParent/" + parent.getParentId());
+            AdminToolUserEntity string_with_link = new AdminToolUserEntity();
+            string_with_link.setUserJson(parent.toJson());
+            string_with_link.setData_link("/admin/getParent/" + parent.getParentId());
+            string_with_link.setDelete_link("/admin/deleteParent/" + parent.getParentId());
+            string_with_link.setEdit_link("/admin/editParent/" + parent.getParentId());
+            string_with_link.setUser_id(parent.getParentId());
             return_list.add(string_with_link);
         }
 
         for (Doctor doctor : doctor_service.getAll()) {
-            StringWithLink string_with_link = new StringWithLink();
-            string_with_link.setString(doctor.toJson());
-            string_with_link.setLink("/admin/getDoctor/" + doctor.getDoctorId());
+            AdminToolUserEntity string_with_link = new AdminToolUserEntity();
+            string_with_link.setData_link(doctor.toJson());
+            string_with_link.setData_link("/admin/getDoctor/" + doctor.getDoctorId());
+            string_with_link.setDelete_link("/admin/deleteDoctor/" + doctor.getDoctorId());
+            string_with_link.setEdit_link("/admin/editDoctor/" + doctor.getDoctorId());
+            string_with_link.setUser_id(doctor.getDoctorId());
             return_list.add(string_with_link);
         }
 
         for (Pediatrician pediatrician : pediatrician_service.getAll()) {
-            StringWithLink string_with_link = new StringWithLink();
-            string_with_link.setString(pediatrician.toJson());
-            string_with_link.setLink("/admin/getPediatrician/" + pediatrician.getPediatricianId());
+            AdminToolUserEntity string_with_link = new AdminToolUserEntity();
+            string_with_link.setData_link(pediatrician.toJson());
+            string_with_link.setData_link("/admin/getPediatrician/" + pediatrician.getPediatricianId());
+            string_with_link.setDelete_link("/admin/deletePediatrician/" + pediatrician.getPediatricianId());
+            string_with_link.setEdit_link("/admin/editPediatrician/" + pediatrician.getPediatricianId());
+            string_with_link.setUser_id(pediatrician.getPediatricianId());
             return_list.add(string_with_link);
         }
 
@@ -140,5 +157,170 @@ public class AdminToolsController {
     }
 
     // UC 26
-    
+    @GetMapping("/admin/getParent/{id}")
+    public ResponseEntity<String> getParent(@PathVariable int id) {
+        Parent parent = null;
+        for (Parent entry : parent_service.getAll())
+        {
+            if (entry.getParentId() == id)
+            {
+                parent = entry;
+            }
+        }
+        if (parent == null) {
+            return ResponseEntity.badRequest().body("Parent not found by id: " + id + "!");
+        }
+
+        return ResponseEntity.ok(parent.toJson());
+    }
+
+    // UC 26
+    @GetMapping("/admin/getDoctor/{id}")
+    public ResponseEntity<String> getDoctor(@PathVariable int id) {
+        Doctor doctor = null;
+        for (Doctor entry : doctor_service.getAll())
+        {
+            if (entry.getDoctorId() == id)
+            {
+                doctor = entry;
+            }
+        }
+        if (doctor == null) {
+            return ResponseEntity.badRequest().body("Doctor not found by id: " + id + "!");
+        }
+
+        return ResponseEntity.ok(doctor.toJson());
+    }
+
+    // UC 26
+    @GetMapping("/admin/getPediatrician/{id}")
+    public ResponseEntity<String> getPediatrician(@PathVariable int id) {
+        Pediatrician pediatrician = null;
+        for (Pediatrician entry : pediatrician_service.getAll())
+        {
+            if (entry.getPediatricianId() == id)
+            {
+                pediatrician = entry;
+            }
+        }
+        if (pediatrician == null) {
+            return ResponseEntity.badRequest().body("Pediatrician not found by id: " + id + "!");
+        }
+
+        return ResponseEntity.ok(pediatrician.toJson());
+    }
+
+    // UC 27
+    @PostMapping("/admin/deleteParent/{id}")
+    public ResponseEntity<String> deleteParent(@PathVariable int id) {
+        Parent parent = null;
+        for (Parent entry : parent_service.getAll())
+        {
+            if (entry.getParentId() == id)
+            {
+                parent = entry;
+            }
+        }
+        if (parent == null) {
+            return ResponseEntity.badRequest().body("Parent not found by id: " + id + "!");
+        }
+
+        parent_service.remove(parent);
+        return ResponseEntity.ok("OK");
+    }
+
+    // UC 27
+    @PostMapping("/admin/deleteDoctor/{id}")
+    public ResponseEntity<String> deleteDoctor(@PathVariable int id) {
+        Doctor doctor = null;
+        for (Doctor entry : doctor_service.getAll())
+        {
+            if (entry.getDoctorId() == id)
+            {
+                doctor = entry;
+            }
+        }
+        if (doctor == null) {
+            return ResponseEntity.badRequest().body("Doctor not found by id: " + id + "!");
+        }
+
+        doctor_service.remove(doctor);
+        return ResponseEntity.ok("OK");
+    }
+
+    // UC 27
+    @PostMapping("/admin/deletePediatrician/{id}")
+    public ResponseEntity<String> deletePediatrician(@PathVariable int id) {
+        Pediatrician pediatrician = null;
+        for (Pediatrician entry : pediatrician_service.getAll())
+        {
+            if (entry.getPediatricianId() == id)
+            {
+                pediatrician = entry;
+            }
+        }
+        if (pediatrician == null) {
+            return ResponseEntity.badRequest().body("Pediatrician not found by id: " + id + "!");
+        }
+
+        pediatrician_service.remove(pediatrician);
+        return ResponseEntity.ok("OK");
+    }
+
+    // UC 28
+    @PostMapping("/admin/editParent/{id}")
+    public ResponseEntity<String> editParent(@PathVariable int id, @RequestBody Parent newParentData) {
+        Parent parent = null;
+        for (Parent entry : parent_service.getAll())
+        {
+            if (entry.getParentId() == id)
+            {
+                parent = entry;
+            }
+        }
+        if (parent == null) {
+            return ResponseEntity.badRequest().body("Parent not found by id: " + id + "!");
+        }
+
+        parent_service.edit(id, newParentData);
+        return ResponseEntity.ok("OK");
+    }
+
+    // UC 28
+    @PostMapping("/admin/editDoctor/{id}")
+    public ResponseEntity<String> editDoctor(@PathVariable int id, @RequestBody Doctor newDoctorData) {
+        Doctor doctor = null;
+        for (Doctor entry : doctor_service.getAll())
+        {
+            if (entry.getDoctorId() == id)
+            {
+                doctor = entry;
+            }
+        }
+        if (doctor == null) {
+            return ResponseEntity.badRequest().body("Doctor not found by id: " + id + "!");
+        }
+
+        doctor_service.edit(id, newDoctorData);
+        return ResponseEntity.ok("OK");
+    }
+
+    // UC 28
+    @PostMapping("/admin/editPediatrician/{id}")
+    public ResponseEntity<String> editPediatrician(@PathVariable int id, @RequestBody Pediatrician newPediatricianData) {
+        Pediatrician pediatrician = null;
+        for (Pediatrician entry : pediatrician_service.getAll())
+        {
+            if (entry.getPediatricianId() == id)
+            {
+                pediatrician = entry;
+            }
+        }
+        if (pediatrician == null) {
+            return ResponseEntity.badRequest().body("Pediatrician not found by id: " + id + "!");
+        }
+
+        pediatrician_service.edit(id, newPediatricianData);
+        return ResponseEntity.ok("OK");
+    }
 }
