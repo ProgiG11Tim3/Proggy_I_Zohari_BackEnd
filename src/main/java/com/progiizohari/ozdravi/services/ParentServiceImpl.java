@@ -23,6 +23,9 @@ public class ParentServiceImpl implements ParentService {
         {
             return "Trying to add Parent that already exists!";
         }
+        if (parent.getOIB().length() != 11){
+            return "Ne dozvoljeni OIB!";
+        }
 
         repository.save(parent);
         return "Parent " + parent.getNameParent() + " " + parent.getLastNameParent() + " successfully added!";

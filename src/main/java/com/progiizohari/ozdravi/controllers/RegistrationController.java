@@ -41,7 +41,10 @@ public class RegistrationController {
         if (result == "Trying to add Parent that already exists!")
         {
             System.out.println("Parent already exists");
-            return ResponseEntity.ok("Parent already exists!");
+            return ResponseEntity.badRequest().body("Parent already exists!");
+        } else if (result == "Ne dozvoljeni OIB!") {
+            System.out.println("Ne dozvoljeni OIB!");
+            return ResponseEntity.badRequest().body("Ne dozvoljeni OIB!");
         }
 
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();

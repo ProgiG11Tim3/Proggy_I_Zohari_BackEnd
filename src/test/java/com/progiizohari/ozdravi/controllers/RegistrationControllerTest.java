@@ -60,5 +60,26 @@ class RegistrationControllerTest {
                         .content(jsonPayload))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
+    @Test
+    void pokusajRegistracijeVecPostojecegRoditelja() throws Exception {
+        String jsonPayload = "{\n" +
+                "  \"name\": \"Petra\",\n" +
+                "  \"surname\": \"Horvat\",\n" +
+                "  \"oib\": \"12345678901\",\n" +
+                "  \"dateOfBirth\": \"1980-12-04\",\n" +
+                "  \"placeOfResidence\": \"Zagreb\",\n" +
+                "  \"postalCode\": \"10000\",\n" +
+                "  \"phoneNumber\": \"0971234567\",\n" +
+                "  \"emailAddress\": \"petra.horvat@gmail.com\",\n" +
+                "  \"username\": \"petraHorvat\",\n" +
+                "  \"password\": \"petraHorvat\",\n" +
+                "  \"employerEmailAddress\": \"telekom@t-com.hr\"\n" +
+                "}";
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonPayload))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
 
 }
