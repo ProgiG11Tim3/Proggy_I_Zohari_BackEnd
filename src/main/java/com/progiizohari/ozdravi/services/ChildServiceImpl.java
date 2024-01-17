@@ -10,5 +10,9 @@ public class ChildServiceImpl implements ChildService{
     @Autowired
     private ChildRepository repository;
 
+    @Override
+    public String getChildByOIB(String oib) {
+        return repository.findByOIB(oib).toString();
+    }
 
 }
