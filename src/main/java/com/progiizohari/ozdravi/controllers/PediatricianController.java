@@ -2,10 +2,13 @@ package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.*;
 import com.progiizohari.ozdravi.repositories.PediatricianRepository;
+import com.progiizohari.ozdravi.services.LoginSessionService;
 import com.progiizohari.ozdravi.services.PediatricianService;
+import com.progiizohari.ozdravi.util.LoginSessionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +18,8 @@ public class PediatricianController {
 
     @Autowired
     private PediatricianService service;
+    @Autowired
+    private LoginSessionHandler loginSessionHandler;
 
     @PostMapping("/addPediatrician")
     public String add(@RequestBody Pediatrician pediatrician) {
@@ -71,5 +76,15 @@ public class PediatricianController {
             return ResponseEntity.badRequest().body(null);
         }
         return ResponseEntity.ok(medicalReports);
+    }
+
+    @GetMapping("/getLoggedInPediatrician")
+    public ResponseEntity<Pediatrician> getLoggedInPediatrician() {
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        Pediatrician pediatrician = loginSessionHandler.getPediatrician(sessionID);
+        if (pediatrician == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(pediatrician);
     }
 }

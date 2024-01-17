@@ -6,9 +6,11 @@ import com.progiizohari.ozdravi.domain.MedicalReport;
 import com.progiizohari.ozdravi.domain.Parent;
 import com.progiizohari.ozdravi.repositories.DoctorRepository;
 import com.progiizohari.ozdravi.services.DoctorService;
+import com.progiizohari.ozdravi.util.LoginSessionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,9 @@ public class DoctorController {
 
     @Autowired
     private DoctorService service;
+    @Autowired
+    private LoginSessionHandler loginSessionHandler;
+
     @PostMapping("/addDoctor")
     public String add(@RequestBody Doctor doctor) {
         return service.add(doctor);
@@ -73,5 +78,15 @@ public class DoctorController {
             return ResponseEntity.badRequest().body(null);
         }
         return ResponseEntity.ok(medicalReports);
+    }
+
+    @GetMapping("/getLoggedInDoctor")
+    public ResponseEntity<Doctor> getLoggedInDoctor() {
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        Doctor doctor = loginSessionHandler.getDoctor(sessionID);
+        if (doctor == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(doctor);
     }
 }
