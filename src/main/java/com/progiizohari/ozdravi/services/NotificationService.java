@@ -13,4 +13,6 @@ public interface NotificationService {
     public List<Notification> getOnlyParentNotifications();
 
     public List<Notification> getOnlyChildNotificaitons(int index);
+
+   public String add(Notification notification);
 }

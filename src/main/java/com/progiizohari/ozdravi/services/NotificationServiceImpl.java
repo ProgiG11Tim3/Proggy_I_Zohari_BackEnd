@@ -67,5 +67,11 @@ public class NotificationServiceImpl implements NotificationService{
         return repository.findNotificationsByChild_OIB(child.getOIB());
     }
 
+    @Override
+    public String add(Notification notification) {
+        repository.save(notification);
+        return notification.toString() + " successfully added!";
+    }
+
 
 }
