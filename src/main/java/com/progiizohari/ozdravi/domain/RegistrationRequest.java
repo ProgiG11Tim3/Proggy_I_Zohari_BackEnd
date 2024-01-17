@@ -124,17 +124,24 @@ public class RegistrationRequest {
         this.employerEmailAddress = employerEmailAddress;
     }
 
-    public Parent toParent(int ID) {
+    public Parent toParent() {
         // formatter for string to date conversion
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         formatter = formatter.withLocale(Locale.UK);
 
-        Doctor doctor = new Doctor();
-        List<Child> children = new ArrayList<>();
-        MedicalRecord medicalRecord = new MedicalRecord();
-        Parent parent = new Parent(OIB, name, surname, LocalDate.parse(dateOfBirth, formatter),
-                username, password, phoneNumber, emailAddress, Integer.parseInt(postalCode),
-                placeOfResidence, employerEmailAddress,medicalRecord ,doctor, children);
+        Parent parent = new Parent();
+        parent.setNameParent(this.name);
+        parent.setLastNameParent(this.surname);
+        parent.setOIB(this.OIB);
+        parent.setDateOfBirthParent(LocalDate.parse(this.dateOfBirth, formatter));
+        parent.setPlaceOfResidence(this.placeOfResidence);
+        parent.setPostalCode(Integer.parseInt(this.postalCode));
+        parent.setPhoneNumberParent(this.phoneNumber);
+        parent.setEmailParent(this.emailAddress);
+        parent.setUserNameParent(this.username);
+        parent.setPasswordParent(this.password);
+        parent.setEmployerEmail(this.employerEmailAddress);
+
         return parent;
     }
 }

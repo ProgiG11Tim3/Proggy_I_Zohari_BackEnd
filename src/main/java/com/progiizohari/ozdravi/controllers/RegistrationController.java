@@ -5,6 +5,7 @@ import com.progiizohari.ozdravi.services.*;
 import com.progiizohari.ozdravi.services.ParentService;
 import com.progiizohari.ozdravi.util.Argon2Crypting;
 import com.progiizohari.ozdravi.util.LoginSessionHandler;
+import jakarta.servlet.Registration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +32,11 @@ public class RegistrationController {
 
     // hakuna matata
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<String> register(@RequestBody Parent parentJson) {
-        parentJson.setPasswordParent(argon2.HashPassword(parentJson.getPasswordParent()));
-        String result = parent_service.add(parentJson);
+    public ResponseEntity<String> register(@RequestBody RegistrationRequest parentJson) {
+        parentJson.setPassword(argon2.HashPassword(parentJson.getPassword()));
+        Parent parent = parentJson.toParent();
+
+        String result = parent_service.add(parent);
 
         if (result == "Trying to add Parent that already exists!")
         {
@@ -42,11 +45,11 @@ public class RegistrationController {
         }
 
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-        boolean already_logged_in = login_session_service.checkSession(parentJson.getUserNameParent(), parentJson.getPasswordParent(), "PARENT", sessionID);
+        boolean already_logged_in = login_session_service.checkSession(parent.getUserNameParent(), parent.getPasswordParent(), "PARENT", sessionID);
         if (already_logged_in) {
             login_session_service.remove(login_session_service.getUserOfSession(sessionID));
         }
-        login_session_service.add(new LoginSession(parentJson.getUserNameParent(), parentJson.getPasswordParent(), "PARENT", sessionID, true));
+        login_session_service.add(new LoginSession(parent.getUserNameParent(), parent.getPasswordParent(), "PARENT", sessionID, true));
 
         System.out.println("registriran novi parent");
         return ResponseEntity.ok("OK");

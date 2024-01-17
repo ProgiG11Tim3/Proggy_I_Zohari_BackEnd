@@ -21,17 +21,17 @@ class RegistrationControllerTest {
     @Test
     void uspjesnoRegistriranje() throws Exception {
         String jsonPayload = "{\n" +
+                "  \"name\": \"Andrej\",\n" +
+                "  \"surname\": \"Panković\",\n" +
                 "  \"oib\": \"12345678910\",\n" +
-                "  \"nameParent\": \"Andrej\",\n" +
-                "  \"lastNameParent\": \"Panković\",\n" +
-                "  \"dateOfBirthParent\": \"1970-04-08\",\n" +
-                "  \"usernameParent\": \"najOsoba\",\n" +
-                "  \"passwordParent\": \"najOsoba\",\n" +
-                "  \"phoneNumberParent\": \"0991234567\",\n" +
-                "  \"emailParent\": \"andrej.pankovic@yahoo.hr\",\n" +
-                "  \"postalCode\": \"10000\",\n" +
+                "  \"dateOfBirth\": \"1970-04-08\",\n" +
                 "  \"placeOfResidence\": \"Zagreb\",\n" +
-                "  \"employerEmail\": \"kebabShop@gmail.hr\"\n" +
+                "  \"postalCode\": \"10000\",\n" +
+                "  \"phoneNumber\": \"0991234567\",\n" +
+                "  \"emailAddress\": \"andrej.pankovic@yahoo.hr\",\n" +
+                "  \"username\": \"najOsoba\",\n" +
+                "  \"password\": \"najOsoba\",\n" +
+                "  \"employerEmailAddress\": \"kebabShop@gmail.hr\"\n" +
                 "}";
 
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
@@ -42,17 +42,17 @@ class RegistrationControllerTest {
     @Test
     void neUspjesnoRegistriranjeJerNekiOdPodatakaNijeUskladuSaBazinimRestrikcijama() throws Exception {
         String jsonPayload = "{\n" +
+                "  \"name\": \"Andrej\",\n" +
+                "  \"surname\": \"Panković\",\n" +
                 "  \"oib\": \"0\",\n" +
-                "  \"nameParent\": \"Andrej\",\n" +
-                "  \"lastNameParent\": \"Panković\",\n" +
-                "  \"dateOfBirthParent\": \"1970-04-08\",\n" +
-                "  \"usernameParent\": \"najOsoba\",\n" +
-                "  \"passwordParent\": \"najOsoba\",\n" +
-                "  \"phoneNumberParent\": \"0991234567\",\n" +
-                "  \"emailParent\": \"andrej.pankovic@yahoo.hr\",\n" +
-                "  \"postalCode\": \"10000\",\n" +
+                "  \"dateOfBirth\": \"1970-04-08\",\n" +
                 "  \"placeOfResidence\": \"Zagreb\",\n" +
-                "  \"employerEmail\": \"kebabShop@gmail.hr\"\n" +
+                "  \"postalCode\": \"10000\",\n" +
+                "  \"phoneNumber\": \"0991234567\",\n" +
+                "  \"emailAddress\": \"andrej.pankovic@yahoo.hr\",\n" +
+                "  \"username\": \"najOsoba\",\n" +
+                "  \"password\": \"najOsoba\",\n" +
+                "  \"employerEmailAddress\": \"kebabShop@gmail.hr\"\n" +
                 "}";
 
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
