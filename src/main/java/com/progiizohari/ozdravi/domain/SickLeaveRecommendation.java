@@ -14,6 +14,9 @@ public class SickLeaveRecommendation {
     @ManyToOne
     @JoinColumn(name = "doctorId")
     private Doctor doctor;
+    @ManyToOne
+    @JoinColumn(name = "parentId")
+    private Parent parent;
 
     @NotNull
     private String recData;
@@ -30,8 +33,9 @@ public class SickLeaveRecommendation {
     public SickLeaveRecommendation() {
     }
 
-    public SickLeaveRecommendation(Doctor doctor, String recData, String employerEmail) {
+    public SickLeaveRecommendation(Doctor doctor, String recData, String employerEmail, Parent parent) {
         this.doctor = doctor;
+        this.parent = parent;
         this.recData = recData;
         this.employerEmail = employerEmail;
         this.sickLeaveStartDate = new Date(System.currentTimeMillis());
@@ -40,6 +44,14 @@ public class SickLeaveRecommendation {
 
     public int getRecommendationId() {
         return recommendationId;
+    }
+
+    public String getEmployerEmail() {
+        return employerEmail;
+    }
+
+    public void setEmployerEmail(String employerEmail) {
+        this.employerEmail = employerEmail;
     }
 
     public Date getSickLeaveStartDate() {

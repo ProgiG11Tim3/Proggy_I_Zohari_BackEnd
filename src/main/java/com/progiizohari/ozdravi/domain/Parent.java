@@ -74,9 +74,13 @@ public class Parent {
     @JsonIgnore
     private List<Notification> notifications;
 
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<SickLeaveRecommendation> sickLeaveRecommendations;
+
     public Parent() {}
 
-    public Parent(String OIB, String nameParent, String lastNameParent, LocalDate dateOfBirthParent, String userNameParent, String passwordParent, String phoneNumberParent, String emailParent, Integer postalCode, String placeOfResidence, String employerEmail, MedicalRecord medicalRecord, Doctor doctor, List<Child> children) {
+    public Parent(String OIB, String nameParent, String lastNameParent, LocalDate dateOfBirthParent, String userNameParent, String passwordParent, String phoneNumberParent, String emailParent, Integer postalCode, String placeOfResidence, String employerEmail, MedicalRecord medicalRecord, Doctor doctor, List<Child> children, List<SickLeaveRecommendation> sickLeaveRecommendations) {
         this.OIB = OIB;
         this.nameParent = nameParent;
         this.lastNameParent = lastNameParent;
@@ -91,6 +95,7 @@ public class Parent {
         this.medicalRecord = medicalRecord;
         this.doctor = doctor;
         this.children = children;
+        this.sickLeaveRecommendations = sickLeaveRecommendations;
     }
 
     public int getParentId() {
@@ -147,6 +152,14 @@ public class Parent {
 
     public Doctor getDoctor() {
         return doctor;
+    }
+
+    public List<SickLeaveRecommendation> getSickLeaveRecommendations() {
+        return sickLeaveRecommendations;
+    }
+
+    public void setSickLeaveRecommendations(List<SickLeaveRecommendation> sickLeaveRecommendations) {
+        this.sickLeaveRecommendations = sickLeaveRecommendations;
     }
 
     public List<Child> getChildren() {

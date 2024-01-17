@@ -62,13 +62,13 @@ public class DataLoader implements CommandLineRunner {
                 new Pediatrician("Jelena", "Šimić", LocalDate.of(1988, 9, 20), "jelenaSimic", argon2.HashPassword("jelenaSimic"), "0983456789", "jelena.simic@gmail.com", null)
         ));
         List<Parent> parents = new ArrayList<>(Arrays.asList(
-                new Parent("12345678901", "Petra", "Horvat", LocalDate.of(1980, 12, 4), "petraHorvat", argon2.HashPassword("petraHorvat"), "0971234567", "petra.horvat@gmail.com", 10000, "Zagreb", "telekom@t-com.hr", null, doctors.get(0), null),
-                new Parent("23456789012", "Luka", "Kovač", LocalDate.of(1985, 5, 18), "lukaKovac", argon2.HashPassword("lukaKovac"), "0972345678", "luka.kovac@gmail.com", 12000, "Split", "vipnet@vip.hr", null, doctors.get(0), null),
-                new Parent("34567890123", "Ivona", "Novak", LocalDate.of(1978, 8, 23), "ivonaNovak", argon2.HashPassword("ivonaNovak"), "0973456789", "ivona.novak@gmail.com", 8000, "Osijek", "inet@inet.hr", null, doctors.get(1), null),
-                new Parent("45678901234", "Nikola", "Babić", LocalDate.of(1982, 3, 7), "nikolaBabic", argon2.HashPassword("nikolaBabic"), "0974567890", "nikola.babic@gmail.com", 15000, "Rijeka", "optika@optinet.hr", null, doctors.get(1), null),
-                new Parent("56789012345", "Mia", "Radić", LocalDate.of(1990, 6, 15), "miaRadic", argon2.HashPassword("miaRadic"), "0975678901", "mia.radic@gmail.com", 11000, "Zadar", "nttdata@nttdata.hr", null, doctors.get(2), null),
+                new Parent("12345678901", "Petra", "Horvat", LocalDate.of(1980, 12, 4), "petraHorvat", argon2.HashPassword("petraHorvat"), "0971234567", "petra.horvat@gmail.com", 10000, "Zagreb", "telekom@t-com.hr", null, doctors.get(0), null, null),
+                new Parent("23456789012", "Luka", "Kovač", LocalDate.of(1985, 5, 18), "lukaKovac", argon2.HashPassword("lukaKovac"), "0972345678", "luka.kovac@gmail.com", 12000, "Split", "vipnet@vip.hr", null, doctors.get(0), null, null),
+                new Parent("34567890123", "Ivona", "Novak", LocalDate.of(1978, 8, 23), "ivonaNovak", argon2.HashPassword("ivonaNovak"), "0973456789", "ivona.novak@gmail.com", 8000, "Osijek", "inet@inet.hr", null, doctors.get(1), null, null),
+                new Parent("45678901234", "Nikola", "Babić", LocalDate.of(1982, 3, 7), "nikolaBabic", argon2.HashPassword("nikolaBabic"), "0974567890", "nikola.babic@gmail.com", 15000, "Rijeka", "optika@optinet.hr", null, doctors.get(1), null, null),
+                new Parent("56789012345", "Mia", "Radić", LocalDate.of(1990, 6, 15), "miaRadic", argon2.HashPassword("miaRadic"), "0975678901", "mia.radic@gmail.com", 11000, "Zadar", "nttdata@nttdata.hr", null, doctors.get(2), null, null),
                 //ostavi dino saurica bez kartona jer treba za jedan test case
-                new Parent("48249825043", "Dino", "Saurić", LocalDate.of(1990, 6, 15), "dinoSauric", argon2.HashPassword("dinoSauric"), "0978901424", "dino.sauric@gmail.com", 11000, "Zadar", "ntt@nttdata.hr", null, doctors.get(2), null)
+                new Parent("48249825043", "Dino", "Saurić", LocalDate.of(1990, 6, 15), "dinoSauric", argon2.HashPassword("dinoSauric"), "0978901424", "dino.sauric@gmail.com", 11000, "Zadar", "ntt@nttdata.hr", null, doctors.get(2), null, null)
         ));
         List<Child> children = new ArrayList<>(Arrays.asList(
                 new Child("29081734199", "Dorian", "Gray", LocalDate.of(2013, 6, 3), "OŠ Dobriše Cesarić", "os.cesaric@gmail.com", parents.get(0), pediatricians.get(0), null),
@@ -219,11 +219,11 @@ public class DataLoader implements CommandLineRunner {
                 new SpecialistExamination("Nutricionist (nutricionistički pregled): Pregledava prehrambene navike, zdravstvene uvjete i ciljeve pacijenta kako bi pružio prilagođene prehrambene preporuke.", "KBC Sestre Milosrdnice", medicalRecords.get(14))
         ));
         List<SickLeaveRecommendation> sickLeaveRecommendations = new ArrayList<>(Arrays.asList(
-                new SickLeaveRecommendation(doctors.get(0), "Respiratorna infekcija: Preporučujem da ostanete kod kuće kako biste spriječili širenje respiratornih infekcija. Odmaranje i ograničavanje kontakta s drugima pomoći će vašem tijelu da se oporavi bez izlaganja drugima.", "telekom@t-com.hr"),
-                new SickLeaveRecommendation(doctors.get(0), "Postoperativna njega: Kako biste osigurali uspješan oporavak nakon operacije, preporučujem da ostanete kod kuće u mirnom okruženju. Odmor je ključan za brži oporavak.", "vipnet@vip.hr"),
-                new SickLeaveRecommendation(doctors.get(1), "Kontakt s potencijalnim alergenima: S obzirom na vašu dijagnozu alergije, preporučujem izbjegavanje kontakta s poznatim alergenima. Ostanak kod kuće pomoći će u smanjenju izloženosti i ublažavanju simptoma.", "inet@inet.hr"),
-                new SickLeaveRecommendation(doctors.get(1), "Karantena radi zarazne bolesti: Na temelju rezultata testiranja, preporučujem karantenu kako biste spriječili širenje zarazne bolesti. Ostanak kod kuće pomoći će zaštititi druge članove zajednice.", "optika@optinet.hr"),
-                new SickLeaveRecommendation(doctors.get(2), "Zdravstveno stanje trudnice: S obzirom na vašu trenutačnu trudnoću, preporučujem ograničavanje izlazaka iz kuće kako biste smanjili rizik od komplikacija. Pridržavajte se preporuka za odmor i oprez kako biste osigurali siguran tijek trudnoće.", "nttdata@nttdata.hr")
+                new SickLeaveRecommendation(doctors.get(0), "Respiratorna infekcija: Preporučujem da ostanete kod kuće kako biste spriječili širenje respiratornih infekcija. Odmaranje i ograničavanje kontakta s drugima pomoći će vašem tijelu da se oporavi bez izlaganja drugima.", "telekom@t-com.hr", parents.get(0)),
+                new SickLeaveRecommendation(doctors.get(0), "Postoperativna njega: Kako biste osigurali uspješan oporavak nakon operacije, preporučujem da ostanete kod kuće u mirnom okruženju. Odmor je ključan za brži oporavak.", "vipnet@vip.hr", parents.get(1)),
+                new SickLeaveRecommendation(doctors.get(1), "Kontakt s potencijalnim alergenima: S obzirom na vašu dijagnozu alergije, preporučujem izbjegavanje kontakta s poznatim alergenima. Ostanak kod kuće pomoći će u smanjenju izloženosti i ublažavanju simptoma.", "inet@inet.hr", parents.get(2)),
+                new SickLeaveRecommendation(doctors.get(1), "Karantena radi zarazne bolesti: Na temelju rezultata testiranja, preporučujem karantenu kako biste spriječili širenje zarazne bolesti. Ostanak kod kuće pomoći će zaštititi druge članove zajednice.", "optika@optinet.hr", parents.get(3)),
+                new SickLeaveRecommendation(doctors.get(2), "Zdravstveno stanje trudnice: S obzirom na vašu trenutačnu trudnoću, preporučujem ograničavanje izlazaka iz kuće kako biste smanjili rizik od komplikacija. Pridržavajte se preporuka za odmor i oprez kako biste osigurali siguran tijek trudnoće.", "nttdata@nttdata.hr", parents.get(4))
         ));
 
         doctorRepository.saveAll(doctors);
