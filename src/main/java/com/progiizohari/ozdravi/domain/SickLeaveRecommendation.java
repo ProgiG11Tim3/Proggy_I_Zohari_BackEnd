@@ -24,6 +24,9 @@ public class SickLeaveRecommendation {
     @NotNull
     private String employerEmail;
 
+    @NotNull
+    private boolean isApproved;
+
     public SickLeaveRecommendation() {
     }
 
@@ -32,6 +35,7 @@ public class SickLeaveRecommendation {
         this.recData = recData;
         this.employerEmail = employerEmail;
         this.sickLeaveStartDate = new Date(System.currentTimeMillis());
+        this.isApproved = false;
     }
 
     public int getRecommendationId() {
@@ -63,12 +67,20 @@ public class SickLeaveRecommendation {
         this.recData = recData;
     }
 
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = true;
+    }
+
     @Override
     public String toString() {
         return "SickLeaveRecommendation{" +
                 "recommendationId=" + recommendationId +
                 ", doctor=" + doctor +
                 ", recData='" + recData + '\'' +
-                '}';
+                ", isApproved=" + isApproved;
     }
 }
