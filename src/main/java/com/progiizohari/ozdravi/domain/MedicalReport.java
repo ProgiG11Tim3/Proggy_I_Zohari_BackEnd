@@ -14,7 +14,7 @@ public class MedicalReport {
     @Id
     @Column(length = 5)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String reportId;
+    private int reportId;
 
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull
@@ -42,11 +42,11 @@ public class MedicalReport {
         this.fileDBS = fileDBS;
     }
 
-    public String getReportId() {
+    public int getReportId() {
         return reportId;
     }
 
-    public void setReportId(String reportId) {
+    public void setReportId(int reportId) {
         this.reportId = reportId;
     }
 
