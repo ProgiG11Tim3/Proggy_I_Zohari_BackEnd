@@ -4,5 +4,5 @@ import com.progiizohari.ozdravi.domain.MedicalRecord;
 import com.progiizohari.ozdravi.domain.MedicalReport;
 
 public interface MedicalReportService {
-    public MedicalReport getByReportId(int reportId);
+    public MedicalReport getByReportId(String reportId);
 }

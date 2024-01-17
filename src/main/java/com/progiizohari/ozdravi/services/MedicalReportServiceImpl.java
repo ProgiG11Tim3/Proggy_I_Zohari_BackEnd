@@ -14,7 +14,7 @@ public class MedicalReportServiceImpl implements MedicalReportService{
     private MedicalReportRepository repository;
 
     @Override
-    public MedicalReport getByReportId(int reportId) {
+    public MedicalReport getByReportId(String reportId) {
         return repository.findByReportId(reportId);
     }
 }
