@@ -15,7 +15,7 @@ public class MedicalReportController {
     private MedicalReportService service;
 
     @GetMapping("/getMedicalReport/{id}")
-    public MedicalReport getByReportId(@PathVariable String id) {
+    public MedicalReport getByReportId(@PathVariable int id) {
         return service.getByReportId(id);
     }
 }
