@@ -1,21 +1,21 @@
 package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.MedicalRecord;
-import com.progiizohari.ozdravi.domain.Parent;
+import com.progiizohari.ozdravi.domain.MedicalReport;
 import com.progiizohari.ozdravi.services.MedicalRecordService;
+import com.progiizohari.ozdravi.services.MedicalReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MedicalRecordController {
-
+public class MedicalReportController {
     @Autowired
-    private MedicalRecordService service;
+    private MedicalReportService service;
 
-    @GetMapping("/getMedicalRecord/{id}")
-    public MedicalRecord getByRecordId(@PathVariable int id) {
-        return service.getByRecordId(id);
+    @GetMapping("/getMedicalReport/{id}")
+    public MedicalReport getByReportId(@PathVariable int id) {
+        return service.getByReportId(id);
     }
 }
