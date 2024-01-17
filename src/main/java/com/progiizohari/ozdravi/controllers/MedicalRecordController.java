@@ -14,7 +14,7 @@ public class MedicalRecordController {
     @Autowired
     private MedicalRecordService service;
 
-    @GetMapping("/getParent/{id}")
+    @GetMapping("/getMedicalRecord/{id}")
     public MedicalRecord getByOIB(@PathVariable int id) {
         return service.getByRecordId(id);
     }
