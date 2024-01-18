@@ -28,7 +28,7 @@ public class ExaminationController {
     }
 
     //UC7
-    @GetMapping(value = "/{text}/getAllSelectedNotifications")
+    @GetMapping(value = "/{text}/getAllSelectedExaminations")
     public ResponseEntity<List<Examination>> getAllSelectedPersonExaminations(@PathVariable String text) {
 
         if (text.equals("parentprofile")) {
