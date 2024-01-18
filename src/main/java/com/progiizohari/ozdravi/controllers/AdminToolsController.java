@@ -67,13 +67,13 @@ public class AdminToolsController {
 
     // UC 25
     @GetMapping("/admin/getAllParents")
-    public ResponseEntity<List<AdminToolParentEntry>> getAllParents() {
-        List<AdminToolParentEntry> return_list = new ArrayList<>();
+    public ResponseEntity<List<AdminToolUserEntity>> getAllParents() {
+        List<AdminToolUserEntity> return_list = new ArrayList<>();
 
         List<Parent> parents = parent_service.getAll();
         for (Parent parent : parents) {
-            AdminToolParentEntry string_with_link = new AdminToolParentEntry();
-            string_with_link.setParent(parent);
+            AdminToolUserEntity string_with_link = new AdminToolUserEntity();
+            string_with_link.setUserJson(parent.toJsonIDs());
             string_with_link.setData_link("/admin/getParent/" + parent.getParentId());
             string_with_link.setDelete_link("/admin/deleteParent/" + parent.getParentId());
             string_with_link.setEdit_link("/admin/editParent/" + parent.getParentId());
