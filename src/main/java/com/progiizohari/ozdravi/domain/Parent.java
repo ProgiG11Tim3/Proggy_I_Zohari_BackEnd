@@ -293,4 +293,65 @@ public class Parent {
                 ", \"children\":" + children +
                 '}';
     }
+
+    public String toJsonIDs() {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{")
+                .append("\"parentId\":").append(parentId)
+                .append(", \"OIB\":\"").append(OIB).append("\"")
+                .append(", \"nameParent\":\"").append(nameParent).append("\"")
+                .append(", \"lastNameParent\":\"").append(lastNameParent).append("\"")
+                .append(", \"dateOfBirthParent\":\"").append(dateOfBirthParent).append("\"")
+                .append(", \"userNameParent\":\"").append(userNameParent).append("\"")
+                .append(", \"passwordParent\":\"").append(passwordParent).append("\"")
+                .append(", \"phoneNumberParent\":\"").append(phoneNumberParent).append("\"")
+                .append(", \"emailParent\":\"").append(emailParent).append("\"")
+                .append(", \"postalCode\":").append(postalCode)
+                .append(", \"placeOfResidence\":\"").append(placeOfResidence).append("\"")
+                .append(", \"employerEmail\":\"").append(employerEmail).append("\"")
+                .append(", \"doctorID\":").append(doctor.getDoctorId());
+
+        // Handle childrenIDs
+        if (!children.isEmpty()) {
+            jsonBuilder.append(", \"childrenIDs\": [");
+            for (Child child : children) {
+                jsonBuilder.append(child.getChildId()).append(",");
+            }
+            // Remove the trailing comma if there are children
+            jsonBuilder.setLength(jsonBuilder.length() - 1);
+            jsonBuilder.append("]");
+        } else {
+            jsonBuilder.append(", \"childrenIDs\": []");
+        }
+
+        // Handle notificationsIDs
+        if (!notifications.isEmpty()) {
+            jsonBuilder.append(", \"notificationsIDs\": [");
+            for (Notification notification : notifications) {
+                jsonBuilder.append(notification.getNotificationId()).append(",");
+            }
+            // Remove the trailing comma if there are notifications
+            jsonBuilder.setLength(jsonBuilder.length() - 1);
+            jsonBuilder.append("]");
+        } else {
+            jsonBuilder.append(", \"notificationsIDs\": []");
+        }
+
+        // Handle sickLeaveRecommendationsIDs
+        if (!sickLeaveRecommendations.isEmpty()) {
+            jsonBuilder.append(", \"sickLeaveRecommendationsIDs\": [");
+            for (SickLeaveRecommendation recommendation : sickLeaveRecommendations) {
+                jsonBuilder.append(recommendation.getRecommendationId()).append(",");
+            }
+            // Remove the trailing comma if there are recommendations
+            jsonBuilder.setLength(jsonBuilder.length() - 1);
+            jsonBuilder.append("]");
+        } else {
+            jsonBuilder.append(", \"sickLeaveRecommendationsIDs\": []");
+        }
+
+        jsonBuilder.append("}");
+
+        return jsonBuilder.toString();
+    }
 }

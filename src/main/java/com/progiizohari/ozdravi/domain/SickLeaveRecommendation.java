@@ -95,4 +95,19 @@ public class SickLeaveRecommendation {
                 ", recData='" + recData + '\'' +
                 ", isApproved=" + isApproved;
     }
+
+    public String toJsonIDs() {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{")
+                .append("\"recommendationId\":").append(recommendationId)
+                .append(", \"doctorID\":").append(doctor.getDoctorId())
+                .append(", \"parentID\":").append(parent.getParentId())
+                .append(", \"recData\":\"").append(recData).append("\"")
+                .append(", \"sickLeaveStartDate\":\"").append(sickLeaveStartDate).append("\"")
+                .append(", \"employerEmail\":\"").append(employerEmail).append("\"")
+                .append(", \"isApproved\":").append(isApproved)
+                .append("}");
+
+        return jsonBuilder.toString();
+    }
 }

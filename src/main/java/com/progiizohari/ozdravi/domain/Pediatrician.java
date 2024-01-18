@@ -169,4 +169,35 @@ public class Pediatrician {
                 ", \"children\":" + children +
                 '}';
     }
+
+    public String toJsonIDs() {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{")
+                .append("\"pediatricianId\":").append(pediatricianId)
+                .append(", \"namePediatrician\":\"").append(namePediatrician).append("\"")
+                .append(", \"lastNamePediatrician\":\"").append(lastNamePediatrician).append("\"")
+                .append(", \"dateOfBirthPediatrician\":\"").append(dateOfBirthPediatrician).append("\"")
+                .append(", \"userNamePediatrician\":\"").append(userNamePediatrician).append("\"")
+                .append(", \"passwordPediatrician\":\"").append(passwordPediatrician).append("\"")
+                .append(", \"phoneNumberPediatrician\":\"").append(phoneNumberPediatrician).append("\"")
+                .append(", \"emailPediatrician\":\"").append(emailPediatrician).append("\"");
+
+        // Handle childrenIDs
+        if (!children.isEmpty()) {
+            jsonBuilder.append(", \"childrenIDs\": [");
+            for (Child child : children) {
+                jsonBuilder.append(child.getChildId()).append(",");
+            }
+            // Remove the trailing comma if there are children
+            jsonBuilder.setLength(jsonBuilder.length() - 1);
+            jsonBuilder.append("]");
+        } else {
+            jsonBuilder.append(", \"childrenIDs\": []");
+        }
+
+        jsonBuilder.append("}");
+
+        return jsonBuilder.toString();
+    }
+
 }

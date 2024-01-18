@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -67,9 +68,10 @@ public class AdminToolsController {
     // UC 25
     @GetMapping("/admin/getAllParents")
     public ResponseEntity<List<AdminToolUserEntity>> getAllParents() {
-        List<AdminToolUserEntity> return_list = new ArrayList<>();
+        List<AdminToolUserEntity> return_list = new LinkedList<>();
 
-        for (Parent parent : parent_service.getAll()) {
+        List<Parent> parents = parent_service.getAll();
+        for (Parent parent : parents) {
             AdminToolUserEntity string_with_link = new AdminToolUserEntity();
             string_with_link.setUserJson(parent.toJson());
             string_with_link.setData_link("/admin/getParent/" + parent.getParentId());

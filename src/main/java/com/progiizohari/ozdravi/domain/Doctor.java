@@ -188,4 +188,48 @@ public class Doctor {
                 ", \"parents\":" + parents +
                 '}';
     }
+
+    public String toJsonIDs() {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{")
+                .append("\"doctorId\":").append(doctorId)
+                .append(", \"nameDoctor\":\"").append(nameDoctor).append("\"")
+                .append(", \"lastNameDoctor\":\"").append(lastNameDoctor).append("\"")
+                .append(", \"dateOfBirthDoctor\":\"").append(dateOfBirthDoctor).append("\"")
+                .append(", \"userNameDoctor\":\"").append(userNameDoctor).append("\"")
+                .append(", \"passwordDoctor\":\"").append(passwordDoctor).append("\"")
+                .append(", \"phoneNumberDoctor\":\"").append(phoneNumberDoctor).append("\"")
+                .append(", \"emailDoctor\":\"").append(emailDoctor).append("\"");
+
+        // Handle parentsIDs
+        if (!parents.isEmpty()) {
+            jsonBuilder.append(", \"parentsIDs\": [");
+            for (Parent parent : parents) {
+                jsonBuilder.append(parent.getParentId()).append(",");
+            }
+            // Remove the trailing comma if there are parents
+            jsonBuilder.setLength(jsonBuilder.length() - 1);
+            jsonBuilder.append("]");
+        } else {
+            jsonBuilder.append(", \"parentsIDs\": []");
+        }
+
+        // Handle sickLeaveRecommendationsIDs
+        if (!sickLeaveRecommendations.isEmpty()) {
+            jsonBuilder.append(", \"sickLeaveRecommendationsIDs\": [");
+            for (SickLeaveRecommendation recommendation : sickLeaveRecommendations) {
+                jsonBuilder.append(recommendation.getRecommendationId()).append(",");
+            }
+            // Remove the trailing comma if there are recommendations
+            jsonBuilder.setLength(jsonBuilder.length() - 1);
+            jsonBuilder.append("]");
+        } else {
+            jsonBuilder.append(", \"sickLeaveRecommendationsIDs\": []");
+        }
+
+        jsonBuilder.append("}");
+
+        return jsonBuilder.toString();
+    }
+
 }
