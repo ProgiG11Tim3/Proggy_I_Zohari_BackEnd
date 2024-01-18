@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 public class SpecialistExamination {
 
@@ -14,13 +17,20 @@ public class SpecialistExamination {
     @NotNull
     private String examTitle;
 
-    @NotNull
     private String examLocations;
 
     @ManyToOne
     @JoinColumn(name = "recordId")
     @JsonIgnore
     private MedicalRecord medicalRecord;
+
+    @ManyToMany
+    @JoinTable(
+            name = "examLocations",
+            joinColumns = @JoinColumn(name = "examId", referencedColumnName = "examId"),
+            inverseJoinColumns = @JoinColumn(name = "hospitalLocationId", referencedColumnName = "hospitalLocationId")
+    )
+    private List<HospitalLocation> hospitalLocations;
 
     public SpecialistExamination() {
     }
@@ -31,13 +41,16 @@ public class SpecialistExamination {
         this.medicalRecord = medicalRecord;
     }
 
+    public SpecialistExamination(String examTitle, MedicalRecord medicalRecord, List<HospitalLocation> hospitalLocations) {
+        this.examTitle = examTitle;
+        this.medicalRecord = medicalRecord;
+        this.hospitalLocations = hospitalLocations;
+    }
+
     public int getExamId() {
         return examId;
     }
 
-    public void setExamId(int examId) {
-        this.examId = examId;
-    }
 
 
     public String getExamTitle() {
@@ -62,6 +75,14 @@ public class SpecialistExamination {
 
     public void setMedicalRecord(MedicalRecord medicalRecord) {
         this.medicalRecord = medicalRecord;
+    }
+
+    public List<HospitalLocation> getHospitalLocations() {
+        return hospitalLocations;
+    }
+
+    public void setHospitalLocations(List<HospitalLocation> hospitalLocations) {
+        this.hospitalLocations = hospitalLocations;
     }
 
     @Override

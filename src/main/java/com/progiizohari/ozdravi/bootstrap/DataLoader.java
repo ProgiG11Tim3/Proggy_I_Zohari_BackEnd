@@ -11,8 +11,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -29,10 +29,11 @@ public class DataLoader implements CommandLineRunner {
     private final SickNoteRepository sickNoteRepository;
     private final SpecialistExaminationRepository specialistExaminationRepository;
     private final SickLeaveRecommendationRepository sickLeaveRecommendationRepository;
+    private final HospitalLocationRepository hospitalLocationRepository;
 
     public DataLoader(Argon2Crypting argon2, DoctorRepository doctorRepository, PediatricianRepository pediatricianRepository, ParentRepository parentRepository, ChildRepository childRepository, NotificationRepository notificationRepository
                       , MedicalRecordRepository medicalRecordRepository, MedicalReportRepository medicalReportRepository, ExaminationRepository examinationRepository, SickNoteRepository sickNoteRepository,
-                      SpecialistExaminationRepository specialistExaminationRepository, SickLeaveRecommendationRepository sickLeaveRecommendationRepository) {
+                      SpecialistExaminationRepository specialistExaminationRepository, SickLeaveRecommendationRepository sickLeaveRecommendationRepository, HospitalLocationRepository hospitalLocationRepository) {
         this.argon2 = argon2;
         this.doctorRepository = doctorRepository;
         this.pediatricianRepository = pediatricianRepository;
@@ -45,6 +46,7 @@ public class DataLoader implements CommandLineRunner {
         this.sickNoteRepository = sickNoteRepository;
         this.specialistExaminationRepository = specialistExaminationRepository;
         this.sickLeaveRecommendationRepository = sickLeaveRecommendationRepository;
+        this.hospitalLocationRepository = hospitalLocationRepository;
     }
 
     @Override
@@ -201,8 +203,12 @@ public class DataLoader implements CommandLineRunner {
                 new SickNote(children.get(8), "Virus izmišljenih domaćih zadaća: Dijete tvrdi da je zaraženo virusom izmišljenih domaćih zadaća i ne može koncentrirano raditi na njima."),
                 new SickNote(children.get(9), "Nagli rast kose koji ometa vid: Dijete tvrdi da mu je kosa iznenada narasla i sada mu ometa vid, pa mora ostati kod kuće dok ne pronađe rješenje za ovu kriznu situaciju.")
         ));
+        List<HospitalLocation> hospitalLocations = new ArrayList<>(Arrays.asList(
+                new HospitalLocation("KLINIČKI BOLNIČKI CENTAR ZAGREB", "ZAGREB", "KIŠPATIĆEVA 12", 45.82489357049353, 16.0057334543042),
+                new HospitalLocation("KLINIČKI BOLNIČKI CENTAR SESTRE MILOSRDNICE", "ZAGREB", "VINOGRADSKA CESTA 29", 45.8155126250784, 15.953155511561702)
+        ));
         List<SpecialistExamination> specialistExaminations = new ArrayList<>(Arrays.asList(
-                new SpecialistExamination("Oftalmolog (pregled vida): Stručnjak će ispitali vaš vid kroz različite testove poput provjere oštrine vida, provjere boje, i pregleda očne pozadine kako bi dijagnosticirao i liječio probleme s vidom.", "KBC Rebro", medicalRecords.get(0)),
+                //new SpecialistExamination("Oftalmolog (pregled vida): Stručnjak će ispitali vaš vid kroz različite testove poput provjere oštrine vida, provjere boje, i pregleda očne pozadine kako bi dijagnosticirao i liječio probleme s vidom.", "KBC Rebro", medicalRecords.get(0)),
                 new SpecialistExamination("Dermatolog (pregled kože): Liječnik će pregledati vašu kožu kako bi identificirao promjene, madeže ili kožne bolesti. Moguće je i izvršiti biopsiju kože radi daljnje analize.", "KBC Rebro", medicalRecords.get(1)),
                 new SpecialistExamination("Kardiolog (kardiološki pregled): Specijalist će pregledati vaše srce pomoću elektrokardiograma (EKG), auskultacije i drugih testova kako bi procijenio zdravlje srca i identificirao moguće probleme.", "KBC Rebro", medicalRecords.get(2)),
                 new SpecialistExamination("Ginekolog (ginekološki pregled): Specijalist će pregledati reproduktivne organe žene, uključujući pregled vrata maternice i dojki. Može provesti i PAPA test ili mamografiju.", "KBC Dubrava", medicalRecords.get(3)),
@@ -216,7 +222,8 @@ public class DataLoader implements CommandLineRunner {
                 new SpecialistExamination("Reumatolog (reumatološki pregled): Pregledava zglobove, mišiće i kosti kako bi dijagnosticirao i liječio reumatske bolesti.", "KBC Sestre Milosrdnice", medicalRecords.get(11)),
                 new SpecialistExamination("Alergolog (alergološki pregled): Pregledava pacijenta kako bi identificirao alergijske reakcije i odredio uzročnike alergija.", "KBC Sestre Milosrdnice", medicalRecords.get(12)),
                 new SpecialistExamination("ENT specijalist (otorinolaringološki pregled): Pregledava uši, nos i grlo kako bi dijagnosticirao i liječio probleme u tim područjima.", "KBC Sestre Milosrdnice", medicalRecords.get(13)),
-                new SpecialistExamination("Nutricionist (nutricionistički pregled): Pregledava prehrambene navike, zdravstvene uvjete i ciljeve pacijenta kako bi pružio prilagođene prehrambene preporuke.", "KBC Sestre Milosrdnice", medicalRecords.get(14))
+                new SpecialistExamination("Nutricionist (nutricionistički pregled): Pregledava prehrambene navike, zdravstvene uvjete i ciljeve pacijenta kako bi pružio prilagođene prehrambene preporuke.", "KBC Sestre Milosrdnice", medicalRecords.get(14)),
+                new SpecialistExamination("Oftamolog (pregled vida): Stručnjak će ispitali vaš vid kroz različite testove poput provjere oštrine vida, provjere boje, i pregleda očne pozadine kako bi dijagnosticirao i liječio probleme s vidom.", medicalRecords.get(0), new ArrayList<>(Arrays.asList(hospitalLocations.get(0), hospitalLocations.get(1))))
         ));
         List<SickLeaveRecommendation> sickLeaveRecommendations = new ArrayList<>(Arrays.asList(
                 new SickLeaveRecommendation(doctors.get(0), "Respiratorna infekcija: Preporučujem da ostanete kod kuće kako biste spriječili širenje respiratornih infekcija. Odmaranje i ograničavanje kontakta s drugima pomoći će vašem tijelu da se oporavi bez izlaganja drugima.", "telekom@t-com.hr", parents.get(0)),
@@ -235,6 +242,7 @@ public class DataLoader implements CommandLineRunner {
         medicalReportRepository.saveAll(medicalReports);
         examinationRepository.saveAll(examinations);
         sickNoteRepository.saveAll(sickNotes);
+        hospitalLocationRepository.saveAll(hospitalLocations);
         specialistExaminationRepository.saveAll(specialistExaminations);
         sickLeaveRecommendationRepository.saveAll(sickLeaveRecommendations);
 
