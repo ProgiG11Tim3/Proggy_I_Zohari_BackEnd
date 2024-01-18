@@ -29,10 +29,6 @@ public class ExaminationServiceImpl implements ExaminationService {
 
     @Override
     public List<Examination> getAllExaminations() {
-        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-        if(!loginSessionHandler.isUserLoggedIn(sessionID)){
-            return null;
-        }
         return repository.findAll();
     }
 
