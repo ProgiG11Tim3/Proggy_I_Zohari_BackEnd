@@ -206,6 +206,7 @@ public class DataLoader implements CommandLineRunner {
         List<HospitalLocation> hospitalLocations = new ArrayList<>(Arrays.asList(
                 new HospitalLocation("KLINIČKI BOLNIČKI CENTAR ZAGREB", "ZAGREB", "KIŠPATIĆEVA 12", 45.82489357049353, 16.0057334543042),
                 new HospitalLocation("KLINIČKI BOLNIČKI CENTAR SESTRE MILOSRDNICE", "ZAGREB", "VINOGRADSKA CESTA 29", 45.8155126250784, 15.953155511561702)
+
         ));
         List<SpecialistExamination> specialistExaminations = new ArrayList<>(Arrays.asList(
                 //new SpecialistExamination("Oftalmolog (pregled vida): Stručnjak će ispitali vaš vid kroz različite testove poput provjere oštrine vida, provjere boje, i pregleda očne pozadine kako bi dijagnosticirao i liječio probleme s vidom.", "KBC Rebro", medicalRecords.get(0)),
