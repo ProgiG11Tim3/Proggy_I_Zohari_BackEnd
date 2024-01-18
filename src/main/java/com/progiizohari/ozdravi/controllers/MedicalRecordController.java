@@ -15,7 +15,7 @@ public class MedicalRecordController {
     private MedicalRecordService service;
 
     @GetMapping("/getMedicalRecord/{id}")
-    public MedicalRecord getByRecordId(@PathVariable int id) {
-        return service.getByRecordId(id);
+    public MedicalRecord getByRecordId(@PathVariable String id) {
+        return service.getByRecordId(Integer.parseInt(id));
     }
 }

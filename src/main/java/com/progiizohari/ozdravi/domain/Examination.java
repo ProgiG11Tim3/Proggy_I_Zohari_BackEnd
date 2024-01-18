@@ -27,11 +27,6 @@ public class Examination {
     @Column(length = 1)
     private String medicalCertificate;
 
-    @NotNull
-    @Pattern(regexp = "[DN]")
-    @Column(length = 1)
-    private String parentMedicalLeave;
-
     @ManyToOne
     @JoinColumn(name = "recordId")
     private MedicalRecord medicalRecord;
@@ -39,11 +34,10 @@ public class Examination {
     public Examination() {
     }
 
-    public Examination(String diagnosis, Timestamp dateOfExamination, String medicalCertificate, String parentMedicalLeave, MedicalRecord medicalRecord) {
+    public Examination(String diagnosis, Timestamp dateOfExamination, String medicalCertificate, MedicalRecord medicalRecord) {
         this.diagnosis = diagnosis;
         this.dateOfExamination = dateOfExamination;
         this.medicalCertificate = medicalCertificate;
-        this.parentMedicalLeave = parentMedicalLeave;
         this.medicalRecord = medicalRecord;
     }
 
@@ -79,13 +73,6 @@ public class Examination {
         this.medicalCertificate = medicalCertificate;
     }
 
-    public String getParentMedicalLeave() {
-        return parentMedicalLeave;
-    }
-
-    public void setParentMedicalLeave(String parentMedicalLeave) {
-        this.parentMedicalLeave = parentMedicalLeave;
-    }
 
     public MedicalRecord getMedicalRecord() {
         return medicalRecord;
@@ -102,7 +89,6 @@ public class Examination {
                 ", diagnosis='" + diagnosis + '\'' +
                 ", dateOfExamination=" + dateOfExamination +
                 ", medicalCertificate=" + medicalCertificate +
-                ", parentMedicalLeave=" + parentMedicalLeave +
                 ", medicalRecord=" + medicalRecord +
                 '}';
     }
