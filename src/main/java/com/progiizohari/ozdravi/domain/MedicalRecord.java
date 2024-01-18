@@ -18,10 +18,12 @@ public class MedicalRecord {
 
     @OneToOne
     @JoinColumn(name = "child_OIB")
+    @JsonIgnore
     private Child child;
 
     @OneToOne
     @JoinColumn(name = "parent_OIB")
+    @JsonIgnore
     private Parent parent;
 
     @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL)

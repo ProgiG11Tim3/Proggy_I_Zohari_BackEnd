@@ -57,7 +57,6 @@ public class Parent {
     private String employerEmail;
 
     @OneToOne(mappedBy = "parent")
-    @JsonIgnore
     private MedicalRecord medicalRecord;
 
     @ManyToOne

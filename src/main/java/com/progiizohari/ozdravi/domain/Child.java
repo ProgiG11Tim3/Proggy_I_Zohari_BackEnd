@@ -50,7 +50,6 @@ public class Child {
     private Pediatrician pediatrician;
 
     @OneToOne(mappedBy = "child")
-    @JsonIgnore
     private MedicalRecord medicalRecord;
 
     @OneToMany(mappedBy = "child", cascade = CascadeType.ALL)
