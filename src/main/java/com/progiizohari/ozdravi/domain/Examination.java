@@ -23,9 +23,8 @@ public class Examination {
     private Timestamp dateOfExamination;
 
     @NotNull
-    @Pattern(regexp = "[DN]")
     @Column(length = 1)
-    private String medicalCertificate;
+    private boolean medicalCertificate;
 
     @ManyToOne
     @JoinColumn(name = "recordId")
@@ -34,7 +33,7 @@ public class Examination {
     public Examination() {
     }
 
-    public Examination(String diagnosis, Timestamp dateOfExamination, String medicalCertificate, MedicalRecord medicalRecord) {
+    public Examination(String diagnosis, Timestamp dateOfExamination, boolean medicalCertificate, MedicalRecord medicalRecord) {
         this.diagnosis = diagnosis;
         this.dateOfExamination = dateOfExamination;
         this.medicalCertificate = medicalCertificate;
@@ -65,11 +64,11 @@ public class Examination {
         this.dateOfExamination = dateOfExamination;
     }
 
-    public String getMedicalCertificate() {
+    public boolean getMedicalCertificate() {
         return medicalCertificate;
     }
 
-    public void setMedicalCertificate(String medicalCertificate) {
+    public void setMedicalCertificate(boolean medicalCertificate) {
         this.medicalCertificate = medicalCertificate;
     }
 

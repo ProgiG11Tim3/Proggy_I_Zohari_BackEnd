@@ -25,7 +25,7 @@ public class ExaminationController {
     public ResponseEntity<Examination> add(@RequestBody Examination examination) {
 
         //Bracun dodaj provjeru jel osoba koja dodaje novi pregled ulogiran i je li on LOM ili pedijatar pacijenta kojem dodaje pregled
-        if (examination.getMedicalCertificate().equals("D")) {
+        if (examination.getMedicalCertificate()) {
 
             if (medicalRecordService.setCurrentDiagnosis(examination.getDiagnosis(), examination.getMedicalRecord().getRecordId())) {
                 System.out.println("Promjenjena je currentDiganosis u Medical Recordu");
