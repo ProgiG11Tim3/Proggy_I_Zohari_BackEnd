@@ -101,7 +101,7 @@ public class SickLeaveRecommendation {
         jsonBuilder.append("{")
                 .append("\"recommendationId\":").append(recommendationId)
                 .append(", \"doctorID\":").append(doctor.getDoctorId())
-                .append(", \"parentID\":").append(parent.getParentId())
+                .append(", \"parentOIB\":").append(parent.getOIB())
                 .append(", \"recData\":\"").append(recData).append("\"")
                 .append(", \"sickLeaveStartDate\":\"").append(sickLeaveStartDate).append("\"")
                 .append(", \"employerEmail\":\"").append(employerEmail).append("\"")

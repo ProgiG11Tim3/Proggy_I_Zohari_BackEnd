@@ -67,13 +67,13 @@ public class AdminToolsController {
 
     // UC 25
     @GetMapping("/admin/getAllParents")
-    public ResponseEntity<List<AdminToolUserEntity>> getAllParents() {
-        List<AdminToolUserEntity> return_list = new LinkedList<>();
+    public ResponseEntity<List<AdminToolParentEntry>> getAllParents() {
+        List<AdminToolParentEntry> return_list = new ArrayList<>();
 
         List<Parent> parents = parent_service.getAll();
         for (Parent parent : parents) {
-            AdminToolUserEntity string_with_link = new AdminToolUserEntity();
-            string_with_link.setUserJson(parent.toJson());
+            AdminToolParentEntry string_with_link = new AdminToolParentEntry();
+            string_with_link.setParent(parent);
             string_with_link.setData_link("/admin/getParent/" + parent.getParentId());
             string_with_link.setDelete_link("/admin/deleteParent/" + parent.getParentId());
             string_with_link.setEdit_link("/admin/editParent/" + parent.getParentId());
@@ -89,9 +89,10 @@ public class AdminToolsController {
     public ResponseEntity<List<AdminToolUserEntity>> getAllDoctors() {
         List<AdminToolUserEntity> return_list = new ArrayList<>();
 
-        for (Doctor doctor : doctor_service.getAll()) {
+        List<Doctor> doctors = doctor_service.getAll();
+        for (Doctor doctor : doctors) {
             AdminToolUserEntity string_with_link = new AdminToolUserEntity();
-            string_with_link.setData_link(doctor.toJson());
+            string_with_link.setUserJson(doctor.toJsonIDs());
             string_with_link.setData_link("/admin/getDoctor/" + doctor.getDoctorId());
             string_with_link.setDelete_link("/admin/deleteDoctor/" + doctor.getDoctorId());
             string_with_link.setEdit_link("/admin/editDoctor/" + doctor.getDoctorId());
@@ -107,9 +108,10 @@ public class AdminToolsController {
     public ResponseEntity<List<AdminToolUserEntity>> getAllPediatricians() {
         List<AdminToolUserEntity> return_list = new ArrayList<>();
 
-        for (Pediatrician pediatrician : pediatrician_service.getAll()) {
+        List<Pediatrician> pediatricians = pediatrician_service.getAll();
+        for (Pediatrician pediatrician : pediatricians) {
             AdminToolUserEntity string_with_link = new AdminToolUserEntity();
-            string_with_link.setData_link(pediatrician.toJson());
+            string_with_link.setUserJson(pediatrician.toJsonIDs());
             string_with_link.setData_link("/admin/getPediatrician/" + pediatrician.getPediatricianId());
             string_with_link.setDelete_link("/admin/deletePediatrician/" + pediatrician.getPediatricianId());
             string_with_link.setEdit_link("/admin/editPediatrician/" + pediatrician.getPediatricianId());
@@ -127,7 +129,7 @@ public class AdminToolsController {
 
         for (Parent parent : parent_service.getAll()) {
             AdminToolUserEntity string_with_link = new AdminToolUserEntity();
-            string_with_link.setUserJson(parent.toJson());
+            string_with_link.setUserJson(parent.toJsonIDs());
             string_with_link.setData_link("/admin/getParent/" + parent.getParentId());
             string_with_link.setDelete_link("/admin/deleteParent/" + parent.getParentId());
             string_with_link.setEdit_link("/admin/editParent/" + parent.getParentId());
@@ -137,7 +139,7 @@ public class AdminToolsController {
 
         for (Doctor doctor : doctor_service.getAll()) {
             AdminToolUserEntity string_with_link = new AdminToolUserEntity();
-            string_with_link.setData_link(doctor.toJson());
+            string_with_link.setUserJson(doctor.toJsonIDs());
             string_with_link.setData_link("/admin/getDoctor/" + doctor.getDoctorId());
             string_with_link.setDelete_link("/admin/deleteDoctor/" + doctor.getDoctorId());
             string_with_link.setEdit_link("/admin/editDoctor/" + doctor.getDoctorId());
@@ -147,7 +149,7 @@ public class AdminToolsController {
 
         for (Pediatrician pediatrician : pediatrician_service.getAll()) {
             AdminToolUserEntity string_with_link = new AdminToolUserEntity();
-            string_with_link.setData_link(pediatrician.toJson());
+            string_with_link.setUserJson(pediatrician.toJsonIDs());
             string_with_link.setData_link("/admin/getPediatrician/" + pediatrician.getPediatricianId());
             string_with_link.setDelete_link("/admin/deletePediatrician/" + pediatrician.getPediatricianId());
             string_with_link.setEdit_link("/admin/editPediatrician/" + pediatrician.getPediatricianId());
@@ -173,7 +175,7 @@ public class AdminToolsController {
             return ResponseEntity.badRequest().body("Parent not found by id: " + id + "!");
         }
 
-        return ResponseEntity.ok(parent.toJson());
+        return ResponseEntity.ok(parent.toJsonIDs());
     }
 
     // UC 26
@@ -191,7 +193,7 @@ public class AdminToolsController {
             return ResponseEntity.badRequest().body("Doctor not found by id: " + id + "!");
         }
 
-        return ResponseEntity.ok(doctor.toJson());
+        return ResponseEntity.ok(doctor.toJsonIDs());
     }
 
     // UC 26
@@ -209,7 +211,7 @@ public class AdminToolsController {
             return ResponseEntity.badRequest().body("Pediatrician not found by id: " + id + "!");
         }
 
-        return ResponseEntity.ok(pediatrician.toJson());
+        return ResponseEntity.ok(pediatrician.toJsonIDs());
     }
 
     // UC 27

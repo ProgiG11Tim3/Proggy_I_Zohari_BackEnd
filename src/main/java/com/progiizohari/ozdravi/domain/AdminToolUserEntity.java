@@ -36,6 +36,7 @@ public class AdminToolUserEntity {
 
     public void setUserJson(String userJson) {
         this.userJson = userJson;
+        this.userJson = this.userJson.replace("\\\"", "\"");
     }
 
     public void setData_link(String data_link) {
