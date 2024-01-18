@@ -45,7 +45,7 @@ public class AdminToolsController {
     }
 
     // UC 24
-    @PostMapping("/admin/createDoctr")
+    @PostMapping("/admin/createDoctor")
     public ResponseEntity<String> createDoctr(@RequestBody CreateDoctor createDoctor) {
         Doctor doctor = new Doctor();
         doctor.setEmailDoctor(createDoctor.getEmailDoctor());
