@@ -34,7 +34,6 @@ public class Examination {
 
     @ManyToOne
     @JoinColumn(name = "recordId")
-    @JsonIgnore
     private MedicalRecord medicalRecord;
 
     public Examination() {

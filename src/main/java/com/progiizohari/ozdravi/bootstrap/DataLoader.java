@@ -205,9 +205,19 @@ public class DataLoader implements CommandLineRunner {
         ));
         List<HospitalLocation> hospitalLocations = new ArrayList<>(Arrays.asList(
                 new HospitalLocation("KLINIČKI BOLNIČKI CENTAR ZAGREB", "ZAGREB", "KIŠPATIĆEVA 12", 45.82489357049353, 16.0057334543042),
-                new HospitalLocation("KLINIČKI BOLNIČKI CENTAR SESTRE MILOSRDNICE", "ZAGREB", "VINOGRADSKA CESTA 29", 45.8155126250784, 15.953155511561702)
-
-        ));
+                new HospitalLocation("KLINIČKI BOLNIČKI CENTAR SESTRE MILOSRDNICE", "ZAGREB", "VINOGRADSKA CESTA 29", 45.8155126250784, 15.953155511561702),
+                new HospitalLocation("KLINIČKI BOLNIČKI CENTAR RIJEKA", "RIJEKA", "KREŠIMIROVA 42", 45.3327739517501, 14.425685852781761),
+                new HospitalLocation("KLINIČKI BOLNIČKI CENTAR SPLIT", "SPLIT", "SPINČIĆEVA 1", 43.503903610838435, 16.457793742327723),
+                new HospitalLocation("KLINIČKI BOLNIČKI CENTAR OSIJEK", "OSIJEK", "J. HUTTLERA 4", 45.558027207314, 18.713886490226905),
+                new HospitalLocation("KLINIČKA BOLNICA DUBRAVA", "ZAGREB", "AVENIJA GOJKA ŠUŠKA 6", 45.83451332774101, 16.0358747441988),
+                new HospitalLocation("KLINIČKA BOLNICA MERKUR", "ZAGREB", "ZAJČEVA 19", 45.82056947144393, 15.99849265531452),
+                new HospitalLocation("KLINIČKA BOLNICA SVETI DUH", "ZAGREB", "SVETI DUH 64", 45.82004491047621, 15.938853900013811),
+                new HospitalLocation("KLINIKA ZA PSIHIJATRIJU VRAPČE", "ZAGREB", "BOLNIČKA CESTA 32", 45.81643091873121, 15.897398342327723),
+                new HospitalLocation("KLINIKA ZA DJEČJE BOLESTI ZAGREB", "ZAGREB", "KLAIĆEVA 16", 45.809747255509826, 15.964553588361362),
+                new HospitalLocation("PSIHIJATRIJSKA BOLNICA ZA DJECU I MLADEŽ", "GRAD ZAGREB", "IVANA KUKULJEVIĆA 11", 45.815296321721426, 15.963260200345974),
+                new HospitalLocation("SPECIJALNA BOLNICA ZA PLUĆNE BOLESTI", "GRAD ZAGREB", "ROCKEFELLEROVA 3", 45.829870164723054, 15.982349440471477),
+                new HospitalLocation("KLINIKA ZA PSIHIJATRIJU SVETI IVAN", "GRAD ZAGREB", "JANKOMIR 11", 45.80564607901219, 15.875439671163859)
+                ));
         List<SpecialistExamination> specialistExaminations = new ArrayList<>(Arrays.asList(
                 //new SpecialistExamination("Oftalmolog (pregled vida): Stručnjak će ispitali vaš vid kroz različite testove poput provjere oštrine vida, provjere boje, i pregleda očne pozadine kako bi dijagnosticirao i liječio probleme s vidom.", "KBC Rebro", medicalRecords.get(0)),
                 new SpecialistExamination("Dermatolog (pregled kože): Liječnik će pregledati vašu kožu kako bi identificirao promjene, madeže ili kožne bolesti. Moguće je i izvršiti biopsiju kože radi daljnje analize.", "KBC Rebro", medicalRecords.get(1)),
