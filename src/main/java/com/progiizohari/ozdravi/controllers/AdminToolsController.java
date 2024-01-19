@@ -143,7 +143,7 @@ public class AdminToolsController {
     }
 
     // UC 25
-    @PostMapping("/admin/getAllPeople")
+    @GetMapping("/admin/getAllPeople")
     public ResponseEntity<List<AdminToolUserEntity>> getAllPeople() {
         List<AdminToolUserEntity> return_list = new ArrayList<>();
 
@@ -248,12 +248,6 @@ public class AdminToolsController {
         if (parent == null) {
             return ResponseEntity.badRequest().body("Parent not found by id: " + id + "!");
         }
-
-        for (Child child : parent.getChildren()) {
-            child_service.remove(child);
-        }
-
-
 
         parent_service.remove(parent);
         return ResponseEntity.ok("OK");
