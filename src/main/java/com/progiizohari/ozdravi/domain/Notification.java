@@ -12,7 +12,6 @@ public class Notification {
 
     @ManyToOne
     @JoinColumn(name = "parent_OIB")
-    @JsonIgnore
     private Parent parent;
 
     @ManyToOne

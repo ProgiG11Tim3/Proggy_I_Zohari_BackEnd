@@ -15,8 +15,9 @@ public class NotificationController {
     private NotificationService service;
 
     @PostMapping("/addNotification")
-    public String addNotification(@RequestBody Notification notification) {
-        return service.add(notification);
+    public ResponseEntity<Notification> addNotification(@RequestBody Notification notification) {
+        service.add(notification);
+        return ResponseEntity.ok(notification);
     }
 
     //UC4
