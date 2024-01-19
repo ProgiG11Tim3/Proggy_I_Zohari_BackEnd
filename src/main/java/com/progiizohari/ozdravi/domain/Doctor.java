@@ -45,10 +45,6 @@ public class Doctor {
     @JsonIgnore
     private List<Parent> parents;
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<SickLeaveRecommendation> sickLeaveRecommendations;
-
     public Doctor() {
     }
 
@@ -60,7 +56,6 @@ public class Doctor {
         this.phoneNumberDoctor = phoneNumberDoctor;
         this.emailDoctor = emailDoctor;
         this.parents = parents;
-        this.sickLeaveRecommendations = sickLeaveRecommendations;
     }
 
     public int getDoctorId() {
@@ -139,13 +134,6 @@ public class Doctor {
         this.parents = parents;
     }
 
-    public List<SickLeaveRecommendation> getSickLeaveRecommendations() {
-        return sickLeaveRecommendations;
-    }
-
-    public void setSickLeaveRecommendations(List<SickLeaveRecommendation> sickLeaveRecommendations) {
-        this.sickLeaveRecommendations = sickLeaveRecommendations;
-    }
 
     public boolean equalVariables(Object o) {
         if (this == o) return true;
@@ -214,7 +202,7 @@ public class Doctor {
             jsonBuilder.append(", \"parentsIDs\": []");
         }
 
-        // Handle sickLeaveRecommendationsIDs
+        /*// Handle sickLeaveRecommendationsIDs
         if (!sickLeaveRecommendations.isEmpty()) {
             jsonBuilder.append(", \"sickLeaveRecommendationsIDs\": [");
             for (SickLeaveRecommendation recommendation : sickLeaveRecommendations) {
@@ -225,7 +213,7 @@ public class Doctor {
             jsonBuilder.append("]");
         } else {
             jsonBuilder.append(", \"sickLeaveRecommendationsIDs\": []");
-        }
+        }*/
 
         jsonBuilder.append("}");
 

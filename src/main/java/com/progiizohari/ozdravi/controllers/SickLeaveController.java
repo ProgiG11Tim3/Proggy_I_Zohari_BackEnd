@@ -3,8 +3,10 @@ package com.progiizohari.ozdravi.controllers;
 import com.progiizohari.ozdravi.domain.SickLeaveRecommendation;
 import com.progiizohari.ozdravi.services.SickLeaveService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -14,12 +16,17 @@ public class SickLeaveController {
     private SickLeaveService sickLeaveService;
 
     @PostMapping("/addSickLeave")
-    public String addSickLeave(@RequestBody SickLeaveRecommendation sickLeave) {
-        return sickLeaveService.add(sickLeave);
+    public ResponseEntity<SickLeaveRecommendation> addSickLeave(@RequestBody SickLeaveRecommendation sickLeave) {
+        System.out.println(sickLeave);
+        sickLeave.setSickLeaveStartDate(new Date(System.currentTimeMillis()));
+        sickLeave.setApproved(false);
+        sickLeaveService.add(sickLeave);
+        return ResponseEntity.ok(sickLeave);
     }
 
     @GetMapping("/getAllSickLeaves")
     public List<SickLeaveRecommendation> getAll() {
+
         return sickLeaveService.getAll();
     }
 

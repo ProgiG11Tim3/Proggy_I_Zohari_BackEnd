@@ -12,9 +12,6 @@ public class SickLeaveRecommendation {
     private int recommendationId;
 
     @ManyToOne
-    @JoinColumn(name = "doctorId")
-    private Doctor doctor;
-    @ManyToOne
     @JoinColumn(name = "parentId")
     private Parent parent;
 
@@ -33,8 +30,7 @@ public class SickLeaveRecommendation {
     public SickLeaveRecommendation() {
     }
 
-    public SickLeaveRecommendation(Doctor doctor, String recData, String employerEmail, Parent parent) {
-        this.doctor = doctor;
+    public SickLeaveRecommendation(Parent parent, String recData, String employerEmail) {
         this.parent = parent;
         this.recData = recData;
         this.employerEmail = employerEmail;
@@ -63,13 +59,6 @@ public class SickLeaveRecommendation {
     }
 
 
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
 
     public String getRecData() {
         return recData;
@@ -84,14 +73,25 @@ public class SickLeaveRecommendation {
     }
 
     public void setApproved(boolean approved) {
-        isApproved = true;
+        isApproved = approved;
+    }
+
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
+    }
+
+    public void setSickLeaveStartDate(Date sickLeaveStartDate) {
+        this.sickLeaveStartDate = sickLeaveStartDate;
     }
 
     @Override
     public String toString() {
         return "SickLeaveRecommendation{" +
                 "recommendationId=" + recommendationId +
-                ", doctor=" + doctor +
                 ", recData='" + recData + '\'' +
                 ", isApproved=" + isApproved;
     }
@@ -100,7 +100,6 @@ public class SickLeaveRecommendation {
         StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.append("{")
                 .append("\"recommendationId\":").append(recommendationId)
-                .append(", \"doctorID\":").append(doctor.getDoctorId())
                 .append(", \"parentOIB\":").append(parent.getOIB())
                 .append(", \"recData\":\"").append(recData).append("\"")
                 .append(", \"sickLeaveStartDate\":\"").append(sickLeaveStartDate).append("\"")
