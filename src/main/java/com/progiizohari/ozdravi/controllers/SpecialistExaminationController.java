@@ -17,8 +17,9 @@ public class SpecialistExaminationController {
     private SpecialistExaminationService service;
 
     @PostMapping("/addSpecialistExamination")
-    public String addSpecialistExamination(@RequestBody SpecialistExamination specialistExamination) {
-        return service.add(specialistExamination);
+    public ResponseEntity<SpecialistExamination> addSpecialistExamination(@RequestBody SpecialistExamination specialistExamination) {
+        service.add(specialistExamination);
+        return ResponseEntity.ok(specialistExamination);
     }
 
     //UC10
