@@ -1,9 +1,8 @@
 package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.FileDB;
-import com.progiizohari.ozdravi.domain.MedicalReport;
 import com.progiizohari.ozdravi.domain.ResponseFile;
-import com.progiizohari.ozdravi.services.FileService;
+import com.progiizohari.ozdravi.services.FileServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
 public class FileController {
 
     @Autowired
-    private FileService storageService;
+    private FileServiceImpl storageService;
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("messageForDoc") String messageForDoc, @RequestParam("medicalReport") String reportId) {
