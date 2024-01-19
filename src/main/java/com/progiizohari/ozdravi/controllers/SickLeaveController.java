@@ -40,4 +40,14 @@ public class SickLeaveController {
     public String approveSickLeave(@PathVariable int id) {
         return sickLeaveService.approve(id);
     }
+
+    @GetMapping("/getSickLeave/{id}")
+    public ResponseEntity<SickLeaveRecommendation> getById(@PathVariable int id) {
+        for (SickLeaveRecommendation sickLeave : sickLeaveService.getAll()) {
+            if (sickLeave.getRecommendationId() == id) {
+                return ResponseEntity.ok(sickLeave);
+            }
+        }
+        return ResponseEntity.badRequest().body(null);
+    }
 }
