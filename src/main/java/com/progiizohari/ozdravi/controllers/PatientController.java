@@ -1,6 +1,7 @@
 package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.*;
+import com.progiizohari.ozdravi.services.ChildService;
 import com.progiizohari.ozdravi.services.DoctorService;
 import com.progiizohari.ozdravi.services.ParentService;
 import com.progiizohari.ozdravi.util.LoginSessionHandler;
@@ -16,6 +17,8 @@ public class PatientController {
     private ParentService parent_service;
     @Autowired
     private DoctorService doctor_service;
+    @Autowired
+    private ChildService child_service;
 
     @Autowired
     private LoginSessionHandler login_session_handler;
@@ -87,6 +90,7 @@ public class PatientController {
         child.setFromChildRegistrationEntry(childRegistrationEntryJson);
         child.setParent(patient);
         child.setPediatrician(pediatrician);
+        child_service.add(child);
 
         return ResponseEntity.ok("OK");
     }

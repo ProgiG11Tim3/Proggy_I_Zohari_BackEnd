@@ -22,10 +22,10 @@ public class FileController {
     private FileService storageService;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("messageForDoc") String messageForDoc) {
         String message = "";
         try {
-            storageService.storeFile(file);
+            storageService.storeFile(file, messageForDoc);
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(message);
         } catch (Exception e) {

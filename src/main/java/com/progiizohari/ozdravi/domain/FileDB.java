@@ -17,6 +17,8 @@ public class FileDB {
 
     private String type;
 
+    private String message;
+
     @Lob
     private byte[] data;
 
@@ -27,10 +29,11 @@ public class FileDB {
     public FileDB() {
     }
 
-    public FileDB(String name, String type, byte[] data) {
+    public FileDB(String name, String type, byte[] data, String message) {
         this.name = name;
         this.type = type;
         this.data = data;
+        this.message = message;
     }
 
     public String getFileId() {
@@ -67,5 +70,13 @@ public class FileDB {
 
     public void setMedicalReport(MedicalReport medicalReport) {
         this.medicalReport = medicalReport;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

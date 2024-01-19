@@ -14,10 +14,9 @@ import java.util.stream.Stream;
 public class FileService {
     @Autowired
     private FileRepository fileRepository;
-    public FileDB storeFile(MultipartFile file) throws IOException {
+    public FileDB storeFile(MultipartFile file, String message) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
-
+        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), message);
         return fileRepository.save(FileDB);
     }
 
