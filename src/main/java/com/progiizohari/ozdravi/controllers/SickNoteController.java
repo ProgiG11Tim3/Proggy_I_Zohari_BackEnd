@@ -15,8 +15,10 @@ public class SickNoteController {
     private SickNoteService service;
 
     @PostMapping("/addSickNote")
-    public String addSickNote(@RequestBody SickNote sickNote) {
-        return service.add(sickNote);
+    public ResponseEntity<SickNote> addSickNote(@RequestBody SickNote sickNote) {
+
+        service.add(sickNote);
+        return ResponseEntity.ok(sickNote);
     }
 
     //UC8

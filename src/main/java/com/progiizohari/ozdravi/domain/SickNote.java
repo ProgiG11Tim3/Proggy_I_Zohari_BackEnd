@@ -12,7 +12,6 @@ public class SickNote {
 
     @ManyToOne
     @JoinColumn(name = "child_OIB")
-    @JsonIgnore
     private Child child;
 
     @NotNull
