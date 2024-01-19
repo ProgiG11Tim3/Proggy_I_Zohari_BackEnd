@@ -1,6 +1,7 @@
 package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.Parent;
+import com.progiizohari.ozdravi.services.ChildService;
 import com.progiizohari.ozdravi.services.DoctorService;
 import com.progiizohari.ozdravi.services.ParentService;
 import com.progiizohari.ozdravi.services.PediatricianService;
@@ -21,10 +22,17 @@ public class DevTestingController {
     private DoctorService doctorService;
     @Autowired
     private PediatricianService pediatricianService;
+    @Autowired
+    private ChildService childService;
 
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String getTestByNumber() {
         return pediatricianService.getAll().get(0).toJsonIDs();
+    }
+
+    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    public String getTestByNumber2() {
+        return childService.getAll().get(0).toString();
     }
 }

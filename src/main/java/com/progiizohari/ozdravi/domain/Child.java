@@ -194,4 +194,13 @@ public class Child {
                 ", medicalRecord=" + medicalRecord +
                 '}';
     }
+
+    public boolean equalVariables(Child child) {
+        return this.OIB.equals(child.getOIB()) &&
+                this.nameChild.equals(child.getNameChild()) &&
+                this.lastNameChild.equals(child.getLastNameChild()) &&
+                this.dateOfBirthChild.equals(child.getDateOfBirthChild()) &&
+                this.educationalInstitution.equals(child.getEducationalInstitution()) &&
+                this.emailEducationalInstitution.equals(child.getEmailEducationalInstitution());
+    }
 }

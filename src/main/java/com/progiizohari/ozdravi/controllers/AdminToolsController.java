@@ -1,10 +1,9 @@
 package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.*;
-import com.progiizohari.ozdravi.services.DoctorService;
-import com.progiizohari.ozdravi.services.ParentService;
-import com.progiizohari.ozdravi.services.PediatricianService;
+import com.progiizohari.ozdravi.services.*;
 import com.progiizohari.ozdravi.util.AdminTools;
+import com.progiizohari.ozdravi.util.LoginSessionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +23,27 @@ public class AdminToolsController {
     private DoctorService doctor_service;
     @Autowired
     private PediatricianService pediatrician_service;
+    @Autowired
+    private ChildService child_service;
+    @Autowired
+    private EmailService email_service;
+    @Autowired
+    private NotificationService notification_service;
+    @Autowired
+    private SickNoteService sick_note_service;
+    @Autowired
+    private SpecialistExaminationService specialist_examination_service;
+    @Autowired
+    private SickLeaveService sick_leave_service;
+    @Autowired
+    private MedicalRecordService medical_record_service;
+    @Autowired
+    private MedicalReportService medical_report_service;
+    @Autowired
+    private LoginSessionHandler login_session_handler;
+    @Autowired
+    private ExaminationService examination_service;
+
 
     // UC 24
     @PostMapping("/admin/createPediatrician")
@@ -228,6 +248,17 @@ public class AdminToolsController {
         if (parent == null) {
             return ResponseEntity.badRequest().body("Parent not found by id: " + id + "!");
         }
+
+        for (Child child : parent.getChildren()) {
+            child_service.remove(child);
+        }
+        for (MedicalRecord medicalRecord : medical_record_service.getAll()) {
+            if (medicalRecord.getParent() != null && medicalRecord.getParent().getParentId() == id) {
+                medical_record_service.remove(medicalRecord);
+            }
+        }
+
+
 
         parent_service.remove(parent);
         return ResponseEntity.ok("OK");
