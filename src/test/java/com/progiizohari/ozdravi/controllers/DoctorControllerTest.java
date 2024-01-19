@@ -303,6 +303,24 @@ class DoctorControllerTest {
                         .session(session))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+    @Test
+    void uspjesnoDohvacanjeNalaza() throws Exception{
+        MockHttpSession session = new MockHttpSession();
+
+        String jsonPayload = "{\n" +
+                "  \"username\": \"anaIvanovic\",\n" +
+                "  \"password\": \"anaIvanovic\"\n" +
+                "}";
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/login")
+                .session(session)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonPayload));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/doctor/getPatientReports/12345678901")
+                        .session(session))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }
 
 
