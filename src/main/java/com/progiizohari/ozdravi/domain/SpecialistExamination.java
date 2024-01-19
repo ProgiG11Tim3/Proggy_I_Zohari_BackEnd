@@ -19,7 +19,6 @@ public class SpecialistExamination {
 
     @ManyToOne
     @JoinColumn(name = "recordId")
-    @JsonIgnore
     private MedicalRecord medicalRecord;
 
     @ManyToMany
