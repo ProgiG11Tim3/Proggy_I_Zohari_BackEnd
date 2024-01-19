@@ -91,4 +91,14 @@ public class MedicalReport {
                 ", medicalRecord=" + medicalRecord +
                 '}';
     }
+
+    public boolean equalValues(MedicalReport medicalReport) {
+        if (this.dateOfReport.equals(medicalReport.getDateOfReport()) &&
+                this.reportInformation.equals(medicalReport.getReportInformation()) &&
+                this.medicalRecord.equals(medicalReport.getMedicalRecord()) &&
+                this.fileDBS.equals(medicalReport.getFileDBS())) {
+            return true;
+        }
+        return false;
+    }
 }
