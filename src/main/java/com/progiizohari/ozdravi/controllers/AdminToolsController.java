@@ -252,11 +252,6 @@ public class AdminToolsController {
         for (Child child : parent.getChildren()) {
             child_service.remove(child);
         }
-        for (MedicalRecord medicalRecord : medical_record_service.getAll()) {
-            if (medicalRecord.getParent() != null && medicalRecord.getParent().getParentId() == id) {
-                medical_record_service.remove(medicalRecord);
-            }
-        }
 
 
 

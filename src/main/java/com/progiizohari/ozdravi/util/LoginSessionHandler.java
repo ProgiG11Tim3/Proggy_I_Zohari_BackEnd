@@ -140,4 +140,14 @@ public class LoginSessionHandler {
         }
         return returnPediatrician;
     }
+
+    public String logout(String sessionID) {
+        for (LoginSession loginSession : login_session_service.getAll()) {
+            if (loginSession.getSession().equals(sessionID)) {
+                login_session_service.remove(loginSession);
+                return "OK";
+            }
+        }
+        return "NOT_FOUND";
+    }
 }

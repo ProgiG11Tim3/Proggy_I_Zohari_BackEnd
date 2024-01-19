@@ -29,4 +29,16 @@ public class LoginGuardController {
         }
     }
 
+    @GetMapping("/logout")
+    public ResponseEntity<String> logout() {
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        String result = login_session_handler.logout(sessionID);
+
+        if (result == "OK") {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.badRequest().body(result);
+        }
+    }
+
 }
