@@ -23,15 +23,15 @@ public class FileController {
     private FileService storageService;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("messageForDoc") String messageForDoc, @RequestParam("medicalReport") MedicalReport medicalReport) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("messageForDoc") String messageForDoc, @RequestParam("medicalReport") String reportId) {
         String message = "";
         try {
-            storageService.storeFile(file, messageForDoc, medicalReport);
+            storageService.storeFile(file, messageForDoc, reportId);
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
-            return ResponseEntity.status(HttpStatus.OK).body(message);
+            return ResponseEntity.ok(message);
         } catch (Exception e) {
             message = "Could not upload the file: " + file.getOriginalFilename() + " | " + e.getMessage();
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
+            return ResponseEntity.badRequest().body(message);
         }
     }
 
