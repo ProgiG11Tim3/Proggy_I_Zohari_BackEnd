@@ -12,4 +12,6 @@ public interface FileService {
     public FileDB getFile(String id);
 
     public Stream<FileDB> getAllFiles();
+
+    public FileDB getFileByReportId(int reportId);
 }

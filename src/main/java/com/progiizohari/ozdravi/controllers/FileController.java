@@ -34,6 +34,14 @@ public class FileController {
         }
     }
 
+    @GetMapping("/getFileByReportId/{id}")
+    public ResponseEntity<byte[]> getFileByReportId(@PathVariable int id) {
+        FileDB fileDB = storageService.getFileByReportId(id);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+                .body(fileDB.getData());
+    }
+
     @GetMapping("/files")
     public ResponseEntity<List<ResponseFile>> getListFiles() {
         List<ResponseFile> files = storageService.getAllFiles().map(dbFile -> {

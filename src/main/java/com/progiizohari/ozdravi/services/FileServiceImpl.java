@@ -36,4 +36,9 @@ public class FileServiceImpl implements FileService{
     public Stream<FileDB> getAllFiles() {
         return fileRepository.findAll().stream();
     }
+
+    @Override
+    public FileDB getFileByReportId(int reportId) {
+        return fileRepository.findFileDBByMedicalReportReportId(reportId);
+    }
 }
