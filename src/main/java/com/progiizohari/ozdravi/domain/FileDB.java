@@ -25,7 +25,6 @@ public class FileDB {
 
     @ManyToOne
     @JoinColumn(name = "reportId")
-    @JsonIgnore
     private MedicalReport medicalReport;
 
     public FileDB() {
