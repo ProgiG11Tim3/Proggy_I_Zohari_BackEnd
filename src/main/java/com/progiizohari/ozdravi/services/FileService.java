@@ -1,6 +1,7 @@
 package com.progiizohari.ozdravi.services;
 
 import com.progiizohari.ozdravi.domain.FileDB;
+import com.progiizohari.ozdravi.domain.MedicalReport;
 import com.progiizohari.ozdravi.repositories.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,9 @@ import java.util.stream.Stream;
 public class FileService {
     @Autowired
     private FileRepository fileRepository;
-    public FileDB storeFile(MultipartFile file, String message) throws IOException {
+    public FileDB storeFile(MultipartFile file, String message, MedicalReport medicalReport) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), message);
+        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), message, medicalReport);
         return fileRepository.save(FileDB);
     }
 

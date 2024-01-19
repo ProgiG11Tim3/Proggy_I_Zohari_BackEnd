@@ -1,6 +1,7 @@
 package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.FileDB;
+import com.progiizohari.ozdravi.domain.MedicalReport;
 import com.progiizohari.ozdravi.domain.ResponseFile;
 import com.progiizohari.ozdravi.services.FileService;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +23,10 @@ public class FileController {
     private FileService storageService;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("messageForDoc") String messageForDoc) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("messageForDoc") String messageForDoc, @RequestParam("medicalReport") MedicalReport medicalReport) {
         String message = "";
         try {
-            storageService.storeFile(file, messageForDoc);
+            storageService.storeFile(file, messageForDoc, medicalReport);
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(message);
         } catch (Exception e) {

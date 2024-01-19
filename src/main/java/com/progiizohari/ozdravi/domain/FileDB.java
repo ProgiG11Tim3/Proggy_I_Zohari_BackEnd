@@ -29,11 +29,12 @@ public class FileDB {
     public FileDB() {
     }
 
-    public FileDB(String name, String type, byte[] data, String message) {
+    public FileDB(String name, String type, byte[] data, String message, MedicalReport medicalReport) {
         this.name = name;
         this.type = type;
         this.data = data;
         this.message = message;
+        this.medicalReport = medicalReport;
     }
 
     public String getFileId() {
