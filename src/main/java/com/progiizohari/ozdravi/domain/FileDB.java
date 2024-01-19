@@ -11,6 +11,7 @@ public class FileDB {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @JsonIgnore
     private String fileId;
 
     private String name;
@@ -24,6 +25,7 @@ public class FileDB {
 
     @ManyToOne
     @JoinColumn(name = "reportId")
+    @JsonIgnore
     private MedicalReport medicalReport;
 
     public FileDB() {

@@ -6,6 +6,8 @@ import com.progiizohari.ozdravi.util.Argon2Crypting;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,10 +32,12 @@ public class DataLoader implements CommandLineRunner {
     private final SpecialistExaminationRepository specialistExaminationRepository;
     private final SickLeaveRecommendationRepository sickLeaveRecommendationRepository;
     private final HospitalLocationRepository hospitalLocationRepository;
+    private final FileRepository fileRepository;
 
     public DataLoader(Argon2Crypting argon2, DoctorRepository doctorRepository, PediatricianRepository pediatricianRepository, ParentRepository parentRepository, ChildRepository childRepository, NotificationRepository notificationRepository
                       , MedicalRecordRepository medicalRecordRepository, MedicalReportRepository medicalReportRepository, ExaminationRepository examinationRepository, SickNoteRepository sickNoteRepository,
-                      SpecialistExaminationRepository specialistExaminationRepository, SickLeaveRecommendationRepository sickLeaveRecommendationRepository, HospitalLocationRepository hospitalLocationRepository) {
+                      SpecialistExaminationRepository specialistExaminationRepository, SickLeaveRecommendationRepository sickLeaveRecommendationRepository, HospitalLocationRepository hospitalLocationRepository,
+                      FileRepository fileRepository) {
         this.argon2 = argon2;
         this.doctorRepository = doctorRepository;
         this.pediatricianRepository = pediatricianRepository;
@@ -47,6 +51,7 @@ public class DataLoader implements CommandLineRunner {
         this.specialistExaminationRepository = specialistExaminationRepository;
         this.sickLeaveRecommendationRepository = sickLeaveRecommendationRepository;
         this.hospitalLocationRepository = hospitalLocationRepository;
+        this.fileRepository = fileRepository;
     }
 
     @Override
@@ -247,6 +252,9 @@ public class DataLoader implements CommandLineRunner {
                 new SickLeaveRecommendation(parents.get(3), "Karantena radi zarazne bolesti: Na temelju rezultata testiranja, preporučujem karantenu kako biste spriječili širenje zarazne bolesti. Ostanak kod kuće pomoći će zaštititi druge članove zajednice.", parents.get(3).getEmployerEmail()),
                 new SickLeaveRecommendation(parents.get(4), "Zdravstveno stanje trudnice: S obzirom na vašu trenutačnu trudnoću, preporučujem ograničavanje izlazaka iz kuće kako biste smanjili rizik od komplikacija. Pridržavajte se preporuka za odmor i oprez kako biste osigurali siguran tijek trudnoće.", parents.get(4).getEmployerEmail())
         ));
+        List<FileDB> pedofiles = new ArrayList<>(Arrays.asList(
+                new FileDB("Zadatak", "pdf", Files.readAllBytes(Path.of(System.getProperty("user.dir") +"\\Zadatak.pdf")),"Message!", medicalReports.get(0))
+        ));
 
         doctorRepository.saveAll(doctors);
         pediatricianRepository.saveAll(pediatricians);
@@ -260,7 +268,9 @@ public class DataLoader implements CommandLineRunner {
         hospitalLocationRepository.saveAll(hospitalLocations);
         specialistExaminationRepository.saveAll(specialistExaminations);
         sickLeaveRecommendationRepository.saveAll(sickLeaveRecommendations);
+        fileRepository.saveAll(pedofiles);
 
+        //System.out.println(System.getProperty("user.dir"));
         System.out.println("...loading successful!");
     }
 }

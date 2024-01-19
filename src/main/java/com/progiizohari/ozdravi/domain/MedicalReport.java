@@ -28,7 +28,6 @@ public class MedicalReport {
     private MedicalRecord medicalRecord;
 
     @OneToMany(mappedBy = "medicalReport", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<FileDB> fileDBS;
 
     public MedicalReport() {
