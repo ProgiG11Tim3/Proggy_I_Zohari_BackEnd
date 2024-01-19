@@ -6,7 +6,7 @@ import com.progiizohari.ozdravi.domain.MedicalReport;
 public interface MedicalReportService {
     public MedicalReport getByReportId(int reportId);
 
-    public boolean add(MedicalReport medicalReport);
+    public MedicalReport add(MedicalReport medicalReport);
 
     public boolean edit(int id, MedicalReport medicalReport);
 }

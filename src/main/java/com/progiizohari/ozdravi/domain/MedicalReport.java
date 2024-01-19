@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotNull;
 
 import java.io.File;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -38,6 +41,12 @@ public class MedicalReport {
         this.dateOfReport = dateOfReport;
         this.reportInformation = reportInformation;
         this.medicalRecord = medicalRecord;
+    }
+
+    public MedicalReport(String reportInformation, MedicalRecord medicalRecord) {
+        this.reportInformation = reportInformation;
+        this.medicalRecord = medicalRecord;
+        this.dateOfReport = Timestamp.valueOf(LocalDateTime.now());
     }
 
     public int getReportId() {

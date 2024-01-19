@@ -14,14 +14,14 @@ public class MedicalReportServiceImpl implements MedicalReportService{
     private MedicalReportRepository repository;
 
     @Override
-    public boolean add(MedicalReport _medicalReport) {
+    public MedicalReport add(MedicalReport _medicalReport) {
         for (MedicalReport medicalReport : repository.findAll()) {
             if (medicalReport.equalValues(_medicalReport)) {
-                return false;
+                return null;
             }
         }
         repository.save(_medicalReport);
-        return true;
+        return repository.save(_medicalReport);
     }
 
     @Override

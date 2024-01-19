@@ -1,8 +1,12 @@
 package com.progiizohari.ozdravi.controllers;
 
 import com.progiizohari.ozdravi.domain.FileDB;
+import com.progiizohari.ozdravi.domain.MedicalRecord;
+import com.progiizohari.ozdravi.domain.MedicalReport;
 import com.progiizohari.ozdravi.domain.ResponseFile;
 import com.progiizohari.ozdravi.services.FileServiceImpl;
+import com.progiizohari.ozdravi.services.MedicalRecordService;
+import com.progiizohari.ozdravi.services.MedicalReportService;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +25,20 @@ public class FileController {
     @Autowired
     private FileServiceImpl storageService;
 
+    @Autowired
+    private MedicalReportService medicalReportService;
+
+    @Autowired
+    private MedicalRecordService medicalRecordService;
+
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("messageForDoc") String messageForDoc, @RequestParam("medicalReport") String reportId) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("messageForDoc") String messageForDoc, @RequestParam("medicalRecord") String recordId) {
         String message = "";
         try {
-            storageService.storeFile(file, messageForDoc, reportId);
+            MedicalRecord medicalRecord = medicalRecordService.getByRecordId(Integer.parseInt(recordId));
+            MedicalReport medicalReport = new MedicalReport(messageForDoc, medicalRecord);
+            MedicalReport predaja = medicalReportService.add(medicalReport);
+            storageService.storeFile(file, messageForDoc, Integer.toString(predaja.getReportId()));
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.ok(message);
         } catch (Exception e) {
