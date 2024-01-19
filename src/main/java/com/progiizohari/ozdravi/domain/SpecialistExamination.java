@@ -17,8 +17,6 @@ public class SpecialistExamination {
     @NotNull
     private String examTitle;
 
-    private String examLocations;
-
     @ManyToOne
     @JoinColumn(name = "recordId")
     @JsonIgnore
@@ -35,11 +33,6 @@ public class SpecialistExamination {
     public SpecialistExamination() {
     }
 
-    public SpecialistExamination(String examTitle, String examLocations, MedicalRecord medicalRecord) {
-        this.examTitle = examTitle;
-        this.examLocations = examLocations;
-        this.medicalRecord = medicalRecord;
-    }
 
     public SpecialistExamination(String examTitle, MedicalRecord medicalRecord, List<HospitalLocation> hospitalLocations) {
         this.examTitle = examTitle;
@@ -59,14 +52,6 @@ public class SpecialistExamination {
 
     public void setExamTitle(String examTitle) {
         this.examTitle = examTitle;
-    }
-
-    public String getExamLocations() {
-        return examLocations;
-    }
-
-    public void setExamLocations(String examLocations) {
-        this.examLocations = examLocations;
     }
 
     public MedicalRecord getMedicalRecord() {
@@ -90,7 +75,6 @@ public class SpecialistExamination {
         return "SpecialistExamination{" +
                 "examId=" + examId +
                 ", examTitle='" + examTitle + '\'' +
-                ", examLocations='" + examLocations + '\'' +
                 ", medicalRecord=" + medicalRecord +
                 '}';
     }
