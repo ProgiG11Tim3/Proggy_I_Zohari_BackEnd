@@ -50,6 +50,9 @@ public class FileController {
     @GetMapping("/getFileByReportId/{id}")
     public ResponseEntity<byte[]> getFileByReportId(@PathVariable int id) {
         FileDB fileDB = storageService.getFileByReportId(id);
+        if (fileDB == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());
