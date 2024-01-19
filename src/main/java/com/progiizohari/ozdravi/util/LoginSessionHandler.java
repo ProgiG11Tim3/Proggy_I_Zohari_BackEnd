@@ -150,4 +150,8 @@ public class LoginSessionHandler {
         }
         return "NOT_FOUND";
     }
+
+    public LoginSession getCurrectLoginSession(String sessionID) {
+        return login_session_service.getUserOfSession(sessionID);
+    }
 }
