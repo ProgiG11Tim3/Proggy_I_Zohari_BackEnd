@@ -252,7 +252,9 @@ public class DataLoader implements CommandLineRunner {
                 new SickLeaveRecommendation(parents.get(3), "Karantena radi zarazne bolesti: Na temelju rezultata testiranja, preporučujem karantenu kako biste spriječili širenje zarazne bolesti. Ostanak kod kuće pomoći će zaštititi druge članove zajednice.", parents.get(3).getEmployerEmail()),
                 new SickLeaveRecommendation(parents.get(4), "Zdravstveno stanje trudnice: S obzirom na vašu trenutačnu trudnoću, preporučujem ograničavanje izlazaka iz kuće kako biste smanjili rizik od komplikacija. Pridržavajte se preporuka za odmor i oprez kako biste osigurali siguran tijek trudnoće.", parents.get(4).getEmployerEmail())
         ));
-
+        List<FileDB> fileDBS = new ArrayList<>(Arrays.asList(
+                new FileDB("Zadatak", "pdf", Files.readAllBytes(Path.of(System.getProperty("user.dir") +"\\Zadatak.pdf")),"Message!", medicalReports.get(0))
+        ));
 
         doctorRepository.saveAll(doctors);
         pediatricianRepository.saveAll(pediatricians);
@@ -266,6 +268,7 @@ public class DataLoader implements CommandLineRunner {
         hospitalLocationRepository.saveAll(hospitalLocations);
         specialistExaminationRepository.saveAll(specialistExaminations);
         sickLeaveRecommendationRepository.saveAll(sickLeaveRecommendations);
+        fileRepository.saveAll(fileDBS);
 
         //System.out.println(System.getProperty("user.dir"));
         System.out.println("...loading successful!");
